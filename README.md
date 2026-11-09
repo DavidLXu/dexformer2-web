@@ -1,6 +1,6 @@
 # DexFormer 2.0
 
-Towards Universal Dexterous Grasping across Arms, Hands, and Objects.
+Towards a Cross-Embodiment Foundation Policy for Dexterous Grasping.
 
 Static project website with interactive recorded-state replay and representation exploration.
 
