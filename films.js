@@ -1,8 +1,8 @@
 'use strict';
 (() => {
   const films = [
-    {id:'long-table',title:'Across the table',description:'A closer look at multiple arm–hand combinations.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
+    {id:'long-table',title:'Across the table',description:'A closer look at multiple arm–hand combinations.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'}
   ];
