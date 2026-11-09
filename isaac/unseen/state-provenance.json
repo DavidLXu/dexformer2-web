@@ -1,0 +1,567 @@
+{
+  "mode": "Fresh Isaac state recordings; no browser simulation",
+  "checkpoint_iteration": 5000,
+  "selected_successful_episodes": [
+    {
+      "model": "flexiv_gripper",
+      "file": "unseen/states/flexiv_gripper_1401_0051.bin",
+      "seed": 1401,
+      "env": 51,
+      "source_sha256": "0b1eab54c08727144390e12c48100af29aca469aab97bb3c1a5bb8195adc5f75",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.97912230178642e-08
+    },
+    {
+      "model": "flexiv_gripper",
+      "file": "unseen/states/flexiv_gripper_1401_0100.bin",
+      "seed": 1401,
+      "env": 100,
+      "source_sha256": "08b9fd6d8511e08066ae914c2a16704a7663c1bdc48f4171e476ca1f9f6a3930",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.976551004937085e-08
+    },
+    {
+      "model": "flexiv_robotiq",
+      "file": "unseen/states/flexiv_robotiq_1501_0050.bin",
+      "seed": 1501,
+      "env": 50,
+      "source_sha256": "bfbac2e62cb6c339f98f9e5dee35c0ad07d5270880137918d918bb1b0a0a6163",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.980178073219205e-08
+    },
+    {
+      "model": "flexiv_robotiq",
+      "file": "unseen/states/flexiv_robotiq_1501_0064.bin",
+      "seed": 1501,
+      "env": 64,
+      "source_sha256": "fe17de2d32c5270e18a8bb2e08be959469d3c70bafd8e9f5555a5595585034b2",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.976856746472259e-08
+    },
+    {
+      "model": "flexiv_tesollo",
+      "file": "unseen/states/flexiv_tesollo_1042_0073.bin",
+      "seed": 1042,
+      "env": 73,
+      "source_sha256": "8b76bac2cfaa49ad52842836aa944ff6c3d85767c60e3e0118bfca48ea10bd1b",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.970142934780095e-08
+    },
+    {
+      "model": "flexiv_tesollo",
+      "file": "unseen/states/flexiv_tesollo_1042_0110.bin",
+      "seed": 1042,
+      "env": 110,
+      "source_sha256": "7a661db1b2bd5248f87929cdd826f21de2c1265c862cd6ae3471c1039fa8b547",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 6.216437202762435e-08
+    },
+    {
+      "model": "flexiv_umi",
+      "file": "unseen/states/flexiv_umi_1501_0045.bin",
+      "seed": 1501,
+      "env": 45,
+      "source_sha256": "407e435d721ddccae90e96397e1ead5df8378f3639f3ae62d0343fb20787f355",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.976976312828831e-08
+    },
+    {
+      "model": "flexiv_umi",
+      "file": "unseen/states/flexiv_umi_1501_0060.bin",
+      "seed": 1501,
+      "env": 60,
+      "source_sha256": "f04993d0cd27d1e6357f7d5996696e89270f0526c53161da9eb2f6b52c02363f",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.983654503698399e-08
+    },
+    {
+      "model": "flexiv_wuji",
+      "file": "unseen/states/flexiv_wuji_1042_0032.bin",
+      "seed": 1042,
+      "env": 32,
+      "source_sha256": "b61595c8d9c41e417ca6916845e4b56aee344d26c7d0f375da12f172077910f6",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.982941359993153e-08
+    },
+    {
+      "model": "flexiv_wuji",
+      "file": "unseen/states/flexiv_wuji_1042_0160.bin",
+      "seed": 1042,
+      "env": 160,
+      "source_sha256": "ab8d3e272d18f22d4cc698bd3313a0bde1fe4a3af41d9914e18042d91dd1c51e",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.984604883885243e-08
+    },
+    {
+      "model": "flexiv_wuji2",
+      "file": "unseen/states/flexiv_wuji2_1042_0005.bin",
+      "seed": 1042,
+      "env": 5,
+      "source_sha256": "db7a8f13c0eabdfb85126dfb75fef8562ec0538a6e2b97dfe8c943b6d4e625fb",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.98536385940833e-08
+    },
+    {
+      "model": "flexiv_wuji2",
+      "file": "unseen/states/flexiv_wuji2_1042_0140.bin",
+      "seed": 1042,
+      "env": 140,
+      "source_sha256": "a8537d2b444477f6a7ed678c1e827f2458ac645af6528cb62d5dc8429b949c86",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.976169835298389e-08
+    },
+    {
+      "model": "flexiv_xarm_g1",
+      "file": "unseen/states/flexiv_xarm_g1_1501_0111.bin",
+      "seed": 1501,
+      "env": 111,
+      "source_sha256": "cbfb57c45fc16b940c215deb766e826d1b6bd3c9637c07ada099c2daa3a32392",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 6.759961958184965e-08
+    },
+    {
+      "model": "flexiv_xarm_g1",
+      "file": "unseen/states/flexiv_xarm_g1_1501_0135.bin",
+      "seed": 1501,
+      "env": 135,
+      "source_sha256": "d3daba0ef11b066745198c529a969601a07837c0729f2c5f70f73d2ad0cf41b5",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.980393098428198e-08
+    },
+    {
+      "model": "franka_gripper",
+      "file": "unseen/states/franka_gripper_1401_0151.bin",
+      "seed": 1401,
+      "env": 151,
+      "source_sha256": "a845f798df4231f72e081fa43e4a5c07b2b239ab9c2b3c32976b0158180dc001",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.145886600578609e-09
+    },
+    {
+      "model": "franka_gripper",
+      "file": "unseen/states/franka_gripper_1401_0180.bin",
+      "seed": 1401,
+      "env": 180,
+      "source_sha256": "857e347855bd1f4bc50d7146d54808fd8dd06b870ae7a3e68efd4a55695d6d5d",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.246970428751111e-09
+    },
+    {
+      "model": "franka_robotiq",
+      "file": "unseen/states/franka_robotiq_1501_0024.bin",
+      "seed": 1501,
+      "env": 24,
+      "source_sha256": "8e6afc3450e133edf065217fc8df716e0e051bf277d31f8f17e26bf239087c1f",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.249145089934345e-09
+    },
+    {
+      "model": "franka_robotiq",
+      "file": "unseen/states/franka_robotiq_1501_0035.bin",
+      "seed": 1501,
+      "env": 35,
+      "source_sha256": "7f98a171bcbca9905578772ae34cc01584235a95d5dade3fd5945fb61758c8a3",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.199701854411341e-09
+    },
+    {
+      "model": "franka_tesollo",
+      "file": "unseen/states/franka_tesollo_1042_0081.bin",
+      "seed": 1042,
+      "env": 81,
+      "source_sha256": "24a7ebca27cb8c14c3a9df8bf951a502fa4831c5699b60d5816d3d63ce90366c",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.097030274277005e-09
+    },
+    {
+      "model": "franka_tesollo",
+      "file": "unseen/states/franka_tesollo_1042_0118.bin",
+      "seed": 1042,
+      "env": 118,
+      "source_sha256": "b6243921953589392761be6eff41edc9f3a377f8b16bb0422f8c0625e3ac0664",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.097776190034881e-09
+    },
+    {
+      "model": "franka_umi",
+      "file": "unseen/states/franka_umi_1501_0155.bin",
+      "seed": 1501,
+      "env": 155,
+      "source_sha256": "c5d2ed2699beb1fdb6d5ad4567ec84f3feb65afa648c55f2d6889bedf0cafd0f",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.231089360265832e-09
+    },
+    {
+      "model": "franka_umi",
+      "file": "unseen/states/franka_umi_1501_0179.bin",
+      "seed": 1501,
+      "env": 179,
+      "source_sha256": "1ef5a9e8621e0e357027cf06d3714c32e16243c63f810412b07cdbd6d65cb8ea",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.206742652704896e-09
+    },
+    {
+      "model": "franka_wuji",
+      "file": "unseen/states/franka_wuji_1042_0049.bin",
+      "seed": 1042,
+      "env": 49,
+      "source_sha256": "132f0267010be01eec10f1a7734d9131a8cfcedaf2778ce251f118faa49c66bb",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.273850962486443e-09
+    },
+    {
+      "model": "franka_wuji",
+      "file": "unseen/states/franka_wuji_1042_0083.bin",
+      "seed": 1042,
+      "env": 83,
+      "source_sha256": "c63c9409a6c51b824b09c67b20a9b51a1bcdae7b5cf2b135f86cb0b98a11dec7",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.1976766429710514e-09
+    },
+    {
+      "model": "franka_wuji2",
+      "file": "unseen/states/franka_wuji2_1042_0020.bin",
+      "seed": 1042,
+      "env": 20,
+      "source_sha256": "bc475add537d3101be7b41a9deba130a6dfd664cda7384205889374ecc294121",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.197814388371889e-09
+    },
+    {
+      "model": "franka_wuji2",
+      "file": "unseen/states/franka_wuji2_1042_0105.bin",
+      "seed": 1042,
+      "env": 105,
+      "source_sha256": "406208d9af5da09d69e1cb6b376fd81f7748852bea094fff08a518a3956f6567",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 3.5590239719112135e-08
+    },
+    {
+      "model": "franka_xarm_g1",
+      "file": "unseen/states/franka_xarm_g1_1501_0024.bin",
+      "seed": 1501,
+      "env": 24,
+      "source_sha256": "e2c4b1787a36487ceb605747bbe5234aa865baf46223e7e224abf8eac95cc313",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.231376243324172e-09
+    },
+    {
+      "model": "franka_xarm_g1",
+      "file": "unseen/states/franka_xarm_g1_1501_0131.bin",
+      "seed": 1501,
+      "env": 131,
+      "source_sha256": "17505ccd46325af7a712fc90e013ee57ad83e4039e2d3d2a293ece52b405f2db",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.201876203713936e-09
+    },
+    {
+      "model": "kuka_gripper",
+      "file": "unseen/states/kuka_gripper_1401_0001.bin",
+      "seed": 1401,
+      "env": 1,
+      "source_sha256": "c3cce1c2e31a0839ca59a6ad5552607237c321f3cea593016908783394002951",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_gripper",
+      "file": "unseen/states/kuka_gripper_1401_0089.bin",
+      "seed": 1401,
+      "env": 89,
+      "source_sha256": "f042f401a73fbc554c80190a7a967341bc87714180f85a4d47b2d07538ee26fd",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_robotiq",
+      "file": "unseen/states/kuka_robotiq_1501_0071.bin",
+      "seed": 1501,
+      "env": 71,
+      "source_sha256": "f60defe26c13e09cff74c18e0169df79a1077da2d694214947b607a3d7ba92e4",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_robotiq",
+      "file": "unseen/states/kuka_robotiq_1501_0194.bin",
+      "seed": 1501,
+      "env": 194,
+      "source_sha256": "83b74a61d5f6db12ee3ae6b7141b2c2851147d774a5bb46b7610f2c403f9e2b8",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_tesollo",
+      "file": "unseen/states/kuka_tesollo_1042_0038.bin",
+      "seed": 1042,
+      "env": 38,
+      "source_sha256": "36fc35af2bf9c888364a1f1a081765837a41169ec64493a89fa2d835da77b0b2",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_tesollo",
+      "file": "unseen/states/kuka_tesollo_1042_0193.bin",
+      "seed": 1042,
+      "env": 193,
+      "source_sha256": "9325d44e65e699b43708f78b72a3a255318f5296a0d26c54d89c734e2ce8a7f3",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_umi",
+      "file": "unseen/states/kuka_umi_1501_0053.bin",
+      "seed": 1501,
+      "env": 53,
+      "source_sha256": "7d68be0f3380ce1cff4ebd8ccbdd09e4a056ec0e0dad4780a5ce25c53341f6d6",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_umi",
+      "file": "unseen/states/kuka_umi_1501_0180.bin",
+      "seed": 1501,
+      "env": 180,
+      "source_sha256": "c3eb74576ed71e2249ac1f8cd3469af3bc5a2c2dfd4eb5626304a0b311b9d936",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_wuji",
+      "file": "unseen/states/kuka_wuji_1042_0017.bin",
+      "seed": 1042,
+      "env": 17,
+      "source_sha256": "c1166fda6125ea61362043e8067e8e762adbe54880bda081d13db454d8f7a087",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_wuji",
+      "file": "unseen/states/kuka_wuji_1042_0168.bin",
+      "seed": 1042,
+      "env": 168,
+      "source_sha256": "211b685ede30d88c3614b6ecd48656533ed4637230c1ebbb22b6cb8e40438585",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_wuji2",
+      "file": "unseen/states/kuka_wuji2_1042_0031.bin",
+      "seed": 1042,
+      "env": 31,
+      "source_sha256": "c3a284c079ab84adb59c8dcbdb6e54a95c22cebcb124f11097fcb2400e8825fd",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_wuji2",
+      "file": "unseen/states/kuka_wuji2_1042_0054.bin",
+      "seed": 1042,
+      "env": 54,
+      "source_sha256": "f8b249076118cefe6f99a185e273689b2a4832de2d963b654633bc1c999f4338",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_xarm_g1",
+      "file": "unseen/states/kuka_xarm_g1_1501_0071.bin",
+      "seed": 1501,
+      "env": 71,
+      "source_sha256": "fa9900cb14895ac83f6bf953bf2419ffc91402703abf1bd974a75e2a4acd9294",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_xarm_g1",
+      "file": "unseen/states/kuka_xarm_g1_1501_0179.bin",
+      "seed": 1501,
+      "env": 179,
+      "source_sha256": "90c35016bcad7257a018f9d5a95e45922ae0ac5a038b703704618c18757d16a0",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "xarm_gripper",
+      "file": "unseen/states/xarm_gripper_1401_0060.bin",
+      "seed": 1401,
+      "env": 60,
+      "source_sha256": "74e46ff9474283faaee1c1f083c48a0d8501784debd28ff0883afd2b37f29ff9",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.8209967097265185e-09
+    },
+    {
+      "model": "xarm_gripper",
+      "file": "unseen/states/xarm_gripper_1401_0119.bin",
+      "seed": 1401,
+      "env": 119,
+      "source_sha256": "1c1289663e9346bdc1c55b8a07444a82b95baaeb850f57839e6121fa9e525ca1",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.422506315581027e-09
+    },
+    {
+      "model": "xarm_robotiq",
+      "file": "unseen/states/xarm_robotiq_1501_0017.bin",
+      "seed": 1501,
+      "env": 17,
+      "source_sha256": "a5d67f84b73dfe1b0a6a8f883d8bf3f69369a13cfa4a57d6c2b3c30a424de70d",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.3324040468025585e-09
+    },
+    {
+      "model": "xarm_robotiq",
+      "file": "unseen/states/xarm_robotiq_1501_0159.bin",
+      "seed": 1501,
+      "env": 159,
+      "source_sha256": "313a3408f7f18dcaca87a4357df20fc9fe790c8a24054a293e9d959838c333d3",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.3386060858558014e-09
+    },
+    {
+      "model": "xarm_tesollo",
+      "file": "unseen/states/xarm_tesollo_1042_0081.bin",
+      "seed": 1042,
+      "env": 81,
+      "source_sha256": "eae1c9058425dc130fb44f9c1ea5747741e1b536610f1083af9764bd2dc8e745",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.5639895127153916e-09
+    },
+    {
+      "model": "xarm_tesollo",
+      "file": "unseen/states/xarm_tesollo_1042_0142.bin",
+      "seed": 1042,
+      "env": 142,
+      "source_sha256": "9301878c120a4a72a9e8f9e141d89c401a0aa1a32f33d276340067c33b7d3810",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.6404114829896e-09
+    },
+    {
+      "model": "xarm_umi",
+      "file": "unseen/states/xarm_umi_1501_0161.bin",
+      "seed": 1501,
+      "env": 161,
+      "source_sha256": "4e788a1794b8b9ef8bc901b53fc93d1f4cd8d5f48d1e97808723b131eebca35c",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.1618744486531145e-09
+    },
+    {
+      "model": "xarm_umi",
+      "file": "unseen/states/xarm_umi_1501_0170.bin",
+      "seed": 1501,
+      "env": 170,
+      "source_sha256": "9664dce870c9b4915842930d21d3b8b5e58af4ca33c1ca830e0b9808dbf717d7",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.758864104155004e-09
+    },
+    {
+      "model": "xarm_wuji",
+      "file": "unseen/states/xarm_wuji_1042_0071.bin",
+      "seed": 1042,
+      "env": 71,
+      "source_sha256": "616ad814f857a842e3c8c35ad7db38c0741bf16f4925c947cc3dfa9c5b02edcb",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 1.7843969608973533e-09
+    },
+    {
+      "model": "xarm_wuji",
+      "file": "unseen/states/xarm_wuji_1042_0178.bin",
+      "seed": 1042,
+      "env": 178,
+      "source_sha256": "7dd5e9c4099f157ad1e31a911995b22bb06a89c3dffad476139de1e30384f48f",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.12634525042996e-09
+    },
+    {
+      "model": "xarm_wuji2",
+      "file": "unseen/states/xarm_wuji2_1042_0053.bin",
+      "seed": 1042,
+      "env": 53,
+      "source_sha256": "888f1f668dc4205966ad3455e02a4b2e03d03924bea2562555c437bf8262e67a",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.0837241578276312e-09
+    },
+    {
+      "model": "xarm_wuji2",
+      "file": "unseen/states/xarm_wuji2_1042_0192.bin",
+      "seed": 1042,
+      "env": 192,
+      "source_sha256": "75247a6d3bd9d89037470bb767c477985ba6f3f33d54a9e45fc386762268e8c5",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.0161188615524006e-09
+    },
+    {
+      "model": "xarm_xarm_g1",
+      "file": "unseen/states/xarm_xarm_g1_1501_0021.bin",
+      "seed": 1501,
+      "env": 21,
+      "source_sha256": "f4c7560a6ade0160b2b76bff2eb71635cc0abf997fab01ddb9da5912f2394b92",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.7616285649648335e-09
+    },
+    {
+      "model": "xarm_xarm_g1",
+      "file": "unseen/states/xarm_xarm_g1_1501_0064.bin",
+      "seed": 1501,
+      "env": 64,
+      "source_sha256": "56bf278e6e6ce299742fff26055d9af378179d800046449adc1a3750364b5fff",
+      "control": "Pose-assisted staged control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.472075063901243e-09
+    }
+  ],
+  "selection": "Successful and lifted >3cm; full 240 steps; final 30 goal errors <5cm; timeout only. Selected clips do not estimate success rates."
+}

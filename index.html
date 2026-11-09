@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the temporal representations of DexFormer 2.0 across 24 arm–hand combinations.">
+  <title>DexFormer 2.0: Towards Universal Dexterous Grasping across Arms, Hands, and Objects</title>
+  <link rel="stylesheet" href="style.css?v=20261110-type-final">
+  <script src="data.js" defer></script><script src="app.js?v=20261109-shapes" defer></script><script src="films.js" defer></script><script src="cases/data.js?v=20261109-cleanup" defer></script><script src="cases.js?v=20261110-copy" defer></script><script src="cases/failures.js?v=20261109-two" defer></script><script src="failures.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="./">DexFormer <span class="version">2.0</span></a><nav class="site-nav" aria-label="Main navigation"><a class="header-link" href="#films">Films</a><a class="header-link" href="#cases">Real-world</a><a class="header-link" href="#isaac">3D Replay</a><a class="header-link" href="#results">Experiments</a><a class="header-link" href="#explorer">Explore t-SNE ↗</a></nav></header>
+  <main>
+    <section class="intro"><div><h1 class="project-title"><span class="project-title-brand">DexFormer <span class="project-title-version">2.0</span></span><span class="project-title-detail">Towards Universal Dexterous Grasping<br class="title-break"> across Arms, Hands, and Objects</span></h1><div class="project-credits" aria-label="Authors and affiliations"><p class="project-authors"><span>Lixin Xu<sup>1,2,*</sup></span><span>Ke Zhang<sup>1,2,*</sup></span><span>Xinyu Liu<sup>2,3,*</sup></span><span>Jie Tan<sup>2,4</sup></span><span>Senming Tan<sup>2</sup></span></p><p class="project-authors project-authors-second"><span>Jiaju Yin<sup>1,2</sup></span><span>Yating Feng<sup>1,2</sup></span><span>Xiyue Dong<sup>1,2</sup></span><span>Renjing Xu<sup>1,†</sup></span></p><p class="project-affiliations"><span><sup>1</sup> HKUST(GZ)</span><span><sup>2</sup> BrainCo</span><span><sup>3</sup> SCUT</span><span><sup>4</sup> Chongqing University</span></p><p class="project-author-notes"><span>* Equal contribution</span><span>† Corresponding author</span></p></div></div></section>
+    <section class="film-section" id="films" aria-label="Project films">
+      
+      <div class="film-screen"><video id="film-video" controls muted playsinline loop preload="none" poster="films/long-table.png" aria-label="Long table promotional film"></video></div>
+      <div class="film-caption"><div><span id="film-number">01 / 04</span><strong id="film-title">Across the table</strong></div><span id="film-description">A closer look at multiple arm–hand combinations.</span></div>
+      <div id="film-picker" role="group" aria-label="Choose a promotional film"></div>
+      
+      <p id="film-status" role="status"></p>
+    </section>
+    <section class="cases-section" id="cases" aria-labelledby="cases-heading">
+      <div class="section-heading"><div><h2 id="cases-heading">Real-world Deployment</h2></div></div>
+      <div class="cases-grid">
+        <article class="case-panel" id="success-cases" aria-labelledby="success-heading">
+          <div class="case-panel-heading"><h3 id="success-heading">Success Cases</h3><span class="case-status">Real-world grasps · 12 clips</span></div>
+          <div class="real-case-layout"><div><video id="case-video" controls muted playsinline preload="none" poster="cases/success-03.png" src="cases/success-03.mp4?v=20261109-cleanup" aria-label="Real-world successful grasp"></video><h4 id="case-title">Multicolor cube</h4><p class="case-detail" id="case-detail">2× speed · 12.3 s playback</p></div><div id="case-picker" role="group" aria-label="Choose a successful grasp"></div></div>
+          
+        </article>
+        <article class="case-panel" id="failure-cases" aria-labelledby="failure-heading">
+          <div class="case-panel-heading"><h3 id="failure-heading">Failure Cases</h3><span class="case-status">2 examples · 2× speed</span></div>
+          <div class="failure-grid" id="failure-gallery"></div>
+          
+        </article>
+      </div>
+    </section>
+    <section class="mujoco-section" id="isaac" aria-labelledby="mujoco-heading">
+      <div class="section-heading"><div><h2 id="mujoco-heading">Explore every grasp in 3D.</h2></div><p>Rotate the scene. Follow the grasp.</p></div>
+      <iframe id="mujoco-replay" src="isaac/index.html?v=locate1" title="Interactive Isaac state replay" loading="lazy"></iframe>
+      
+    </section>
+    <section id="results" class="results-section" aria-labelledby="results-heading">
+      <div class="section-heading"><div><h2 id="results-heading">Experiments</h2></div></div>
+      <div class="result-highlights"><div><strong>89.01<span>%</span></strong><p>Seen embodiments · seen objects</p></div><div><strong>48.85<span>%</span></strong><p>Unseen embodiments · unseen objects</p></div><div><strong>+15.67<span>pp</span></strong><p>Over GRU when both are unseen</p></div></div>
+      <div class="result-tabs" role="group" aria-label="Experiment view"><button data-result-tab="overview" aria-pressed="true">Generalization</button><button data-result-tab="matrix" aria-pressed="false">24 embodiments</button><button data-result-tab="ablation" aria-pressed="false">Ablations</button><button data-result-tab="robustness" aria-pressed="false">Fault robustness</button><button data-result-tab="quality" aria-pressed="false">Success stability</button></div>
+      <div id="results-content" aria-live="polite"></div>
+      <details class="result-training"><summary>Training dynamics · archived fault-trained runs</summary><img src="training-success.png" loading="lazy" alt="Training success curves over 5,000 iterations for MorphAttention with memory, MLP plus Transformer-XL, no tree bias, and no memory."><p class="result-note">18 seen embodiments. Final 50-iteration averages: 78.21% (MorphAttention, memory 16), 76.04% (MLP + TXL), 66.94% (no tree bias), and 64.39% (no memory). All runs use a 60/20/20 nominal/initial/mid-episode fault mixture. Faint traces are raw values, not confidence intervals. These single-run adaptive-curriculum metrics are separate from the no-fault checkpoints evaluated above.</p></details><details class="result-protocol"><summary>Evaluation protocol &amp; scope</summary><p>Stable success requires all 240 control steps, object position error below 5 cm throughout the final 30 steps (0.5 s), and no non-timeout termination. Physics runs at 240 Hz; control at 60 Hz. Reported values are from the current paper tables, with frozen policies and normalization statistics.</p><p>Each model has one training run. Five evaluation seeds are not independent training runs. Equal iteration counts do not imply equal sampling budgets: DexFormer 1.0 uses rollout length 32, versus 64 for the other variants.</p><p>Real-world success-rate and motor-disconnection tables are still pending in the paper; the real-world videos are qualitative examples.</p><a href="results-data.json" download>Download table values ↗</a></details>
+    </section>
+    <div class="section-heading representation-heading"><div><p class="eyebrow">INSIDE THE POLICY</p><h2>Explore the representation.</h2></div><p>Hover to identify a robot. Follow its grasp in motion.</p></div>
+    <section class="explorer" id="explorer" aria-label="Interactive t-SNE visualization">
+      <div class="explorer-header"><div><span class="status-dot"></span><h2>Representation space</h2><span class="projection-label">t-SNE · 128D → 2D</span></div><button id="reset" type="button">↺ <span>Reset view</span></button></div>
+      <div class="view-toolbar"><div role="group" aria-label="Color representation by"><button type="button" data-tsne-view="embodiment" aria-pressed="true">Arm × Hand · 24</button><button type="button" data-tsne-view="arm" aria-pressed="false">Arms · 4</button><button type="button" data-tsne-view="hand" aria-pressed="false">Hands · 6</button></div><p id="view-note">Original t-SNE coordinates · color = combination; shape = arm.</p></div>
+      <div class="shape-key" aria-label="Point shape encodes arm">Shape = arm <span>● Flexiv</span><span>■ Franka</span><span>▲ KUKA</span><span>★ xArm7</span></div><div class="explorer-body">
+        <div class="plot-panel"><div class="plot-wrap"><canvas id="plot" role="img" aria-label="t-SNE scatter plot of 19,200 samples from 24 arm–hand combinations. Hover over points or use the accessible legend buttons to highlight a combination and preview the robot."></canvas></div><div class="plot-status"><span class="hint-icon">↗</span><span id="selection" aria-live="polite">Hover over a point or a legend entry to explore.</span><span id="selection-count">24 combinations</span></div></div>
+        <aside class="legend-panel"><section id="embodiment-preview" aria-label="Embodiment preview"><div class="preview-images"></div><div class="preview-caption"><span class="preview-kicker">EMBODIMENT</span><strong id="preview-name">Explore a combination</strong><span id="preview-meta">Hover over the cloud or a legend entry.</span><a id="preview-watch" href="#isaac" hidden>View in 3D ↗</a></div></section><div class="legend-title"><h2>Arm × Hand</h2><span>18 seen / 6 unseen</span></div><p class="legend-help">Hover to highlight. Click to keep a selection.</p><div id="legend"></div><p class="unseen-note"><span>(unseen)</span> Held-out pairings of known arms and hands.</p></aside>
+      </div>
+      <div class="explorer-footer"><span><b>800</b> samples per combination</span><span><b>1.0 s</b> into each rollout</span><span><b>16 steps</b> of temporal memory</span></div>
+    </section>
+    <section class="reading-note"><span class="note-label">READING THE MAP</span><p>Each point represents a 128-dimensional Transformer-XL output, before concatenation with the task features. Switch views to color the same points by arm–hand combination, arm, or hand. Shapes identify arms in all three views: circle = Flexiv, square = Franka, triangle = KUKA, star = xArm7. In the combination view, held-out pairings are marked <b>(unseen)</b>. The map visualizes representation structure, not grasp success or a direct measure of generalization.</p></section>
+  </main>
+  <footer class="site-footer"><span>DexFormer 2.0</span><span>Temporal representations · 24 embodiments</span></footer>
+<script src="results.js" defer></script>
+<script src="mujoco-section.js?v=locate1" defer></script>
+</body>
+</html>

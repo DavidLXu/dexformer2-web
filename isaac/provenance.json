@@ -1,0 +1,11 @@
+{
+  "source": "Isaac recorded states, teaser capture 2026-10-27",
+  "episodes": 96,
+  "embodiments": 24,
+  "frames_per_episode": 240,
+  "fps": 60,
+  "source_hashes_verified": true,
+  "max_fk_position_error_m": 1.997101596449958e-05,
+  "selection": "Selected stable-success episodes; not success-rate evidence",
+  "transform": "Robot-root coordinates; same rigid coordinate transform for robot and object; full frames 0..239; no dynamics simulation"
+}

@@ -1,0 +1,81 @@
+import * as THREE from './vendor/three.module.js';
+import {OrbitControls} from './vendor/OrbitControls.js';
+import {RoomEnvironment} from './vendor/RoomEnvironment.js';
+const $=id=>document.getElementById(id);let catalogue,model,trial,states,frame=0,playing=false,visible=true,last=0,busy=false,ready=false,renderer,scene,camera,controls,group,links=[],object,geometries=new Map(),textures=new Map(),request=0,raf=0;
+const q=new THREE.Quaternion(),p=new THREE.Vector3();
+let syncGuided=()=>{};
+function stop(){document.getElementById('unseen-video')?.pause();playing=false;cancelAnimationFrame(raf);$('play').textContent='Play';}
+function draw(){if(renderer)renderer.render(scene,camera);}
+function display(){if(!states)return;const f=Math.min(Math.floor(frame),trial.frames-1);for(let i=0;i<links.length+1;i++){const mesh=i<links.length?links[i]:object;const offset=f*trial.stride+i*7;mesh.position.fromArray(states,offset);mesh.quaternion.fromArray(states,offset+3);} $('time').value=f;$('clock').value=((f+1)/trial.fps).toFixed(2)+' / '+(trial.frames/trial.fps).toFixed(2)+' s';$('height').textContent=(trial.heights[f]*100).toFixed(1)+' cm';draw();}
+function tick(now){if(!playing||!visible||document.hidden)return;frame+=Math.min((now-last)/1000,.1)*trial.fps;last=now;if(frame>=trial.frames-1){frame=trial.frames-1;stop();}display();if(playing)raf=requestAnimationFrame(tick);}
+function play(){if(!ready||busy)return;if(frame>=trial.frames-1)frame=0;playing=true;$('play').textContent='Pause';last=performance.now();raf=requestAnimationFrame(tick);}
+function home(){camera.position.set(1.65,1.7,1.45);controls.target.set(.25,0,.42);controls.update();draw();}
+async function texture(spec,color=false){const key=spec.filename+(color?'s':'l');if(!textures.has(key))textures.set(key,new THREE.TextureLoader().loadAsync(spec.filename).then(t=>{if(color)t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());return t;}));return textures.get(key);}
+async function material(wrapper){const s=wrapper.bsdf||wrapper;const m=new THREE.MeshPhysicalMaterial({roughness:.45,metalness:0,clearcoat:.12});const base=s.base_color??s.reflectance??.5;if(base?.type==='bitmap')m.map=await texture(base,true);else {const rgb=base?.value||base;m.color.setRGB(...(Array.isArray(rgb)?rgb:[rgb,rgb,rgb]));}for(const [key,prop] of [['roughness','roughness'],['metallic','metalness']]){const v=s[key];if(v?.type==='bitmap'){m[prop]=1;m[prop+'Map']=await texture(v);}else if(typeof v==='number')m[prop]=v;}if(wrapper.normalmap)m.normalMap=await texture(wrapper.normalmap);return m;}
+async function geometry(part){if(!geometries.has(part.file))geometries.set(part.file,(async()=>{const r=await fetch(part.file);if(!r.ok)throw Error('Missing geometry');const b=await r.arrayBuffer(),n=part.vertices,g=new THREE.BufferGeometry();let offset=0;g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(b,offset,n*3),3));offset+=n*12;g.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(b,offset,n*3),3));offset+=n*12;if(part.uv){g.setAttribute('uv',new THREE.BufferAttribute(new Float32Array(b,offset,n*2),2));offset+=n*8;}g.setIndex(new THREE.BufferAttribute(new Uint32Array(b,offset,part.indices),1));return g;})());return geometries.get(part.file);}
+async function mesh(part){const [g,m]=await Promise.all([geometry(part),material(part.material)]);const o=new THREE.Mesh(g,m);o.castShadow=true;o.receiveShadow=true;return o;}
+async function choose(t,index){if(busy&&trial)return;stop();const token=++request;const next=new Float32Array(await(await fetch(t.file)).arrayBuffer());if(token!==request)return;if(next.length!==t.frames*t.stride)throw Error('Incomplete Isaac state data');const obj=await mesh(t.object);if(token!==request){obj.material.dispose();return;}if(object){group.remove(object);object.material.dispose();}object=obj;group.add(object);trial=t;syncGuided(model,index);states=next;frame=0;$('time').max=t.frames-1;$('clip-name').textContent=t.label;$('clip-name').parentElement.querySelector('span').textContent='Recorded object';$('outcome').textContent='';document.querySelectorAll('[data-trial]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.trial===index)));display();}
+async function switchModel(m){if(busy)return;$('configured-replay').hidden=false;syncGuided(m,0);leaveVideo();busy=true;document.querySelectorAll(".guided-selection select").forEach(el=>el.disabled=true);ready=false;stop();++request;states=null;trial=null;$('model-name').textContent=m.label;$('replay-to-map').hidden=true;$('model-info').textContent=m.split+' · '+m.trials.length+' recorded grasps';$('height').parentElement.querySelector('span').textContent='Object center above robot base plane';document.querySelector('.detail').innerHTML='';if(m.new_hand){document.querySelectorAll('[data-new-hand]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.newHand===m.new_hand)));document.querySelector('.detail').innerHTML='';}document.querySelector('#trials').previousElementSibling.textContent='Choose a recorded object';$('outcome').textContent='Loading Isaac assets…';document.querySelectorAll('[data-model]').forEach(b=>{b.disabled=true;b.setAttribute('aria-pressed',String(b.dataset.model===m.id));});$('trials').replaceChildren();['play','time'].forEach(id=>$(id).disabled=true);
+try{if(group){scene.remove(group);group.traverse(o=>o.material?.dispose());}for(const g of geometries.values())(await g).dispose();for(const t of textures.values())(await t).dispose();geometries.clear();textures.clear();object=null;model=m;group=new THREE.Group();scene.add(group);links=m.links.map(()=>new THREE.Group());links.forEach(o=>group.add(o));const parts=await Promise.all(m.parts.map(mesh));parts.forEach((o,i)=>links[m.links.indexOf(m.parts[i].link)].add(o));m.trials.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t.label;b.dataset.trial=i;b.onclick=()=>choose(t,i).catch(error);$('trials').append(b);});await choose(m.trials[0],0);ready=true;$('replay-to-map').hidden=!!m.new_hand;['play','time'].forEach(id=>$(id).disabled=false);$('overlay').style.display='none';}finally{busy=false;document.querySelectorAll(".guided-selection select").forEach(el=>el.disabled=false);document.querySelectorAll('[data-model]').forEach(b=>b.disabled=false);}}
+function error(e){stop();$('overlay').style.display='flex';$('status').textContent='Replay could not load: '+e.message;console.error(e);}
+async function init(selected){if(renderer)return;$('load').disabled=true;$('status').textContent='Loading original meshes and Isaac states…';try{
+renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;renderer.domElement.setAttribute('aria-label','Isaac recorded state visualization');$('stage').prepend(renderer.domElement);scene=new THREE.Scene();scene.background=new THREE.Color('#e2e6e9');const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;room.dispose();pmrem.dispose();scene.environmentIntensity=.8;scene.add(new THREE.HemisphereLight(0xffffff,0x81909d,1));const key=new THREE.DirectionalLight(0xfff4e3,2.6);key.position.set(1,-2,4);key.castShadow=true;key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-1.5,right:1.5,top:1.5,bottom:-1.5,near:.1,far:10});key.shadow.bias=-.00015;key.shadow.normalBias=.001;scene.add(key);const fill=new THREE.DirectionalLight(0xd7eaff,1.4);fill.position.set(-2,2,3);scene.add(fill);const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0xd2d8dc,roughness:.65,metalness:.06}));floor.position.z=-.004;floor.receiveShadow=true;scene.add(floor);
+camera=new THREE.PerspectiveCamera(37,1,.01,100);camera.up.set(0,0,1);controls=new OrbitControls(camera,renderer.domElement);controls.minDistance=.35;controls.maxDistance=4;controls.enableDamping=false;controls.addEventListener('change',draw);home();new ResizeObserver(()=>{const box=$('stage').getBoundingClientRect();renderer.setSize(box.width,box.height,false);camera.aspect=box.width/box.height;camera.updateProjectionMatrix();draw();}).observe($('stage'));catalogue=await cataloguePromise;await switchModel(selected?.id?selected:catalogue.models.find(m=>m.id==='flexiv_revo3'));$('reset').disabled=false;
+}catch(e){error(e);}}
+const cataloguePromise=Promise.all([fetch('catalogue.json').then(r=>r.json()),fetch('unseen/catalogue.json').then(r=>r.json()),fetch('unseen/states-catalogue.json').then(r=>r.json())]).then(([c,entries,extra])=>{
+ const allModels=[...c.models,...extra.models];$('summary').textContent='4 arms × 13 hand / gripper types · '+allModels.length+' combinations with 3D replay · '+allModels.reduce((n,m)=>n+m.trials.length,0)+' selected episodes';const grid=$('combinations');const known=['revo3','sharpa','leap','allegro','rapid','shadow'].map(id=>({id,label:c.labels[id],kind:'known'}));const columns=[...known,...entries.filter(e=>e.id!=='orca').map(e=>e.id==='tesollo'?{...e,label:'Tesollo'}:e)];extra.models.forEach(m=>{m.label=m.label.replace('Tesollo DG-5F-M','Tesollo');});
+ const table=document.createElement('table');table.className='replay-matrix';table.setAttribute('aria-label','Four arms paired with training hands, new hands and grippers');const head=table.createTHead();const groups=head.insertRow();const corner=document.createElement('th');corner.rowSpan=2;corner.textContent='Arm / hand';corner.scope='col';groups.append(corner);
+ for(const [title,count] of [['Training hands',6],['New hands',3],['New grippers',4]]){const th=document.createElement('th');th.colSpan=count;th.textContent=title;th.scope='colgroup';th.className='group-title';groups.append(th);}
+ const headers=head.insertRow();columns.forEach((col,i)=>{const th=document.createElement('th');th.textContent=col.label;th.scope='col';if(i===6||i===9)th.className='group-start';headers.append(th);});
+ const body=table.createTBody();for(const arm of ['franka','kuka','xarm','flexiv']){const row=body.insertRow();const label=document.createElement('th');label.textContent=c.labels[arm];label.scope='row';row.append(label);columns.forEach((col,i)=>{const cell=row.insertCell();if(i===6||i===9)cell.className='group-start';const m=i<6?c.models.find(m=>m.arm===arm&&m.hand===col.id):extra.models.find(m=>m.arm===arm&&m.new_hand===col.id);const b=document.createElement('button');b.setAttribute('aria-label',c.labels[arm]+' + '+col.label+(m?'':' · '+(col.id==='orca'?'No verified stable success':'Recording pending')));b.setAttribute('aria-pressed','false');if(m){b.dataset.model=m.id;b.textContent='View'+(m.split==='Unseen'?' *':'');b.title=m.trials.length+' recorded grasps'+(m.control?' · '+m.control:'');b.onclick=()=> (renderer?switchModel(m):init(m)).catch(error);}else{b.disabled=true;b.textContent=col.id==='orca'?'No success':'Pending';}cell.append(b);});}grid.replaceChildren(table);setupGuided(allModels,columns,c.labels);return c;
+}).catch(e=>{error(e);throw e;});
+$('load').onclick=init;$('play').onclick=()=>playing?stop():play();$('time').oninput=()=>{stop();frame=+$('time').value;display();};$('reset').onclick=home;document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='mujoco-visible'){visible=e.data.visible;if(!visible)stop();}});window.addEventListener('pagehide',()=>{stop();renderer?.dispose();});const reportSize=()=>{const height=Math.ceil(Math.max(...[...document.body.children].filter(e=>e.tagName!=='SCRIPT'&&!e.hidden).map(e=>e.getBoundingClientRect().bottom+window.scrollY)))+2;parent.postMessage({type:'mujoco-height',height},location.origin);};const sizeObserver=new ResizeObserver(reportSize);[...document.body.children].filter(e=>e.tagName!=='SCRIPT').forEach(e=>sizeObserver.observe(e));
+
+let videoMode=false;const armLabels={franka:'Franka',kuka:'KUKA',xarm:'xArm7',flexiv:'Flexiv'};
+function leaveVideo(){videoMode=false;const v=$('unseen-video');v.pause();v.hidden=true;v.removeAttribute('src');v.load();$('stage').classList.remove('video-mode');document.querySelector('.controls').style.display='';document.querySelector('.tag').textContent='ISAAC · RECORDED STATE EXPLORER';document.querySelectorAll('[data-new-hand]').forEach(b=>b.setAttribute('aria-pressed','false'));if(controls)controls.enabled=true;}
+
+function setupGuided(allModels,columns,labels){
+ let selectedArm='',selectedHand='',selectedObject=-1;
+ const find=()=>allModels.find(m=>m.arm===selectedArm&&(m.new_hand||m.hand)===selectedHand);
+ const setStatus=text=>$('config-status').textContent=text;
+ function card(label,image,pressed,tag,onClick){
+  const b=document.createElement('button');b.type='button';b.className='config-card';b.setAttribute('aria-pressed',String(pressed));
+  const img=new Image();img.src=image;img.alt='';img.loading='lazy';const name=document.createElement('strong');name.textContent=label;b.append(img,name);
+  if(tag){const note=document.createElement('small');note.textContent='('+tag+')';b.append(note);}
+  b.setAttribute('aria-label',label+(tag?' ('+tag+')':''));b.onclick=onClick;return b;
+ }
+ function renderArms(){
+  $('arm-cards').replaceChildren(...['franka','kuka','xarm','flexiv'].map(id=>card(labels[id],'config-assets/arm-'+id+'.png',selectedArm===id,'',()=>{
+   if(busy)return;if(selectedArm===id)return;stop();$('configured-replay').hidden=true;selectedArm=id;selectedHand='';selectedObject=-1;renderArms();renderHands();$('hand-step').hidden=false;$('object-step').hidden=true;setStatus('Now choose a hand for '+labels[id]+'.');
+  })));
+ }
+ function renderHands(){
+  $('hand-context').textContent='Available with '+labels[selectedArm]+'. Labels reflect this arm–hand pairing.';
+  $('hand-cards').replaceChildren();
+  for(const col of columns){
+   const m=allModels.find(m=>m.arm===selectedArm&&(m.new_hand||m.hand)===col.id);if(!m)continue;
+   const tag=m.new_hand?(m.control==='Direct policy control'?'zero-shot new embodiment':'new embodiment'):(m.split==='Unseen'?'unseen pair':'');
+   $('hand-cards').append(card(col.label,'config-assets/hand-'+col.id+'.png',selectedHand===col.id,tag,()=>{
+    if(busy)return;if(selectedHand===col.id)return;stop();$('configured-replay').hidden=true;selectedHand=col.id;selectedObject=-1;renderHands();renderObjects();$('object-step').hidden=false;setStatus('Choose an object to load the replay.');
+   }));
+  }
+ }
+ function renderObjects(){const m=find();$('object-cards').replaceChildren(...m.trials.map((t,i)=>card(t.label,'config-assets/object-'+t.object_id+'.png',i===selectedObject,'',()=>loadSelection(i))));}
+ syncGuided=(m,index=0)=>{if(!m)return;selectedArm=m.arm;selectedHand=m.new_hand||m.hand;selectedObject=index;renderArms();renderHands();renderObjects();$('hand-step').hidden=false;$('object-step').hidden=false;};
+ async function loadSelection(index){
+  if(busy)return;const m=find();if(!m)return;$('configured-replay').hidden=false;selectedObject=index;renderObjects();
+  document.querySelector('.configurator').classList.add('is-loading');setStatus('Loading '+m.label+' · '+m.trials[index].label+'…');
+  try{
+   if(!renderer)await init(m);else if(model?.id!==m.id)await switchModel(m);
+   if(ready&&model?.id===m.id){if(trial!==m.trials[index])await choose(m.trials[index],index);syncGuided(m,index);setStatus(m.label+' · '+m.trials[index].label+' — ready to play.');}
+  }catch(e){error(e);setStatus('Could not load this replay. Please try again.');}
+  finally{document.querySelector('.configurator').classList.remove('is-loading');}
+ }
+ renderArms();
+}
+
+$('replay-to-map').onclick=e=>{e.preventDefault();if(!ready||!model||model.new_hand)return;stop();parent.postMessage({type:'dexformer-locate',composition:model.id},location.origin);};
+window.addEventListener('message',async e=>{
+ if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='dexformer-replay')return;
+ try{const c=await cataloguePromise;const m=c.models.find(m=>m.id===e.data.composition);if(!m||busy)return;await(renderer?switchModel(m):init(m));}catch(err){error(err);}
+});
