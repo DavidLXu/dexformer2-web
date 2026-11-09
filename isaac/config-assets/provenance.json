@@ -47,5 +47,6 @@
     "object-rb_massage_ball_028.png",
     "object-rb_mooncake_014.png",
     "object-rb_mouse_074.png"
-  ]
+  ],
+  "object_texture_fix": "2026-11-10: flipped object V coordinates for Mitsuba bitmap convention; regenerated all 27 object thumbnails at 192 spp."
 }

@@ -16,12 +16,29 @@
   const cellSize = 16, duration = 280;
   const name = g => g.label || `${g.arm_display} + ${g.hand_display}${g.seen_unseen === 'unseen' ? ' (unseen)' : ''}`;
 
-  // Reuse the paper's images in a permanent sidebar region, outside the canvas.
-  groups.forEach((g, i) => {
-    const img = new Image(); img.src = `embodiments/${g.composition}.png`; img.alt = '';
-    img.decoding = 'async'; img.setAttribute('aria-hidden', 'true');
-    document.querySelector('.preview-images').append(img); previews.push(img);
-  });
+  const explorer=document.getElementById('explorer');
+  let pointerAnchor=null;
+  explorer.append(preview);preview.classList.add('preview-floating');preview.hidden=false;preview.inert=true;
+  function addPreview(key,src){const img=new Image();img.src=src;img.alt='';img.decoding='async';img.dataset.previewKey=key;img.setAttribute('aria-hidden','true');preview.querySelector('.preview-images').append(img);previews.push(img);}
+  original.groups.forEach(g=>addPreview(g.composition,`embodiments/${g.composition}.png`));
+  for(const arm of [...new Set(original.groups.map(g=>g.arm))])addPreview('arm-'+arm,`isaac/config-assets/arm-${arm}.png`);
+  for(const hand of [...new Set(original.groups.map(g=>g.hand))])addPreview('hand-'+hand,`isaac/config-assets/hand-${hand}.png`);
+  function positionPreview(){
+    if(!pointerAnchor)return;
+    const box=explorer.getBoundingClientRect(),w=preview.offsetWidth,h=preview.offsetHeight;
+    let x=pointerAnchor.x-box.left+22,y=pointerAnchor.y-box.top+18;
+    if(x+w>box.width-12)x=pointerAnchor.x-box.left-w-22;
+    if(y+h>Math.min(box.height-12,innerHeight-box.top-12))y=pointerAnchor.y-box.top-h-18;
+    x=Math.max(12,Math.min(x,box.width-w-12));y=Math.max(12,Math.min(y,box.height-h-12));
+    preview.style.left=x+'px';preview.style.top=y+'px';
+  }
+  function anchor(event,element){
+    if(event?.clientX!==undefined)pointerAnchor={x:event.clientX,y:event.clientY};
+    else{const r=element.getBoundingClientRect();pointerAnchor={x:r.left,y:r.top+r.height/2};}
+    positionPreview();
+  }
+  preview.addEventListener('pointerenter',cancelHover);preview.addEventListener('pointerleave',leave);
+  preview.addEventListener('focusin',cancelHover);preview.addEventListener('focusout',leave);
   function buildLegend(){
   legend.replaceChildren();buttons.length=0;
   let lastArm, section;
@@ -38,9 +55,9 @@
     const label = document.createElement('span'); label.textContent = g.label || `${g.arm_display} + ${g.hand_display}`;
     if (g.seen_unseen === 'unseen') {const tag = document.createElement('span'); tag.className = 'unseen-tag'; tag.textContent = '(unseen)'; label.append(tag);}
     button.append(dot, label); section.append(button); buttons.push(button);
-    button.addEventListener('pointerenter', () => schedule(i));
+    button.addEventListener('pointerenter', event => {anchor(event,button);schedule(i);});
     button.addEventListener('pointerleave', leave);
-    button.addEventListener('focus', () => {cancelHover();activate(i);});
+    button.addEventListener('focus', () => {anchor(null,button);cancelHover();activate(i);});
     button.addEventListener('blur', leave);
     button.addEventListener('click', () => {cancelHover();pinned = pinned === i ? null : i;activate(pinned, true);});
   });
@@ -77,18 +94,15 @@
     transitionTo([index === null ? 1 : .48, ...groups.map((_, i) => index === i ? .78 : 0)]);
   }
   function showPreview(index) {
-    if(view !== "embodiment")return;
-    // Retain the last explored robot on pointer exit; the fixed region never collapses.
-    if(index===null){
-      if(previewIndex!==null)document.getElementById('preview-meta').textContent='Last explored · 800 samples';
-      return;
-    }
-    previews.forEach((img,i)=>{img.classList.toggle('visible',i===index);img.alt=i===index?`${groups[i].arm_display} arm with ${groups[i].hand_display} hand`:'';img.setAttribute('aria-hidden',String(i!==index));});
-    document.getElementById('preview-name').textContent=name(groups[index]);
-    document.getElementById('preview-meta').textContent='800 samples · 128D representation';
-    preview.style.setProperty('--group-color',groups[index].color_hex);
-    preview.classList.add('has-selection');previewIndex=index;
-    const watch=document.getElementById('preview-watch');watch.hidden=false;watch.dataset.composition=groups[index].composition;
+    if(index===null){preview.classList.remove('is-open');preview.inert=true;preview.setAttribute('aria-hidden','true');return;}
+    const g=groups[index],key=view==='embodiment'?g.composition:view+'-'+g[view];
+    previews.forEach(img=>{const selected=img.dataset.previewKey===key;img.classList.toggle('visible',selected);img.alt=selected?name(g):'';img.setAttribute('aria-hidden',String(!selected));});
+    preview.querySelector('.preview-kicker').textContent=view==='embodiment'?'EMBODIMENT':view==='arm'?'ARM':'HAND';
+    document.getElementById('preview-name').textContent=name(g);
+    document.getElementById('preview-meta').textContent=points.filter(p=>p[2]===index).length.toLocaleString()+' samples · 128D representation';
+    preview.style.setProperty('--group-color',g.color_hex);preview.classList.add('has-selection','is-open');previewIndex=index;preview.inert=false;preview.setAttribute('aria-hidden','false');
+    if(!pointerAnchor){const r=canvas.getBoundingClientRect();pointerAnchor={x:r.left+r.width*.6,y:r.top+50};}
+    positionPreview();
   }
   function transitionTo(next) {
     cancelAnimationFrame(frame);frame=0;
@@ -124,7 +138,7 @@
       else {for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,rr=k%2?r*.43:r;const px=x+Math.cos(a)*rr,py=y+Math.sin(a)*rr;k?path.lineTo(px,py):path.moveTo(px,py);}path.closePath();}
       paths[g].addPath(path);baseCtx.fillStyle=groups[g].color_hex;baseCtx.fill(path);
     });
-    draw();
+    draw();positionPreview();
   }
   function draw() {
     if(!width)return;
@@ -152,13 +166,12 @@
     if(active!==null&&currentDistance<144&&(best===null||Math.sqrt(currentDistance)<Math.sqrt(distance)+3))best=active;
     return best;
   }
-  canvas.addEventListener('pointermove',event=>{const index=hit(event);schedule(index);canvas.style.cursor=index===null?'default':'pointer';});
+  canvas.addEventListener('pointermove',event=>{anchor(event,canvas);const index=hit(event);schedule(index);canvas.style.cursor=index===null?'default':'pointer';});
   canvas.addEventListener('pointerleave',leave);
-  canvas.addEventListener('click',event=>{cancelHover();const index=hit(event);pinned=index===pinned?null:index;activate(pinned,true);});
+  canvas.addEventListener('click',event=>{anchor(event,canvas);cancelHover();const index=hit(event);pinned=index===pinned?null:index;activate(pinned,true);});
   function reset(){
     cancelHover();pinned=null;activate(null,true);previewIndex=null;
     preview.classList.remove('has-selection');
-    document.getElementById('preview-watch').hidden=true;
     previews.forEach(img=>{img.classList.remove('visible');img.alt='';img.setAttribute('aria-hidden','true');});
     document.getElementById('preview-name').textContent='Explore a combination';
     document.getElementById('preview-meta').textContent='Hover over the cloud or a legend entry.';
@@ -167,21 +180,20 @@
   document.addEventListener('keydown',event=>{if(event.key==='Escape')reset();});
   document.addEventListener('dexformer:locate',event=>{
     const index=original.groups.findIndex(g=>g.composition===event.detail);
-    if(index<0)return;setView('embodiment');cancelHover();pinned=index;activate(index,true);
+    if(index<0)return;pointerAnchor=null;setView('embodiment');cancelHover();pinned=index;activate(index,true);
   });
   function setView(next){
     cancelHover();cancelAnimationFrame(frame);frame=0;view=next;active=null;pinned=null;
     if(view==='embodiment'){groups=original.groups;points=original.points;}
     else {
       const keys=[...new Set(original.groups.map(g=>g[view]))];
-      groups=keys.map((key,i)=>({...(view==='arm'?{arm:key}:{}),label:original.groups.find(g=>g[view]===key)[view+'_display'],color_hex:palette[i]}));
+      groups=keys.map((key,i)=>({[view]:key,label:original.groups.find(g=>g[view]===key)[view+'_display'],color_hex:palette[i]}));
       points=original.points.map(([x,y,g])=>[x,y,keys.indexOf(original.groups[g][view])]);
     }
     weights=[1,...groups.map(()=>0)];buildLegend();reset();resize();
-    preview.hidden=view!=='embodiment';
+    preview.hidden=false;
     document.querySelector('.legend-title h2').textContent=view==='embodiment'?'Arm × Hand':view==='arm'?'Four arms':'Six hands';
     document.querySelector('.legend-title>span').textContent=view==='embodiment'?'18 seen / 6 unseen':'All 24 combinations';
-    document.querySelector('.unseen-note').hidden=view!=='embodiment';
     document.querySelectorAll('[data-tsne-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tsneView===view)));
     document.getElementById('view-note').textContent=view==='embodiment'?'Original t-SNE coordinates · color = combination; shape = arm.':`Same t-SNE coordinates · color = ${view}; shape = arm. Each group pools all ${view==='arm'?'six hands':'four arms'}; seen and unseen pairings are combined.`;
   }

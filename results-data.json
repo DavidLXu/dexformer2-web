@@ -219,5 +219,44 @@
       0.87
     ]
   ],
-  "source_sha256": "94421cd75d70accd20b4b2897ccef7221d5fe75948982aa6fc237b93a576b100"
+  "source_sha256": "94421cd75d70accd20b4b2897ccef7221d5fe75948982aa6fc237b93a576b100",
+  "unseen-transfer": {
+    "flexiv": {
+      "wuji1": 41.2,
+      "wuji2": 32.6,
+      "tesollo": 12.7,
+      "franka_hand": 6.0,
+      "robotiq": 8.4,
+      "xarm_g1": 6.1,
+      "umi": 10.7
+    },
+    "franka": {
+      "wuji1": 10.0,
+      "wuji2": 9.2,
+      "tesollo": 7.0,
+      "franka_hand": 11.8,
+      "robotiq": 13.3,
+      "xarm_g1": 9.5,
+      "umi": 17.2
+    },
+    "kuka": {
+      "wuji1": 24.1,
+      "wuji2": 3.7,
+      "tesollo": 6.7,
+      "franka_hand": 2.5,
+      "robotiq": 3.7,
+      "xarm_g1": 3.7,
+      "umi": 2.9
+    },
+    "xarm": {
+      "wuji1": 33.4,
+      "wuji2": 12.7,
+      "tesollo": 20.7,
+      "franka_hand": 16.7,
+      "robotiq": 13.9,
+      "xarm_g1": 10.3,
+      "umi": 18.0
+    }
+  },
+  "unseen-transfer-source": "Paper table: Transfer to unseen hand and gripper types; five-seed means, 1,000 episodes per pair; grippers use staged pose control."
 }

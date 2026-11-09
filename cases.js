@@ -1,12 +1,56 @@
 (() => {
-const video=document.getElementById('case-video'),picker=document.getElementById('case-picker');
-video.defaultPlaybackRate=2;video.playbackRate=2;
-video.addEventListener('loadedmetadata',()=>{video.playbackRate=2;});
-window.REAL_CASES.forEach((c,i)=>{
- const b=document.createElement('button');b.type='button';b.className='real-case-button';b.setAttribute('aria-pressed',String(i===0));b.setAttribute('aria-label','Watch '+c.title);
- const img=new Image();img.src='cases/'+c.id+'.png';img.alt='';img.loading='lazy';const label=document.createElement('span');label.textContent=c.title;b.append(img,label);picker.append(b);
- b.addEventListener('click',()=>{video.pause();video.poster='cases/'+c.id+'.png';video.src='cases/'+c.id+'.mp4?v=20261109-cleanup';video.setAttribute('aria-label',c.title+' successful grasp');document.getElementById('case-title').textContent=c.title;document.getElementById('case-detail').textContent='2× speed · '+((c.end-c.start)/2).toFixed(1)+' s playback';picker.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));video.playbackRate=2;video.play().catch(()=>{});});
-});
-new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)video.pause();}).observe(video);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();});
+ const continuous=document.getElementById('revo3-continuous-video');
+ function stopOthers(except){document.querySelectorAll('video').forEach(v=>{if(v!==except)v.pause();});}
+ function setupVideo(v){
+  v.muted=true;v.playsInline=true;v.defaultPlaybackRate=3;v.playbackRate=3;
+  v.addEventListener('loadedmetadata',()=>{v.playbackRate=3;});
+  v.addEventListener('play',()=>stopOthers(v));
+  const observer=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)v.pause();},{threshold:.1});observer.observe(v);return observer;
+ }
+ setupVideo(continuous);
+ function carousel(host,clips,label,showEmbodiment=false){
+  host.replaceChildren();let selected=0;
+  const toolbar=document.createElement('div');toolbar.className='case-carousel-toolbar';
+  const count=document.createElement('span');count.className='case-carousel-count';count.setAttribute('aria-live','polite');
+  const prev=document.createElement('button'),next=document.createElement('button');
+  prev.type=next.type='button';prev.textContent='←';next.textContent='→';prev.setAttribute('aria-label','Previous '+label);next.setAttribute('aria-label','Next '+label);
+  const controls=document.createElement('div');controls.className='case-carousel-arrows';controls.append(prev,next);
+  const rowHeading=host.closest('.case-embodiment-row')?.querySelector('h4');
+  if(rowHeading){rowHeading.append(count);toolbar.append(controls);}else{toolbar.append(count,controls);}
+  const track=document.createElement('div');track.className='case-carousel-track';track.setAttribute('role','region');track.setAttribute('aria-label',label);track.tabIndex=0;
+  const cards=[];
+  function update(){count.replaceChildren();if(showEmbodiment){const name=document.createElement('strong');name.className='case-count-embodiment';name.textContent=clips[selected].embodiment;count.append(name);}count.append(document.createTextNode((selected+1)+' / '+clips.length));prev.disabled=selected===0;next.disabled=selected===clips.length-1;}
+  function activate(i,scroll=true){
+   selected=i;const item=cards[i];stopOthers(item.video);
+   cards.forEach((c,j)=>c.article.classList.toggle('is-selected',j===i));
+   if(!item.video.src){item.video.src=item.src;item.video.controls=true;item.video.load();}
+   item.play.hidden=true;item.video.playbackRate=3;item.video.play().catch(()=>{item.play.hidden=false;});
+   if(scroll)track.scrollTo({left:item.article.offsetLeft-track.firstElementChild.offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+   update();
+  }
+  clips.forEach((c,i)=>{
+   const article=document.createElement('article');article.className='case-video-card';
+   const media=document.createElement('div');media.className='case-card-media';
+   const video=document.createElement('video');video.preload='none';video.poster=c.poster||'cases/'+c.id+'.png';video.setAttribute('aria-label',c.embodiment+' · '+c.title);setupVideo(video);
+   const play=document.createElement('button');play.type='button';play.className='case-card-play';play.setAttribute('aria-label','Play '+c.title);const glyph=document.createElement('span');glyph.textContent='▶';play.append(glyph);play.addEventListener('click',()=>activate(i,false));
+   media.append(video,play);
+   const title=document.createElement('h4');title.textContent=c.title;
+   const meta=document.createElement('p');meta.className='case-detail';meta.textContent='3× speed';
+   const caption=document.createElement('div');caption.className='case-card-caption';caption.append(title,meta);
+   article.append(media,caption);
+   if(c.observation){const p=document.createElement('p');p.className='case-observation';p.textContent=c.observation;article.append(p);}
+   cards.push({article,video,play,src:c.src||'cases/'+c.id+'.mp4?v=20261110-original-2x'});track.append(article);
+  });
+  prev.addEventListener('click',()=>activate(Math.max(0,selected-1)));next.addEventListener('click',()=>activate(Math.min(clips.length-1,selected+1)));
+  track.addEventListener('keydown',e=>{if(e.target!==track)return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();activate(Math.max(0,Math.min(clips.length-1,selected+(e.key==='ArrowLeft'?-1:1))));}});
+  host.append(toolbar,track);update();
+ }
+ const revo3=window.REAL_CASES.filter(c=>c.embodiment==='Flexiv + Revo3');
+ const leap=window.REAL_CASES.filter(c=>c.embodiment==='Flexiv + LEAP');
+ carousel(document.getElementById('success-revo3-carousel'),revo3,'Revo3 success case');
+ carousel(document.getElementById('success-leap-carousel'),leap,'LEAP success case');
+ const failures=window.FAILURE_CASES.map(c=>({...c,embodiment:'Flexiv + Revo3',src:'cases/'+c.id+'.mp4?v=20261110-labeled',poster:'cases/'+c.id+'.png?v=20261110-labeled'}));
+ failures.push({id:'flexiv-leap-demo',embodiment:'Flexiv + LEAP',title:'Unsuccessful grasp acquisition',src:'cases/flexiv-leap-demo.mp4?v=20261110-labeled',poster:'cases/flexiv-leap-demo.png?v=20261110-labeled',observation:'The hand repeatedly contacts the yellow die but does not establish a stable grasp or complete a lift.'});
+ carousel(document.getElementById('failure-carousel'),failures,'failure case',true);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stopOthers();});
 })();

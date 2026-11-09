@@ -1,11 +1,8 @@
 (()=>{
- const frame=document.getElementById('mujoco-replay');let pending=null;
+ const frame=document.getElementById('mujoco-replay');
  const send=visible=>frame.contentWindow?.postMessage({type:'mujoco-visible',visible},location.origin);
  new IntersectionObserver(entries=>send(entries[0].isIntersecting)).observe(frame);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)send(false);});
- const replay=()=>{if(pending)frame.contentWindow?.postMessage({type:'dexformer-replay',composition:pending},location.origin);};
- frame.addEventListener('load',replay);
- document.getElementById('preview-watch').addEventListener('click',event=>{pending=event.currentTarget.dataset.composition;replay();});
  window.addEventListener('message',event=>{
   if(event.origin!==location.origin||event.source!==frame.contentWindow)return;
   if(event.data?.type==='mujoco-height'){const height=Number(event.data.height);if(Number.isFinite(height)&&height>300&&height<6000)frame.style.height=height+'px';}
