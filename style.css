@@ -105,3 +105,23 @@ main{max-width:1440px;padding-top:55px}.intro{display:block;text-align:center;ma
 .deployment-note{font-size:13px;font-weight:400;line-height:1.7;color:var(--muted);margin:12px 0 0}
 
 #revo3-continuous .deployment-note{margin:14px 0 0}
+
+/* The new-embodiment tab shares one projection across independently toggled layers. */
+.layer-toolbar{padding:16px 24px 10px;background:#f8f9fa;border-bottom:1px solid var(--line)}
+.layer-toolbar[hidden],#ur5e-shape-key[hidden]{display:none}
+.layer-toolbar fieldset{padding:0;margin:0 0 14px;border:0;display:flex;gap:10px 22px;flex-wrap:wrap}
+.layer-toolbar legend{font-size:11px;font-weight:600;color:#6a726d;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.layer-toolbar label{display:flex;align-items:center;gap:7px;font-size:12px;cursor:pointer}
+.layer-toolbar input[type=checkbox]{width:15px;height:15px;accent-color:#315943}
+.layer-toolbar label>span{color:#737b76;font-variant-numeric:tabular-nums}
+.base-opacity{color:#636b66;flex-wrap:wrap}.base-opacity input{width:140px;accent-color:#315943}.base-opacity output{min-width:34px;font-variant-numeric:tabular-nums}
+.layer-toolbar p{max-width:940px;color:#737b76;font-size:11px;line-height:1.7;margin:12px 0 3px}
+.swatch[data-shape=diamond]{border-radius:0;transform:rotate(45deg)}
+.new-embodiment-view #legend{display:block;max-height:640px;overflow-y:auto;overscroll-behavior:contain;padding-right:8px}
+.new-embodiment-view .arm-group{margin-bottom:18px}.new-embodiment-view .arm-group h3{font-size:10px;letter-spacing:.04em}
+.preview-floating.preview-text-only .preview-images{display:none}.preview-floating.preview-text-only .preview-caption{padding:18px;width:100%}
+#embodiment-preview.preview-floating.preview-text-only{min-height:0;width:260px}
+@media(max-width:760px){.layer-toolbar{padding:14px 18px}.new-embodiment-view #legend{max-height:360px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.new-embodiment-view .legend-item{font-size:11px}.view-toolbar{padding:14px 18px}.view-toolbar button{padding:7px 11px;font-size:12px}}
+
+.new-embodiment-view .legend-panel{min-width:0}.new-embodiment-view .legend-item{white-space:normal}.new-embodiment-view .legend-title{flex-wrap:wrap}
+@media(max-width:760px){.new-embodiment-view .explorer-body{grid-template-columns:minmax(0,1fr)}.new-embodiment-view #legend{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}

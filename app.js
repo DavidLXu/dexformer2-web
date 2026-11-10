@@ -2,7 +2,25 @@
 (() => {
   const original = window.TSNE_DATA;
   let groups = original.groups, points = original.points, view = 'embodiment';
-  const shapes={flexiv:'circle',franka:'square',kuka:'triangle',xarm:'star'};
+  const shapes={flexiv:'circle',franka:'square',kuka:'triangle',xarm:'star',ur5e:'diamond'};
+  let newData=null, newDataRequest=null, viewRequest=0;
+  let source=original, originalOpacity=.45;
+  const layers={'original':true,'new-hands':true,'new-arm':true};
+  const layerNames={'original':'Original combinations','new-hands':'Unseen hands','new-arm':'Unseen arm'};
+  const isCombinationView=()=>view==='embodiment'||view==='new';
+  const visibleGroup=g=>view!=='new'||layers[g.layer];
+  const visibleGroups=()=>groups.filter(visibleGroup);
+  function validateNewData(data){
+    if(data.groups?.length!==43||data.points?.length!==34400||data.extent!==180)throw new Error('Unexpected dataset');
+    const counts=Array(43).fill(0);
+    data.points.forEach(p=>{if(p.length!==3||!p.every(Number.isFinite)||!Number.isInteger(p[2])||!data.groups[p[2]]||Math.abs(p[0])>180||Math.abs(p[1])>180)throw new Error('Invalid sample');counts[p[2]]++;});
+    if(counts.some(n=>n!==800)||data.groups.some(g=>!Object.hasOwn(layers,g.layer)))throw new Error('Invalid groups');
+    return data;
+  }
+  function loadNewData(){
+    if(!newDataRequest)newDataRequest=fetch('new-embodiments.json?v=20261110').then(r=>{if(!r.ok)throw new Error('Data unavailable');return r.json();}).then(validateNewData).catch(error=>{newDataRequest=null;throw error;});
+    return newDataRequest;
+  }
   const palette = ['#4277b5','#d98637','#359b89','#9b65ac','#cc647e','#8b9141'];
   const canvas = document.getElementById('plot'), ctx = canvas.getContext('2d');
   const base = document.createElement('canvas'), baseCtx = base.getContext('2d');
@@ -41,12 +59,15 @@
   preview.addEventListener('focusin',cancelHover);preview.addEventListener('focusout',leave);
   function buildLegend(){
   legend.replaceChildren();buttons.length=0;
-  let lastArm, section;
-  groups.forEach((g, i) => {
-    if (!section || (view === 'embodiment' && g.arm !== lastArm)) {
+  let lastArm, lastLayer, section;
+  const entries=groups.map((g,i)=>[g,i]);
+  if(view==='new')entries.sort((a,b)=>Number(a[0].layer==='original')-Number(b[0].layer==='original'));
+  entries.forEach(([g, i]) => {
+    if(!visibleGroup(g))return;
+    if (!section || (isCombinationView() && (g.arm !== lastArm || g.layer !== lastLayer))) {
       section = document.createElement('section'); section.className = 'arm-group';
-      const title = document.createElement('h3'); title.textContent = view === 'embodiment' ? g.arm_display : (view === 'arm' ? 'ARMS' : 'HANDS');
-      section.append(title); legend.append(section); lastArm = g.arm;
+      const title = document.createElement('h3'); title.textContent = isCombinationView() ? `${g.arm_display}${view==='new'?' · '+layerNames[g.layer]:''}` : (view === 'arm' ? 'ARMS' : 'HANDS');
+      section.append(title); legend.append(section); lastArm = g.arm;lastLayer=g.layer;
     }
     const button = document.createElement('button'); button.type = 'button'; button.className = 'legend-item';
     button.dataset.group = String(i); button.style.setProperty('--color', g.color_hex);
@@ -54,7 +75,7 @@
     const dot = document.createElement('span'); dot.className = 'swatch';dot.dataset.shape=shapes[g.arm]||'circle'; dot.setAttribute('aria-hidden', 'true');
     const label = document.createElement('span'); label.textContent = g.label || `${g.arm_display} + ${g.hand_display}`;
     if (g.seen_unseen === 'unseen') {const tag = document.createElement('span'); tag.className = 'unseen-tag'; tag.textContent = '(unseen)'; label.append(tag);}
-    button.append(dot, label); section.append(button); buttons.push(button);
+    button.append(dot, label); section.append(button); buttons[i]=button;
     button.addEventListener('pointerenter', event => {anchor(event,button);schedule(i);});
     button.addEventListener('pointerleave', leave);
     button.addEventListener('focus', () => {anchor(null,button);cancelHover();activate(i);});
@@ -87,19 +108,20 @@
       b.classList.toggle('active', index === i); b.classList.toggle('dimmed', index !== null && index !== i);
       b.setAttribute('aria-pressed', String(pinned === i));
     });
-    status.textContent = index === null ? 'Hover over a point or a legend entry to explore.' : `${name(groups[index])}${pinned === index ? ' · pinned' : ''}`;
-    count.textContent = index === null ? `${groups.length} ${view === 'arm' ? 'arms' : view === 'hand' ? 'hands' : 'combinations'}` : `${points.filter(p=>p[2]===index).length.toLocaleString()} samples`;
+    status.textContent = index === null ? (visibleGroups().length ? 'Hover over a point or a legend entry to explore.' : 'All layers are hidden. Enable a layer above to explore.') : `${name(groups[index])}${pinned === index ? ' · pinned' : ''}`;
+    count.textContent = index === null ? `${visibleGroups().length} ${view === 'arm' ? 'arms' : view === 'hand' ? 'hands' : 'combinations'}${view==='new'?' · '+(visibleGroups().length*800).toLocaleString()+' samples':''}` : `${points.filter(p=>p[2]===index).length.toLocaleString()} samples`;
     showPreview(index);
     // Retain original colors at 48% of base opacity; emphasize the selected group.
     transitionTo([index === null ? 1 : .48, ...groups.map((_, i) => index === i ? .78 : 0)]);
   }
   function showPreview(index) {
     if(index===null){preview.classList.remove('is-open');preview.inert=true;preview.setAttribute('aria-hidden','true');return;}
-    const g=groups[index],key=view==='embodiment'?g.composition:view+'-'+g[view];
+    const g=groups[index],key=isCombinationView()?g.composition:view+'-'+g[view];
+    const hasImage=previews.some(img=>img.dataset.previewKey===key);preview.classList.toggle('preview-text-only',!hasImage);
     previews.forEach(img=>{const selected=img.dataset.previewKey===key;img.classList.toggle('visible',selected);img.alt=selected?name(g):'';img.setAttribute('aria-hidden',String(!selected));});
-    preview.querySelector('.preview-kicker').textContent=view==='embodiment'?'EMBODIMENT':view==='arm'?'ARM':'HAND';
+    preview.querySelector('.preview-kicker').textContent=isCombinationView()?'EMBODIMENT':view==='arm'?'ARM':'HAND';
     document.getElementById('preview-name').textContent=name(g);
-    document.getElementById('preview-meta').textContent=points.filter(p=>p[2]===index).length.toLocaleString()+' samples · 128D representation';
+    document.getElementById('preview-meta').textContent=points.filter(p=>p[2]===index).length.toLocaleString()+' samples · 128D representation'+(view==='new'?' · '+layerNames[g.layer]:'');
     preview.style.setProperty('--group-color',g.color_hex);preview.classList.add('has-selection','is-open');previewIndex=index;preview.inert=false;preview.setAttribute('aria-hidden','false');
     if(!pointerAnchor){const r=canvas.getBoundingClientRect();pointerAnchor={x:r.left+r.width*.6,y:r.top+50};}
     positionPreview();
@@ -121,33 +143,36 @@
     for(const c of [canvas,base]){c.width=Math.round(width*ratio);c.height=Math.round(height*ratio);}
     ctx.setTransform(ratio,0,0,ratio,0,0);baseCtx.setTransform(ratio,0,0,ratio,0,0);
     const left=48,right=18,top=20,bottom=45;
-    const scale=Math.min((width-left-right)/320,(height-top-bottom)/320);
+    const extent=view==='new'?newData.extent:150;
+    const scale=Math.min((width-left-right)/(2*extent+20),(height-top-bottom)/(2*extent+20));
     const ox=left+(width-left-right)/2,oy=top+(height-top-bottom)/2;
-    axes={scale,ox,oy};projected=points.map(([x,y,g])=>[ox+x*scale,oy-y*scale,g]);
+    axes={scale,ox,oy,extent};projected=points.map(([x,y,g])=>[ox+x*scale,oy-y*scale,g]);
     cells=new Map();paths.length=0;groups.forEach((_,i)=>paths[i]=new Path2D());
     const radius=width<450?1.35:1.65;
     baseCtx.clearRect(0,0,width,height);baseCtx.globalAlpha=.66;
     projected.forEach(([x,y,g],i)=>{
+      if(!visibleGroup(groups[g]))return;
       const key=`${Math.floor(x/cellSize)},${Math.floor(y/cellSize)}`;
       if(!cells.has(key))cells.set(key,[]);cells.get(key).push(i);
-      const arm=original.groups[original.points[i][2]].arm;
+      const arm=source.groups[source.points[i][2]].arm;
       const path=new Path2D(),shape=shapes[arm],r=shape==='star'?radius*1.75:shape==='triangle'?radius*1.4:radius;
       if(shape==='circle'){path.arc(x,y,r,0,Math.PI*2);}
       else if(shape==='square'){path.rect(x-r*.9,y-r*.9,r*1.8,r*1.8);}
+      else if(shape==='diamond'){path.moveTo(x,y-r*1.4);path.lineTo(x+r*1.2,y);path.lineTo(x,y+r*1.4);path.lineTo(x-r*1.2,y);path.closePath();}
       else if(shape==='triangle'){path.moveTo(x,y-r);path.lineTo(x+r*.92,y+r*.65);path.lineTo(x-r*.92,y+r*.65);path.closePath();}
       else {for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,rr=k%2?r*.43:r;const px=x+Math.cos(a)*rr,py=y+Math.sin(a)*rr;k?path.lineTo(px,py):path.moveTo(px,py);}path.closePath();}
-      paths[g].addPath(path);baseCtx.fillStyle=groups[g].color_hex;baseCtx.fill(path);
+      paths[g].addPath(path);baseCtx.globalAlpha=view==='new'?(groups[g].layer==='original'?.66*originalOpacity:.82):.66;baseCtx.fillStyle=groups[g].color_hex;baseCtx.fill(path);
     });
     draw();positionPreview();
   }
   function draw() {
     if(!width)return;
-    ctx.clearRect(0,0,width,height);const {scale,ox,oy}=axes;
+    ctx.clearRect(0,0,width,height);const {scale,ox,oy,extent}=axes;
     ctx.font='10px -apple-system, BlinkMacSystemFont, sans-serif';ctx.globalAlpha=1;
-    for(const tick of [-100,0,100]){
+    for(const tick of (view==='new'?[-150,0,150]:[-100,0,100])){
       const x=ox+tick*scale,y=oy-tick*scale;
-      ctx.strokeStyle='#f0f0f2';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,oy-150*scale);ctx.lineTo(x,oy+150*scale);ctx.moveTo(ox-150*scale,y);ctx.lineTo(ox+150*scale,y);ctx.stroke();
-      ctx.fillStyle='#a0a0a5';ctx.textAlign='center';ctx.fillText(tick,x,oy+150*scale+18);ctx.textAlign='right';ctx.fillText(tick,ox-150*scale-9,y+3);
+      ctx.strokeStyle='#f0f0f2';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,oy-extent*scale);ctx.lineTo(x,oy+extent*scale);ctx.moveTo(ox-extent*scale,y);ctx.lineTo(ox+extent*scale,y);ctx.stroke();
+      ctx.fillStyle='#a0a0a5';ctx.textAlign='center';ctx.fillText(tick,x,oy+extent*scale+18);ctx.textAlign='right';ctx.fillText(tick,ox-extent*scale-9,y+3);
     }
     ctx.fillStyle='#85858b';ctx.textAlign='center';ctx.fillText('t-SNE 1',ox,height-7);ctx.save();ctx.translate(12,oy);ctx.rotate(-Math.PI/2);ctx.fillText('t-SNE 2',0,0);ctx.restore();
     ctx.globalAlpha=weights[0];ctx.drawImage(base,0,0,width,height);
@@ -182,21 +207,44 @@
     const index=original.groups.findIndex(g=>g.composition===event.detail);
     if(index<0)return;pointerAnchor=null;setView('embodiment');cancelHover();pinned=index;activate(index,true);
   });
-  function setView(next){
+  async function setView(next){
+    const request=++viewRequest;
+    if(next==='new'&&!newData){
+      const button=document.querySelector('[data-tsne-view="new"]');button.setAttribute('aria-busy','true');
+      document.getElementById('view-note').textContent='Loading the shared 43-combination projection…';
+      try{newData=await loadNewData();}
+      catch(error){if(request===viewRequest){document.getElementById('view-note').textContent='Could not load new embodiments. Select this tab to retry.';status.textContent='New-embodiment data could not be loaded.';}return;}
+      finally{button.removeAttribute('aria-busy');}
+      if(request!==viewRequest)return;
+    }
     cancelHover();cancelAnimationFrame(frame);frame=0;view=next;active=null;pinned=null;
-    if(view==='embodiment'){groups=original.groups;points=original.points;}
+    source=view==='new'?newData:original;
+    if(isCombinationView()){groups=source.groups;points=source.points;}
     else {
       const keys=[...new Set(original.groups.map(g=>g[view]))];
       groups=keys.map((key,i)=>({[view]:key,label:original.groups.find(g=>g[view]===key)[view+'_display'],color_hex:palette[i]}));
       points=original.points.map(([x,y,g])=>[x,y,keys.indexOf(original.groups[g][view])]);
     }
-    weights=[1,...groups.map(()=>0)];buildLegend();reset();resize();
+    weights=[1,...groups.map(()=>0)];
+    document.getElementById('new-embodiment-layers').hidden=view!=='new';
+    document.getElementById('ur5e-shape-key').hidden=view!=='new';explorer.classList.toggle('new-embodiment-view',view==='new');
+    canvas.setAttribute('aria-label',view==='new'?'Joint t-SNE of 34,400 samples from 43 combinations. Toggle original combinations, unseen hands and UR5e layers; use legend buttons to select a group.':'Original t-SNE of 19,200 samples from 24 arm–hand combinations. Use legend buttons to select a group.');
+    buildLegend();reset();resize();
     preview.hidden=false;
-    document.querySelector('.legend-title h2').textContent=view==='embodiment'?'Arm × Hand':view==='arm'?'Four arms':'Six hands';
-    document.querySelector('.legend-title>span').textContent=view==='embodiment'?'18 seen / 6 unseen':'All 24 combinations';
+    document.querySelector('.legend-title h2').textContent=view==='new'?'Original + new':view==='embodiment'?'Arm × Hand':view==='arm'?'Four arms':'Six hands';
+    document.querySelector('.legend-title>span').textContent=view==='new'?'24 original / 19 new':view==='embodiment'?'18 seen / 6 unseen':'All 24 combinations';
     document.querySelectorAll('[data-tsne-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tsneView===view)));
-    document.getElementById('view-note').textContent=view==='embodiment'?'Original t-SNE coordinates · color = combination; shape = arm.':`Same t-SNE coordinates · color = ${view}; shape = arm. Each group pools all ${view==='arm'?'six hands':'four arms'}; seen and unseen pairings are combined.`;
+    document.getElementById('view-note').textContent=view==='new'?'Shared 43-combination projection · original layer + unseen hands + UR5e.':view==='embodiment'?'Original t-SNE coordinates · color = combination; shape = arm.':`Same t-SNE coordinates · color = ${view}; shape = arm. Each group pools all ${view==='arm'?'six hands':'four arms'}; seen and unseen pairings are combined.`;
   }
   document.querySelectorAll('[data-tsne-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.tsneView)));
+  document.querySelectorAll('[data-tsne-layer]').forEach(input=>input.addEventListener('change',()=>{
+    layers[input.dataset.tsneLayer]=input.checked;cancelHover();cancelAnimationFrame(frame);frame=0;
+    weights=[1,...groups.map(()=>0)];buildLegend();reset();resize();
+  }));
+  let opacityFrame=0;
+  document.getElementById('base-opacity').addEventListener('input',event=>{
+    originalOpacity=Number(event.target.value)/100;document.getElementById('base-opacity-value').textContent=event.target.value+'%';
+    if(!opacityFrame)opacityFrame=requestAnimationFrame(()=>{opacityFrame=0;resize();});
+  });
   new ResizeObserver(resize).observe(canvas.parentElement);
 })();
