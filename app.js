@@ -201,7 +201,7 @@
     document.getElementById('preview-name').textContent='Explore a combination';
     document.getElementById('preview-meta').textContent='Hover over the cloud or a legend entry.';
   }
-  document.getElementById('reset').addEventListener('click',reset);
+  document.getElementById('reset')?.addEventListener('click',reset);
   document.addEventListener('keydown',event=>{if(event.key==='Escape')reset();});
   document.addEventListener('dexformer:locate',event=>{
     const index=original.groups.findIndex(g=>g.composition===event.detail);
