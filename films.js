@@ -1,7 +1,7 @@
 'use strict';
 (() => {
   const films = [
-    {id:'intro',src:'films/intro.mp4?v=20261111-v5',poster:'films/intro.png?v=20261111',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00',sound:true,manual:true},
+    {id:'intro',src:'films/intro.mp4?v=20261111-v5',poster:'films/intro.png?v=20261111b',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00',sound:true,manual:true},
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
