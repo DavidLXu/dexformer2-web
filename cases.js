@@ -51,6 +51,7 @@
  carousel(document.getElementById('success-leap-carousel'),leap,'LEAP success case');
  const failures=window.FAILURE_CASES.map(c=>({...c,embodiment:'Flexiv + Revo3',src:'cases/'+c.id+'.mp4?v=20261110-labeled',poster:'cases/'+c.id+'.png?v=20261110-labeled'}));
  failures.push({id:'flexiv-leap-demo',embodiment:'Flexiv + LEAP',title:'Unsuccessful grasp acquisition',src:'cases/flexiv-leap-demo.mp4?v=20261110-labeled',poster:'cases/flexiv-leap-demo.png?v=20261110-labeled',observation:'The hand repeatedly contacts the yellow die but does not establish a stable grasp or complete a lift.'});
+ failures.push(...[{id:'flexiv-leap-failure-block',title:'White block · failed grasp'},{id:'flexiv-leap-failure-pomegranate',title:'Pomegranate · failed grasp'}].map(c=>({...c,embodiment:'Flexiv + LEAP',src:'cases/'+c.id+'.mp4?v=20261111-trim',poster:'cases/'+c.id+'.png?v=20261111-trim'})));
  carousel(document.getElementById('failure-carousel'),failures,'failure case',true);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopOthers();});
 })();
