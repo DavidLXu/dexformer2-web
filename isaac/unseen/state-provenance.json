@@ -143,6 +143,26 @@
       "max_world_position_error_m": 5.981682602949662e-08
     },
     {
+      "model": "flexiv_xhand1",
+      "file": "unseen/states/flexiv_xhand1_1042_0184.bin",
+      "seed": 1042,
+      "env": 184,
+      "source_sha256": "033266ec0250c7beee31a60e1ce3247a5b97d6bf90763567b088fd7cdb006ff9",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.98652354872398e-08
+    },
+    {
+      "model": "flexiv_xhand1",
+      "file": "unseen/states/flexiv_xhand1_1042_0193.bin",
+      "seed": 1042,
+      "env": 193,
+      "source_sha256": "a9847b4de1989e2f003dacda20b2baa63c2245916f941fe7595df3921b1cc5c8",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 5.97374231707655e-08
+    },
+    {
       "model": "franka_gripper",
       "file": "unseen/states/franka_gripper_1401_0107.bin",
       "seed": 1401,
@@ -281,6 +301,26 @@
       "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 7.080465531586556e-09
+    },
+    {
+      "model": "franka_xhand1",
+      "file": "unseen/states/franka_xhand1_1042_0026.bin",
+      "seed": 1042,
+      "env": 26,
+      "source_sha256": "1736a492cb20a55efd23111edcd4d7ace32ab0edd2ac9db60df84cfd6c68f0a1",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.094382348040805e-09
+    },
+    {
+      "model": "franka_xhand1",
+      "file": "unseen/states/franka_xhand1_1042_0199.bin",
+      "seed": 1042,
+      "env": 199,
+      "source_sha256": "cfa22ffb5b03e9aa333fb2c6dd2eed4de912e4bd02bae7854220094d48d149e2",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 7.085746434209838e-09
     },
     {
       "model": "kuka_gripper",
@@ -423,6 +463,26 @@
       "max_world_position_error_m": 0.0
     },
     {
+      "model": "kuka_xhand1",
+      "file": "unseen/states/kuka_xhand1_1042_0079.bin",
+      "seed": 1042,
+      "env": 79,
+      "source_sha256": "7ddb78cb1b1413430b2edb8ec66519bca7152ae3da1e1dca0b1374c38db611d3",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_xhand1",
+      "file": "unseen/states/kuka_xhand1_1042_0176.bin",
+      "seed": 1042,
+      "env": 176,
+      "source_sha256": "df12aea8d70b136fb013efb7d700f33d9508d970ad7af99afe9d52e1f3e4484a",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
       "model": "xarm_gripper",
       "file": "unseen/states/xarm_gripper_1401_0115.bin",
       "seed": 1401,
@@ -561,6 +621,26 @@
       "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 2.0330485561012437e-09
+    },
+    {
+      "model": "xarm_xhand1",
+      "file": "unseen/states/xarm_xhand1_1042_0048.bin",
+      "seed": 1042,
+      "env": 48,
+      "source_sha256": "3ee7beb444a880403522091383a1738271aa882245e4594ba53a5b8ee5de48f8",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.2066298901340206e-09
+    },
+    {
+      "model": "xarm_xhand1",
+      "file": "unseen/states/xarm_xhand1_1042_0120.bin",
+      "seed": 1042,
+      "env": 120,
+      "source_sha256": "072ed587bae1992c16e6882e1e0497eb06af0547c49cc48c5303fbf9ba5620b8",
+      "control": "Direct policy control",
+      "stable_success": true,
+      "max_world_position_error_m": 2.19666639584655e-09
     }
   ],
   "selection": "Successful and lifted >3cm; full 240 steps; final 30 goal errors <5cm; timeout only. Selected clips do not estimate success rates."
