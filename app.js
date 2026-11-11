@@ -11,14 +11,14 @@
   const visibleGroup=g=>view!=='new'||layers[g.layer];
   const visibleGroups=()=>groups.filter(visibleGroup);
   function validateNewData(data){
-    if(data.groups?.length!==43||data.points?.length!==34400||data.extent!==180)throw new Error('Unexpected dataset');
-    const counts=Array(43).fill(0);
-    data.points.forEach(p=>{if(p.length!==3||!p.every(Number.isFinite)||!Number.isInteger(p[2])||!data.groups[p[2]]||Math.abs(p[0])>180||Math.abs(p[1])>180)throw new Error('Invalid sample');counts[p[2]]++;});
+    if(data.groups?.length!==47||data.points?.length!==37600||data.extent!==170)throw new Error('Unexpected dataset');
+    const counts=Array(47).fill(0);
+    data.points.forEach(p=>{if(p.length!==3||!p.every(Number.isFinite)||!Number.isInteger(p[2])||!data.groups[p[2]]||Math.abs(p[0])>170||Math.abs(p[1])>170)throw new Error('Invalid sample');counts[p[2]]++;});
     if(counts.some(n=>n!==800)||data.groups.some(g=>!Object.hasOwn(layers,g.layer)))throw new Error('Invalid groups');
     return data;
   }
   function loadNewData(){
-    if(!newDataRequest)newDataRequest=fetch('new-embodiments.json?v=20261110').then(r=>{if(!r.ok)throw new Error('Data unavailable');return r.json();}).then(validateNewData).catch(error=>{newDataRequest=null;throw error;});
+    if(!newDataRequest)newDataRequest=fetch('new-embodiments.json?v=20261112-xhand1').then(r=>{if(!r.ok)throw new Error('Data unavailable');return r.json();}).then(validateNewData).catch(error=>{newDataRequest=null;throw error;});
     return newDataRequest;
   }
   const palette = ['#4277b5','#d98637','#359b89','#9b65ac','#cc647e','#8b9141'];
@@ -211,7 +211,7 @@
     const request=++viewRequest;
     if(next==='new'&&!newData){
       const button=document.querySelector('[data-tsne-view="new"]');button.setAttribute('aria-busy','true');
-      document.getElementById('view-note').textContent='Loading the shared 43-combination projection…';
+      document.getElementById('view-note').textContent='Loading the shared 47-combination projection…';
       try{newData=await loadNewData();}
       catch(error){if(request===viewRequest){document.getElementById('view-note').textContent='Could not load new embodiments. Select this tab to retry.';status.textContent='New-embodiment data could not be loaded.';}return;}
       finally{button.removeAttribute('aria-busy');}
@@ -228,13 +228,13 @@
     weights=[1,...groups.map(()=>0)];
     document.getElementById('new-embodiment-layers').hidden=view!=='new';
     document.getElementById('ur5e-shape-key').hidden=view!=='new';explorer.classList.toggle('new-embodiment-view',view==='new');
-    canvas.setAttribute('aria-label',view==='new'?'Joint t-SNE of 34,400 samples from 43 combinations. Toggle original combinations, unseen hands and UR5e layers; use legend buttons to select a group.':'Original t-SNE of 19,200 samples from 24 arm–hand combinations. Use legend buttons to select a group.');
+    canvas.setAttribute('aria-label',view==='new'?'Joint t-SNE of 37,600 samples from 47 combinations. Toggle original combinations, unseen hands and UR5e layers; use legend buttons to select a group.':'Original t-SNE of 19,200 samples from 24 arm–hand combinations. Use legend buttons to select a group.');
     buildLegend();reset();resize();
     preview.hidden=false;
     document.querySelector('.legend-title h2').textContent=view==='new'?'Original + new':view==='embodiment'?'Arm × Hand':view==='arm'?'Four arms':'Six hands';
-    document.querySelector('.legend-title>span').textContent=view==='new'?'24 original / 19 new':view==='embodiment'?'18 seen / 6 unseen':'All 24 combinations';
+    document.querySelector('.legend-title>span').textContent=view==='new'?'24 original / 23 new':view==='embodiment'?'18 seen / 6 unseen':'All 24 combinations';
     document.querySelectorAll('[data-tsne-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tsneView===view)));
-    document.getElementById('view-note').textContent=view==='new'?'Shared 43-combination projection · original layer + unseen hands + UR5e.':view==='embodiment'?'Original t-SNE coordinates · color = combination; shape = arm.':`Same t-SNE coordinates · color = ${view}; shape = arm. Each group pools all ${view==='arm'?'six hands':'four arms'}; seen and unseen pairings are combined.`;
+    document.getElementById('view-note').textContent=view==='new'?'Shared 47-combination projection · original layer + unseen hands + UR5e.':view==='embodiment'?'Original t-SNE coordinates · color = combination; shape = arm.':`Same t-SNE coordinates · color = ${view}; shape = arm. Each group pools all ${view==='arm'?'six hands':'four arms'}; seen and unseen pairings are combined.`;
   }
   document.querySelectorAll('[data-tsne-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.tsneView)));
   document.querySelectorAll('[data-tsne-layer]').forEach(input=>input.addEventListener('change',()=>{

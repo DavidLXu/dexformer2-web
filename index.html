@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Explore DexFormer 2.0 temporal representations across 24 original and 19 new arm–hand combinations.">
+  <meta name="description" content="Explore DexFormer 2.0 temporal representations across 24 original and 23 new arm–hand combinations.">
   <title>DexFormer 2.0: Towards a Cross-Embodiment Foundation Policy for Dexterous Grasping</title>
   <link rel="stylesheet" href="style.css?v=20261112-blue">
-  <script src="data.js" defer></script><script src="app.js?v=20261112-shapes" defer></script><script src="films.js?v=20261112-intro-f" defer></script><script src="cases/data.js?v=20261110-leap-object-names-2" defer></script><script src="cases/failures.js?v=20261110-reviewed" defer></script><script src="cases.js?v=20261111-leap-trim" defer></script>
+  <script src="data.js" defer></script><script src="app.js?v=20261112-xhand1-tsne" defer></script><script src="films.js?v=20261112-intro-f" defer></script><script src="cases/data.js?v=20261110-leap-object-names-2" defer></script><script src="cases/failures.js?v=20261110-reviewed" defer></script><script src="cases.js?v=20261111-leap-trim" defer></script>
 </head>
 <body>
   <header class="site-header"><a class="wordmark" href="./">DexFormer <span class="version">2.0</span></a><nav class="site-nav" aria-label="Main navigation"><a class="header-link" href="#films">Films</a><a class="header-link" href="#isaac">3D Replay</a><a class="header-link" href="#explorer">Explore t-SNE ↗</a><a class="header-link" href="#cases">Real-world</a><a class="header-link" href="#results">Experiments</a></nav></header>
@@ -26,15 +26,15 @@
     </section>
     <div class="section-heading representation-heading"><div><h2>Explore the representation.</h2></div></div>
     <section class="explorer" id="explorer" aria-label="Interactive t-SNE visualization">
-      <div class="view-toolbar"><div role="group" aria-label="Color representation by"><button type="button" data-tsne-view="embodiment" aria-pressed="true">Arm × Hand · 24</button><button type="button" data-tsne-view="arm" aria-pressed="false">Arms · 4</button><button type="button" data-tsne-view="hand" aria-pressed="false">Hands · 6</button><button type="button" data-tsne-view="new" aria-pressed="false">New embodiments · +19</button></div><p id="view-note">Original t-SNE coordinates · color = combination; shape = arm.</p></div>
+      <div class="view-toolbar"><div role="group" aria-label="Color representation by"><button type="button" data-tsne-view="embodiment" aria-pressed="true">Arm × Hand · 24</button><button type="button" data-tsne-view="arm" aria-pressed="false">Arms · 4</button><button type="button" data-tsne-view="hand" aria-pressed="false">Hands · 6</button><button type="button" data-tsne-view="new" aria-pressed="false">New embodiments · +23</button></div><p id="view-note">Original t-SNE coordinates · color = combination; shape = arm.</p></div>
       <div id="new-embodiment-layers" class="layer-toolbar" hidden>
         <fieldset><legend>Overlay layers</legend>
           <label><input type="checkbox" data-tsne-layer="original" checked> Original combinations <span>24</span></label>
-          <label><input type="checkbox" data-tsne-layer="new-hands" checked> Unseen hands <span>12</span></label>
+          <label><input type="checkbox" data-tsne-layer="new-hands" checked> Unseen hands <span>16</span></label>
           <label><input type="checkbox" data-tsne-layer="new-arm" checked> UR5e <span>7</span></label>
         </fieldset>
         <label class="base-opacity" for="base-opacity">Original layer opacity <input id="base-opacity" type="range" min="10" max="100" value="45" step="5"><output id="base-opacity-value" for="base-opacity">45%</output></label>
-        <p>Wuji 1, Wuji 2.2 and Tesollo on four known arms; UR5e with six known hands and Wuji 1. UR5e + known hands use reference-pose initialization. This view shows a joint projection of all 43 combinations; positions differ from the original map. Cluster separation does not measure grasp success.</p>
+        <p>Wuji 1, Wuji 2.2, Tesollo and XHAND1 on four known arms; UR5e with six known hands and Wuji 1. UR5e + known hands use reference-pose initialization. This view shows a joint projection of all 47 combinations; positions differ from the original map. Cluster separation does not measure grasp success.</p>
       </div>
       <div class="shape-key" aria-label="Point shape encodes arm">Shape = arm <span>● Flexiv</span><span>▲ Franka</span><span>■ KUKA</span><span>★ xArm7</span><span id="ur5e-shape-key" hidden>◆ UR5e</span></div><div class="explorer-body">
         <div class="plot-panel"><div class="plot-wrap"><canvas id="plot" role="img" aria-label="t-SNE scatter plot of 19,200 samples from 24 arm–hand combinations. Hover over points or use the accessible legend buttons to highlight a combination and preview the robot."></canvas></div><div class="plot-status"><span class="hint-icon">↗</span><span id="selection" aria-live="polite">Hover over a point or a legend entry to explore.</span><span id="selection-count">24 combinations</span></div></div>
