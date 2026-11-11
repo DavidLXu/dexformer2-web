@@ -1,6 +1,7 @@
 'use strict';
 (() => {
   const films = [
+    {id:'intro',src:'films/intro.mp4?v=20261111-v5',poster:'films/intro.png?v=20261111',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00',sound:true,manual:true},
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
@@ -26,7 +27,7 @@
     video.autoplay=Boolean(play)&&inView&&!document.hidden;
     if(current!==index){
       request++;video.pause();current=index;status.textContent='';
-      video.poster=film.poster||`films/${film.id}.png`;video.defaultPlaybackRate=film.rate||1;video.src=film.src||`films/${film.id}.mp4`;video.load();video.playbackRate=film.rate||1;
+      video.muted=!film.sound;video.poster=film.poster||`films/${film.id}.png`;video.defaultPlaybackRate=film.rate||1;video.src=film.src||`films/${film.id}.mp4`;video.load();video.playbackRate=film.rate||1;
       video.setAttribute('aria-label',`${film.title} promotional film`);
       document.getElementById('film-number').textContent=`0${index+1} / ${String(films.length).padStart(2,'0')}`;
       document.getElementById('film-title').textContent=film.title;
@@ -45,7 +46,7 @@
     document.querySelectorAll('video').forEach(v=>{if(v!==event.target)v.pause();});
   },true);
   function suspend(){video.autoplay=false;resumeOnReturn=resumeOnReturn||!video.paused;video.pause();}
-  function resume(){if(inView&&!document.hidden&&resumeOnReturn){resumeOnReturn=false;select(current,true);}}
+  function resume(){if(inView&&!document.hidden&&resumeOnReturn){resumeOnReturn=false;if(!films[current].manual)select(current,true);}}
   new IntersectionObserver(entries=>{
     inView=entries[0].isIntersecting;
     if(inView)resume();else suspend();

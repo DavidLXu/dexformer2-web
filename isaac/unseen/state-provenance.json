@@ -4,43 +4,43 @@
   "selected_successful_episodes": [
     {
       "model": "flexiv_gripper",
-      "file": "unseen/states/flexiv_gripper_1401_0051.bin",
+      "file": "unseen/states/flexiv_gripper_1401_0055.bin",
       "seed": 1401,
-      "env": 51,
-      "source_sha256": "0b1eab54c08727144390e12c48100af29aca469aab97bb3c1a5bb8195adc5f75",
-      "control": "Pose-assisted staged control",
+      "env": 55,
+      "source_sha256": "6d6c66e7b7894c34c8985a4d1662687e37b0ea34bf8507fc4755ff48ea670c85",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 5.97912230178642e-08
+      "max_world_position_error_m": 5.982353002688857e-08
     },
     {
       "model": "flexiv_gripper",
-      "file": "unseen/states/flexiv_gripper_1401_0100.bin",
+      "file": "unseen/states/flexiv_gripper_1401_0101.bin",
       "seed": 1401,
-      "env": 100,
-      "source_sha256": "08b9fd6d8511e08066ae914c2a16704a7663c1bdc48f4171e476ca1f9f6a3930",
-      "control": "Pose-assisted staged control",
+      "env": 101,
+      "source_sha256": "45ec8bcb6c0bae44ea45bbbc9aa0592a03b0776944578095b1d0f43ee4155377",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 5.976551004937085e-08
+      "max_world_position_error_m": 6.192055285472146e-08
     },
     {
       "model": "flexiv_robotiq",
-      "file": "unseen/states/flexiv_robotiq_1501_0050.bin",
-      "seed": 1501,
-      "env": 50,
-      "source_sha256": "bfbac2e62cb6c339f98f9e5dee35c0ad07d5270880137918d918bb1b0a0a6163",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/flexiv_robotiq_1401_0170.bin",
+      "seed": 1401,
+      "env": 170,
+      "source_sha256": "5d5308857159919f5b1950faca068454b5bb6431778599947338d09e802fc340",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 5.980178073219205e-08
+      "max_world_position_error_m": 5.987587635982279e-08
     },
     {
       "model": "flexiv_robotiq",
-      "file": "unseen/states/flexiv_robotiq_1501_0064.bin",
-      "seed": 1501,
-      "env": 64,
-      "source_sha256": "fe17de2d32c5270e18a8bb2e08be959469d3c70bafd8e9f5555a5595585034b2",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/flexiv_robotiq_1401_0171.bin",
+      "seed": 1401,
+      "env": 171,
+      "source_sha256": "cc704aaf887ead6afa47c9da1c2e270612c98b067d102bcb410118c35329702e",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 5.976856746472259e-08
+      "max_world_position_error_m": 5.989136622570517e-08
     },
     {
       "model": "flexiv_tesollo",
@@ -64,23 +64,23 @@
     },
     {
       "model": "flexiv_umi",
-      "file": "unseen/states/flexiv_umi_1501_0045.bin",
-      "seed": 1501,
-      "env": 45,
-      "source_sha256": "407e435d721ddccae90e96397e1ead5df8378f3639f3ae62d0343fb20787f355",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/flexiv_umi_1401_0054.bin",
+      "seed": 1401,
+      "env": 54,
+      "source_sha256": "2c8102dc04c5027de924cfac90190518a3afb88240c057f15ed93edd3ddb5541",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 5.976976312828831e-08
+      "max_world_position_error_m": 5.997148469759079e-08
     },
     {
       "model": "flexiv_umi",
-      "file": "unseen/states/flexiv_umi_1501_0060.bin",
-      "seed": 1501,
-      "env": 60,
-      "source_sha256": "f04993d0cd27d1e6357f7d5996696e89270f0526c53161da9eb2f6b52c02363f",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/flexiv_umi_1401_0190.bin",
+      "seed": 1401,
+      "env": 190,
+      "source_sha256": "b68dbc9a3aec3e4f2517e161d61df3f46e71a8958174a668ffbc3c28f6f6e8fc",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 5.983654503698399e-08
+      "max_world_position_error_m": 5.99185195569284e-08
     },
     {
       "model": "flexiv_wuji",
@@ -124,63 +124,63 @@
     },
     {
       "model": "flexiv_xarm_g1",
-      "file": "unseen/states/flexiv_xarm_g1_1501_0111.bin",
-      "seed": 1501,
-      "env": 111,
-      "source_sha256": "cbfb57c45fc16b940c215deb766e826d1b6bd3c9637c07ada099c2daa3a32392",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/flexiv_xarm_g1_1401_0070.bin",
+      "seed": 1401,
+      "env": 70,
+      "source_sha256": "96b0da99c6be5a0d6c7a7ebe708e9ae7c262e6fae3b5fb3a280482a984ac801b",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 6.759961958184965e-08
+      "max_world_position_error_m": 5.988119479823472e-08
     },
     {
       "model": "flexiv_xarm_g1",
-      "file": "unseen/states/flexiv_xarm_g1_1501_0135.bin",
-      "seed": 1501,
-      "env": 135,
-      "source_sha256": "d3daba0ef11b066745198c529a969601a07837c0729f2c5f70f73d2ad0cf41b5",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/flexiv_xarm_g1_1401_0075.bin",
+      "seed": 1401,
+      "env": 75,
+      "source_sha256": "40dc0eaff1dd2bdff8b31d149f2b7965785f0f125c205f598819cd05d7a4f97c",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 5.980393098428198e-08
+      "max_world_position_error_m": 5.981682602949662e-08
     },
     {
       "model": "franka_gripper",
-      "file": "unseen/states/franka_gripper_1401_0151.bin",
+      "file": "unseen/states/franka_gripper_1401_0107.bin",
       "seed": 1401,
-      "env": 151,
-      "source_sha256": "a845f798df4231f72e081fa43e4a5c07b2b239ab9c2b3c32976b0158180dc001",
-      "control": "Pose-assisted staged control",
+      "env": 107,
+      "source_sha256": "ca89803efac970c3c72031f4efa9ee95bbe2b88b08d5244eb1637cfa90ec9128",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.145886600578609e-09
+      "max_world_position_error_m": 3.518687459558961e-08
     },
     {
       "model": "franka_gripper",
-      "file": "unseen/states/franka_gripper_1401_0180.bin",
+      "file": "unseen/states/franka_gripper_1401_0191.bin",
       "seed": 1401,
-      "env": 180,
-      "source_sha256": "857e347855bd1f4bc50d7146d54808fd8dd06b870ae7a3e68efd4a55695d6d5d",
-      "control": "Pose-assisted staged control",
+      "env": 191,
+      "source_sha256": "4744b8f2f79718359f3f31c8351f49a93ed96feca93bbaa3298d76e1b0a59bbd",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.246970428751111e-09
+      "max_world_position_error_m": 7.083138189052372e-09
     },
     {
       "model": "franka_robotiq",
-      "file": "unseen/states/franka_robotiq_1501_0024.bin",
-      "seed": 1501,
-      "env": 24,
-      "source_sha256": "8e6afc3450e133edf065217fc8df716e0e051bf277d31f8f17e26bf239087c1f",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/franka_robotiq_1401_0004.bin",
+      "seed": 1401,
+      "env": 4,
+      "source_sha256": "e8bab19a40ef72c582fd298dcef74f22980896b21a53a42e38fd44ac2a73486d",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.249145089934345e-09
+      "max_world_position_error_m": 7.080029090524324e-09
     },
     {
       "model": "franka_robotiq",
-      "file": "unseen/states/franka_robotiq_1501_0035.bin",
-      "seed": 1501,
-      "env": 35,
-      "source_sha256": "7f98a171bcbca9905578772ae34cc01584235a95d5dade3fd5945fb61758c8a3",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/franka_robotiq_1401_0021.bin",
+      "seed": 1401,
+      "env": 21,
+      "source_sha256": "c01fea6ffa9cabc3d13361048790e55e054f7dc3cd75c7a41898644c00fd2a26",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.199701854411341e-09
+      "max_world_position_error_m": 7.067442599862658e-09
     },
     {
       "model": "franka_tesollo",
@@ -204,23 +204,23 @@
     },
     {
       "model": "franka_umi",
-      "file": "unseen/states/franka_umi_1501_0155.bin",
-      "seed": 1501,
-      "env": 155,
-      "source_sha256": "c5d2ed2699beb1fdb6d5ad4567ec84f3feb65afa648c55f2d6889bedf0cafd0f",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/franka_umi_1401_0035.bin",
+      "seed": 1401,
+      "env": 35,
+      "source_sha256": "2b840f6a4ca23d26b2e4392dd778a15560695e7b4fa4a323f73276a965a5a9f3",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.231089360265832e-09
+      "max_world_position_error_m": 7.080629244257305e-09
     },
     {
       "model": "franka_umi",
-      "file": "unseen/states/franka_umi_1501_0179.bin",
-      "seed": 1501,
-      "env": 179,
-      "source_sha256": "1ef5a9e8621e0e357027cf06d3714c32e16243c63f810412b07cdbd6d65cb8ea",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/franka_umi_1401_0084.bin",
+      "seed": 1401,
+      "env": 84,
+      "source_sha256": "54167e7037ef859cf0ba43684bd66a257cc18b31b8290f4217bf974ebc4a78fc",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.206742652704896e-09
+      "max_world_position_error_m": 7.075578540924779e-09
     },
     {
       "model": "franka_wuji",
@@ -264,61 +264,61 @@
     },
     {
       "model": "franka_xarm_g1",
-      "file": "unseen/states/franka_xarm_g1_1501_0024.bin",
-      "seed": 1501,
-      "env": 24,
-      "source_sha256": "e2c4b1787a36487ceb605747bbe5234aa865baf46223e7e224abf8eac95cc313",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/franka_xarm_g1_1401_0164.bin",
+      "seed": 1401,
+      "env": 164,
+      "source_sha256": "5da4d3c05edfee927e293b744397ba01ff1bd0ead78f926a1815e7fe41849dd4",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.231376243324172e-09
+      "max_world_position_error_m": 7.077206545469783e-09
     },
     {
       "model": "franka_xarm_g1",
-      "file": "unseen/states/franka_xarm_g1_1501_0131.bin",
-      "seed": 1501,
-      "env": 131,
-      "source_sha256": "17505ccd46325af7a712fc90e013ee57ad83e4039e2d3d2a293ece52b405f2db",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/franka_xarm_g1_1401_0185.bin",
+      "seed": 1401,
+      "env": 185,
+      "source_sha256": "6b1aac2e376dfb8ed54c37110f5c04954f47002b453473bc9b9329027f53dfd6",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 7.201876203713936e-09
+      "max_world_position_error_m": 7.080465531586556e-09
     },
     {
       "model": "kuka_gripper",
-      "file": "unseen/states/kuka_gripper_1401_0001.bin",
+      "file": "unseen/states/kuka_gripper_1401_0069.bin",
       "seed": 1401,
-      "env": 1,
-      "source_sha256": "c3cce1c2e31a0839ca59a6ad5552607237c321f3cea593016908783394002951",
-      "control": "Pose-assisted staged control",
+      "env": 69,
+      "source_sha256": "2228f4f721d6fdb425384eabf145855336b086c181c5736cbaf616aac2ea39eb",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
     {
       "model": "kuka_gripper",
-      "file": "unseen/states/kuka_gripper_1401_0089.bin",
+      "file": "unseen/states/kuka_gripper_1401_0181.bin",
       "seed": 1401,
-      "env": 89,
-      "source_sha256": "f042f401a73fbc554c80190a7a967341bc87714180f85a4d47b2d07538ee26fd",
-      "control": "Pose-assisted staged control",
+      "env": 181,
+      "source_sha256": "5251f7f3d1ff1dad6bb6a32c32bf667df456703cad8b205022452fa94d8ef870",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
     {
       "model": "kuka_robotiq",
-      "file": "unseen/states/kuka_robotiq_1501_0071.bin",
-      "seed": 1501,
-      "env": 71,
-      "source_sha256": "f60defe26c13e09cff74c18e0169df79a1077da2d694214947b607a3d7ba92e4",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/kuka_robotiq_1401_0030.bin",
+      "seed": 1401,
+      "env": 30,
+      "source_sha256": "930c4f6bd6813c6ac2d29903d5e2d24e0b3ee7ac0e5299fc83cdd27bdb7969b7",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
     {
       "model": "kuka_robotiq",
-      "file": "unseen/states/kuka_robotiq_1501_0194.bin",
-      "seed": 1501,
-      "env": 194,
-      "source_sha256": "83b74a61d5f6db12ee3ae6b7141b2c2851147d774a5bb46b7610f2c403f9e2b8",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/kuka_robotiq_1401_0061.bin",
+      "seed": 1401,
+      "env": 61,
+      "source_sha256": "d970dced17b3f0e229880beeee049e59d43731e7837870d6bf13f77bd69fe014",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
@@ -344,21 +344,21 @@
     },
     {
       "model": "kuka_umi",
-      "file": "unseen/states/kuka_umi_1501_0053.bin",
-      "seed": 1501,
-      "env": 53,
-      "source_sha256": "7d68be0f3380ce1cff4ebd8ccbdd09e4a056ec0e0dad4780a5ce25c53341f6d6",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/kuka_umi_1401_0164.bin",
+      "seed": 1401,
+      "env": 164,
+      "source_sha256": "77cb9e1ec71c61cd72a65963a54184305724f10178395296d2b9dd6fa6e56cde",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
     {
       "model": "kuka_umi",
-      "file": "unseen/states/kuka_umi_1501_0180.bin",
-      "seed": 1501,
-      "env": 180,
-      "source_sha256": "c3eb74576ed71e2249ac1f8cd3469af3bc5a2c2dfd4eb5626304a0b311b9d936",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/kuka_umi_1401_0169.bin",
+      "seed": 1401,
+      "env": 169,
+      "source_sha256": "6f7e1aa214581f069f1dd7a6467e28bfc5e8933355bea1a24dc7ee3962186feb",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
@@ -404,63 +404,63 @@
     },
     {
       "model": "kuka_xarm_g1",
-      "file": "unseen/states/kuka_xarm_g1_1501_0071.bin",
-      "seed": 1501,
-      "env": 71,
-      "source_sha256": "fa9900cb14895ac83f6bf953bf2419ffc91402703abf1bd974a75e2a4acd9294",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/kuka_xarm_g1_1401_0005.bin",
+      "seed": 1401,
+      "env": 5,
+      "source_sha256": "a7996efdbf605a4ee57ef7e6da3885b0fd7c64f13846a7b8149e56e67fc56577",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
     {
       "model": "kuka_xarm_g1",
-      "file": "unseen/states/kuka_xarm_g1_1501_0179.bin",
-      "seed": 1501,
-      "env": 179,
-      "source_sha256": "90c35016bcad7257a018f9d5a95e45922ae0ac5a038b703704618c18757d16a0",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/kuka_xarm_g1_1401_0141.bin",
+      "seed": 1401,
+      "env": 141,
+      "source_sha256": "3bd67e65c10c2b7beddf2334ad725766694fd94881246bc9f24dd807ce6352d7",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
     {
       "model": "xarm_gripper",
-      "file": "unseen/states/xarm_gripper_1401_0060.bin",
+      "file": "unseen/states/xarm_gripper_1401_0115.bin",
       "seed": 1401,
-      "env": 60,
-      "source_sha256": "74e46ff9474283faaee1c1f083c48a0d8501784debd28ff0883afd2b37f29ff9",
-      "control": "Pose-assisted staged control",
+      "env": 115,
+      "source_sha256": "67a83527f90e65fd014ccbc84939e5e439ec49c3bdc86cca4b6a6741781a36f8",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.8209967097265185e-09
+      "max_world_position_error_m": 2.2344508976656477e-09
     },
     {
       "model": "xarm_gripper",
-      "file": "unseen/states/xarm_gripper_1401_0119.bin",
+      "file": "unseen/states/xarm_gripper_1401_0170.bin",
       "seed": 1401,
-      "env": 119,
-      "source_sha256": "1c1289663e9346bdc1c55b8a07444a82b95baaeb850f57839e6121fa9e525ca1",
-      "control": "Pose-assisted staged control",
+      "env": 170,
+      "source_sha256": "9e5f0fc124b8a2fa253788f65f7150018b4b71ed5176be8ab861fddf2e177713",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.422506315581027e-09
+      "max_world_position_error_m": 2.2652800020075263e-09
     },
     {
       "model": "xarm_robotiq",
-      "file": "unseen/states/xarm_robotiq_1501_0017.bin",
-      "seed": 1501,
-      "env": 17,
-      "source_sha256": "a5d67f84b73dfe1b0a6a8f883d8bf3f69369a13cfa4a57d6c2b3c30a424de70d",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/xarm_robotiq_1401_0051.bin",
+      "seed": 1401,
+      "env": 51,
+      "source_sha256": "0c34ffe5c90b76939b63d9c76999b7e7680acd5089fc5a121fbd24717fe6aac5",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.3324040468025585e-09
+      "max_world_position_error_m": 1.8708491226913035e-09
     },
     {
       "model": "xarm_robotiq",
-      "file": "unseen/states/xarm_robotiq_1501_0159.bin",
-      "seed": 1501,
-      "env": 159,
-      "source_sha256": "313a3408f7f18dcaca87a4357df20fc9fe790c8a24054a293e9d959838c333d3",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/xarm_robotiq_1401_0145.bin",
+      "seed": 1401,
+      "env": 145,
+      "source_sha256": "23a429d27d676b0665a0d0c5bb960b9586d7918fe697f6b683d2db0b6dc4f696",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.3386060858558014e-09
+      "max_world_position_error_m": 2.0076845565118413e-09
     },
     {
       "model": "xarm_tesollo",
@@ -484,23 +484,23 @@
     },
     {
       "model": "xarm_umi",
-      "file": "unseen/states/xarm_umi_1501_0161.bin",
-      "seed": 1501,
-      "env": 161,
-      "source_sha256": "4e788a1794b8b9ef8bc901b53fc93d1f4cd8d5f48d1e97808723b131eebca35c",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/xarm_umi_1401_0001.bin",
+      "seed": 1401,
+      "env": 1,
+      "source_sha256": "706dcf9ff4a9e7e95d86b17d7267f5c92d662ffbb5193bb392d161ac60026c84",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.1618744486531145e-09
+      "max_world_position_error_m": 1.929284339806334e-09
     },
     {
       "model": "xarm_umi",
-      "file": "unseen/states/xarm_umi_1501_0170.bin",
-      "seed": 1501,
-      "env": 170,
-      "source_sha256": "9664dce870c9b4915842930d21d3b8b5e58af4ca33c1ca830e0b9808dbf717d7",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/xarm_umi_1401_0184.bin",
+      "seed": 1401,
+      "env": 184,
+      "source_sha256": "1090bde737172608c1c415a553627b58a3fa3168b9ab5fec577d73b8a56d9220",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.758864104155004e-09
+      "max_world_position_error_m": 2.2581916557966664e-09
     },
     {
       "model": "xarm_wuji",
@@ -544,23 +544,23 @@
     },
     {
       "model": "xarm_xarm_g1",
-      "file": "unseen/states/xarm_xarm_g1_1501_0021.bin",
-      "seed": 1501,
-      "env": 21,
-      "source_sha256": "f4c7560a6ade0160b2b76bff2eb71635cc0abf997fab01ddb9da5912f2394b92",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/xarm_xarm_g1_1401_0004.bin",
+      "seed": 1401,
+      "env": 4,
+      "source_sha256": "b80221d08960c6dc76e4e1566614e676ca152a02a18ee92d9062b896450fd15a",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.7616285649648335e-09
+      "max_world_position_error_m": 2.184354053164582e-09
     },
     {
       "model": "xarm_xarm_g1",
-      "file": "unseen/states/xarm_xarm_g1_1501_0064.bin",
-      "seed": 1501,
-      "env": 64,
-      "source_sha256": "56bf278e6e6ce299742fff26055d9af378179d800046449adc1a3750364b5fff",
-      "control": "Pose-assisted staged control",
+      "file": "unseen/states/xarm_xarm_g1_1401_0011.bin",
+      "seed": 1401,
+      "env": 11,
+      "source_sha256": "25fc5d1737dedd98a3bcb6daac4e124dea571b4ebe5e260d296d9252437523b8",
+      "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
-      "max_world_position_error_m": 2.472075063901243e-09
+      "max_world_position_error_m": 2.0330485561012437e-09
     }
   ],
   "selection": "Successful and lifted >3cm; full 240 steps; final 30 goal errors <5cm; timeout only. Selected clips do not estimate success rates."

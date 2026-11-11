@@ -225,38 +225,38 @@
       "wuji1": 41.2,
       "wuji2": 32.6,
       "tesollo": 12.7,
-      "franka_hand": 6.0,
-      "robotiq": 8.4,
-      "xarm_g1": 6.1,
-      "umi": 10.7
+      "franka_hand": 14.7,
+      "robotiq": 7.0,
+      "xarm_g1": 5.9,
+      "umi": 3.7
     },
     "franka": {
       "wuji1": 10.0,
       "wuji2": 9.2,
       "tesollo": 7.0,
-      "franka_hand": 11.8,
-      "robotiq": 13.3,
-      "xarm_g1": 9.5,
-      "umi": 17.2
+      "franka_hand": 18.7,
+      "robotiq": 16.4,
+      "xarm_g1": 20.2,
+      "umi": 15.1
     },
     "kuka": {
       "wuji1": 24.1,
       "wuji2": 3.7,
       "tesollo": 6.7,
-      "franka_hand": 2.5,
-      "robotiq": 3.7,
-      "xarm_g1": 3.7,
-      "umi": 2.9
+      "franka_hand": 14.3,
+      "robotiq": 8.1,
+      "xarm_g1": 6.1,
+      "umi": 3.6
     },
     "xarm": {
       "wuji1": 33.4,
       "wuji2": 12.7,
       "tesollo": 20.7,
-      "franka_hand": 16.7,
-      "robotiq": 13.9,
-      "xarm_g1": 10.3,
-      "umi": 18.0
+      "franka_hand": 18.8,
+      "robotiq": 15.0,
+      "xarm_g1": 13.1,
+      "umi": 7.8
     }
   },
-  "unseen-transfer-source": "Paper table: Transfer to unseen hand and gripper types; five-seed means, 1,000 episodes per pair; grippers use staged pose control."
+  "unseen-transfer-source": "Paper table: Transfer to unseen hand and gripper types; five-seed means, 1,000 episodes per pair; grippers are driven by the policy's own actions through a fixed virtual-hand retargeting map (data/gripper_policy_20261111/formal_m0x_summary.json)."
 }
