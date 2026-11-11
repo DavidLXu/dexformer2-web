@@ -2,7 +2,7 @@
 (() => {
   const original = window.TSNE_DATA;
   let groups = original.groups, points = original.points, view = 'embodiment';
-  const shapes={flexiv:'circle',franka:'square',kuka:'triangle',xarm:'star',ur5e:'diamond'};
+  const shapes={flexiv:'circle',franka:'triangle',kuka:'square',xarm:'star',ur5e:'diamond'};
   let newData=null, newDataRequest=null, viewRequest=0;
   let source=original, originalOpacity=.45;
   const layers={'original':true,'new-hands':true,'new-arm':true};
