@@ -115,12 +115,6 @@
     "clips": []
   },
   {
-    "id": "orca",
-    "label": "ORCA",
-    "kind": "hand",
-    "clips": []
-  },
-  {
     "id": "franka_hand",
     "label": "Franka Hand",
     "kind": "gripper",
