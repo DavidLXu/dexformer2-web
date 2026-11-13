@@ -4,6 +4,9 @@ Towards a Cross-Embodiment Foundation Policy for Dexterous Grasping.
 
 Static project website with interactive recorded-state replay and representation exploration.
 
+- Website: https://davidlxu.github.io/dexformer2-web/
+- Project code: https://github.com/DavidLXu/dexformer2 (currently rendering scripts and recorded trajectories; full project code planned).
+
 ## Local preview
 
 ```sh
