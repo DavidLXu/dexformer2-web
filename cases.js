@@ -2,8 +2,8 @@
  const continuous=document.getElementById('revo3-continuous-video');
  function stopOthers(except){document.querySelectorAll('video:not(.nonstop-loop)').forEach(v=>{if(v!==except)v.pause();});}
  function setupVideo(v){
-  v.muted=true;v.playsInline=true;v.defaultPlaybackRate=3;v.playbackRate=3;
-  v.addEventListener('loadedmetadata',()=>{v.playbackRate=3;});
+  v.muted=true;v.playsInline=true;v.defaultPlaybackRate=1;v.playbackRate=1;
+  v.addEventListener('loadedmetadata',()=>{v.playbackRate=1;});
   v.addEventListener('play',()=>stopOthers(v));
   const observer=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)v.pause();},{threshold:.1});observer.observe(v);return observer;
  }
@@ -32,7 +32,7 @@
    selected=i;const item=cards[i];stopOthers(item.video);
    cards.forEach((c,j)=>c.article.classList.toggle('is-selected',j===i));
    if(!item.video.src){item.video.src=item.src;item.video.controls=true;item.video.load();}
-   item.play.hidden=true;item.video.playbackRate=3;item.video.play().catch(()=>{item.play.hidden=false;});
+   item.play.hidden=true;item.video.playbackRate=1;item.video.play().catch(()=>{item.play.hidden=false;});
    if(scroll)track.scrollTo({left:item.article.offsetLeft-track.firstElementChild.offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
    update();
   }
@@ -47,7 +47,7 @@
    const caption=document.createElement('div');caption.className='case-card-caption';caption.append(title,meta);
    article.append(media,caption);
    if(c.observation){const p=document.createElement('p');p.className='case-observation';p.textContent=c.observation;article.append(p);}
-   cards.push({article,video,play,src:c.src||'cases/'+c.id+'.mp4?v=20261110-original-2x'});track.append(article);
+   cards.push({article,video,play,src:c.src||'cases/'+c.id+'.mp4?v=20261115-baked3x'});track.append(article);
   });
   prev.addEventListener('click',()=>activate(Math.max(0,selected-1)));next.addEventListener('click',()=>activate(Math.min(clips.length-1,selected+1)));
   track.addEventListener('keydown',e=>{if(e.target!==track)return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();activate(Math.max(0,Math.min(clips.length-1,selected+(e.key==='ArrowLeft'?-1:1))));}});
@@ -57,9 +57,9 @@
  const leap=window.REAL_CASES.filter(c=>c.embodiment==='Flexiv + LEAP');
  carousel(document.getElementById('success-revo3-carousel'),revo3,'Revo3 success case');
  carousel(document.getElementById('success-leap-carousel'),leap,'LEAP success case');
- const failures=window.FAILURE_CASES.map(c=>({...c,embodiment:'Flexiv + Revo3',src:'cases/'+c.id+'.mp4?v=20261110-labeled',poster:'cases/'+c.id+'.png?v=20261110-labeled'}));
- failures.push({id:'flexiv-leap-demo',embodiment:'Flexiv + LEAP',title:'Unsuccessful grasp acquisition',src:'cases/flexiv-leap-demo.mp4?v=20261110-labeled',poster:'cases/flexiv-leap-demo.png?v=20261110-labeled',observation:'The hand repeatedly contacts the yellow die but does not establish a stable grasp or complete a lift.'});
- failures.push(...[{id:'flexiv-leap-failure-block',title:'White block · failed grasp'},{id:'flexiv-leap-failure-pomegranate',title:'Pomegranate · failed grasp'}].map(c=>({...c,embodiment:'Flexiv + LEAP',src:'cases/'+c.id+'.mp4?v=20261111-trim',poster:'cases/'+c.id+'.png?v=20261111-trim'})));
+ const failures=window.FAILURE_CASES.map(c=>({...c,embodiment:'Flexiv + Revo3',src:'cases/'+c.id+'.mp4?v=20261115-baked3x',poster:'cases/'+c.id+'.png?v=20261110-labeled'}));
+ failures.push({id:'flexiv-leap-demo',embodiment:'Flexiv + LEAP',title:'Unsuccessful grasp acquisition',src:'cases/flexiv-leap-demo.mp4?v=20261115-baked3x',poster:'cases/flexiv-leap-demo.png?v=20261110-labeled',observation:'The hand repeatedly contacts the yellow die but does not establish a stable grasp or complete a lift.'});
+ failures.push(...[{id:'flexiv-leap-failure-block',title:'White block · failed grasp'},{id:'flexiv-leap-failure-pomegranate',title:'Pomegranate · failed grasp'}].map(c=>({...c,embodiment:'Flexiv + LEAP',src:'cases/'+c.id+'.mp4?v=20261115-baked3x',poster:'cases/'+c.id+'.png?v=20261111-trim'})));
  carousel(document.getElementById('failure-carousel'),failures,'failure case',true);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopOthers();});
 })();
