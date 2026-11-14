@@ -43,7 +43,8 @@
   // Coordinate the film playlist with other page videos.
   document.addEventListener('play',event=>{
     if(!(event.target instanceof HTMLVideoElement)||event.target.classList.contains('nonstop-loop'))return;
-    document.querySelectorAll('video:not(.nonstop-loop)').forEach(v=>{if(v!==event.target)v.pause();});
+    const g=event.target.dataset.group;
+    document.querySelectorAll('video:not(.nonstop-loop)').forEach(v=>{if(v!==event.target&&!(g&&v.dataset.group===g))v.pause();});
   },true);
   function suspend(){video.autoplay=false;resumeOnReturn=resumeOnReturn||!video.paused;video.pause();}
   function resume(){if(inView&&!document.hidden&&resumeOnReturn){resumeOnReturn=false;if(!films[current].manual)select(current,true);}}
