@@ -1,6 +1,6 @@
 (() => {
  const continuous=document.getElementById('revo3-continuous-video');
- function stopOthers(except){document.querySelectorAll('video').forEach(v=>{if(v!==except)v.pause();});}
+ function stopOthers(except){document.querySelectorAll('video:not(.nonstop-loop)').forEach(v=>{if(v!==except)v.pause();});}
  function setupVideo(v){
   v.muted=true;v.playsInline=true;v.defaultPlaybackRate=3;v.playbackRate=3;
   v.addEventListener('loadedmetadata',()=>{v.playbackRate=3;});
@@ -8,6 +8,14 @@
   const observer=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)v.pause();},{threshold:.1});observer.observe(v);return observer;
  }
  setupVideo(continuous);
+ // Short pre-sped fruit clips beside the non-stop video: silent loops that play only while visible.
+ document.querySelectorAll('video.nonstop-loop').forEach(v=>{
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  new IntersectionObserver(es=>{const on=es[0].isIntersecting;
+   if(on&&!reduce){if(!v.src){v.src=v.dataset.src;}v.play().catch(()=>{v.controls=true;});}else if(!on){v.pause();}
+  },{threshold:.25}).observe(v);
+  if(reduce)v.controls=true;v.addEventListener('click',()=>{if(!v.src)v.src=v.dataset.src;v.paused?v.play():v.pause();});
+ });
  function carousel(host,clips,label,showEmbodiment=false){
   host.replaceChildren();let selected=0;
   const toolbar=document.createElement('div');toolbar.className='case-carousel-toolbar';

@@ -42,8 +42,8 @@
   video.addEventListener('error',()=>{status.textContent='This film could not be loaded. Select another film or reload the page.';});
   // Coordinate the film playlist with other page videos.
   document.addEventListener('play',event=>{
-    if(!(event.target instanceof HTMLVideoElement))return;
-    document.querySelectorAll('video').forEach(v=>{if(v!==event.target)v.pause();});
+    if(!(event.target instanceof HTMLVideoElement)||event.target.classList.contains('nonstop-loop'))return;
+    document.querySelectorAll('video:not(.nonstop-loop)').forEach(v=>{if(v!==event.target)v.pause();});
   },true);
   function suspend(){video.autoplay=false;resumeOnReturn=resumeOnReturn||!video.paused;video.pause();}
   function resume(){if(inView&&!document.hidden&&resumeOnReturn){resumeOnReturn=false;if(!films[current].manual)select(current,true);}}
