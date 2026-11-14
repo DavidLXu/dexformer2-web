@@ -1,7 +1,7 @@
 'use strict';
 (() => {
   const films = [
-    {id:'intro',src:'films/intro.mp4?v=20261114-v9-authors',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00',sound:true,manual:true},
+    {id:'intro',src:'films/intro.mp4?v=20261114-v9-authors',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00',sound:true},
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
@@ -22,7 +22,8 @@
     info.append(title,time);button.append(img,info);picker.append(button);buttons.push(button);
     button.addEventListener('click',()=>select(i,true));
   });
-  function select(index,play){
+  // auto: started by scrolling, not by a click. Browsers only allow that muted, so a film with sound starts muted.
+  function select(index,play,auto=false){
     const film=films[index];
     video.autoplay=Boolean(play)&&inView&&!document.hidden;
     if(current!==index){
@@ -34,11 +35,12 @@
       document.getElementById('film-description').textContent=film.description;
       buttons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
     }
-    if(play){const token=++request;video.play().catch(()=>{if(token===request)status.textContent='Press play to watch this film.';});}
+    if(play){video.muted=auto?true:!film.sound;const token=++request;video.play().then(()=>{if(token===request&&auto&&film.sound)status.textContent='Playing without sound. Unmute for the narration.';}).catch(()=>{if(token===request)status.textContent='Press play to watch this film.';});}
   }
   video.addEventListener('loadedmetadata',()=>{video.playbackRate=films[current]?.rate||1;});
-  video.addEventListener('playing',()=>{status.textContent='';});
-  video.addEventListener('ended',()=>select((current+1)%films.length,inView&&!document.hidden));
+  video.addEventListener('volumechange',()=>{if(!video.muted)status.textContent='';});
+  video.addEventListener('playing',()=>{if(!(video.muted&&films[current]?.sound))status.textContent='';});
+  video.addEventListener('ended',()=>select((current+1)%films.length,inView&&!document.hidden,video.muted));
   video.addEventListener('error',()=>{status.textContent='This film could not be loaded. Select another film or reload the page.';});
   // Coordinate the film playlist with other page videos.
   document.addEventListener('play',event=>{
@@ -47,11 +49,10 @@
     document.querySelectorAll('video:not(.nonstop-loop)').forEach(v=>{if(v!==event.target&&!(g&&v.dataset.group===g))v.pause();});
   },true);
   function suspend(){video.autoplay=false;resumeOnReturn=resumeOnReturn||!video.paused;video.pause();}
-  function resume(){if(inView&&!document.hidden&&resumeOnReturn){resumeOnReturn=false;if(!films[current].manual)select(current,true);}}
-  new IntersectionObserver(entries=>{
-    inView=entries[0].isIntersecting;
-    if(inView)resume();else suspend();
-  },{threshold:0}).observe(video);
+  function resume(){if(inView&&!document.hidden&&resumeOnReturn){resumeOnReturn=false;select(current,true,true);}}
+  // Pause once the film leaves the screen; start it once most of it is in view.
+  new IntersectionObserver(entries=>{if(!entries[0].isIntersecting){inView=false;suspend();}},{threshold:0}).observe(video);
+  new IntersectionObserver(entries=>{if(entries[0].isIntersecting){inView=true;resume();}},{threshold:.6}).observe(video);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)suspend();else resume();});
   select(0,false);
 })();
