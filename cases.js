@@ -8,6 +8,13 @@
   const observer=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)v.pause();},{threshold:.1});observer.observe(v);return observer;
  }
  setupVideo(continuous);
+ const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ // Start a video when it scrolls into focus (most of it visible); setupVideo already pauses it once it leaves.
+ function playWhenFocused(target,start){
+  if(reduceMotion)return;
+  new IntersectionObserver(es=>{if(es[0].isIntersecting&&!document.hidden)start();},{threshold:.6}).observe(target);
+ }
+ playWhenFocused(continuous,()=>{if(continuous.paused)continuous.play().catch(()=>{});});
  // Short pre-sped fruit clips beside the non-stop video: silent loops that play only while visible.
  document.querySelectorAll('video.nonstop-loop').forEach(v=>{
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -16,7 +23,7 @@
   },{threshold:.25}).observe(v);
   if(reduce)v.controls=true;v.addEventListener('click',()=>{if(!v.src)v.src=v.dataset.src;v.paused?v.play():v.pause();});
  });
- function carousel(host,clips,label,showEmbodiment=false){
+ function carousel(host,clips,label,showEmbodiment=false,autoplay=false){
   host.replaceChildren();let selected=0;
   const toolbar=document.createElement('div');toolbar.className='case-carousel-toolbar';
   const count=document.createElement('span');count.className='case-carousel-count';count.setAttribute('aria-live','polite');
@@ -52,14 +59,16 @@
   prev.addEventListener('click',()=>activate(Math.max(0,selected-1)));next.addEventListener('click',()=>activate(Math.min(clips.length-1,selected+1)));
   track.addEventListener('keydown',e=>{if(e.target!==track)return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();activate(Math.max(0,Math.min(clips.length-1,selected+(e.key==='ArrowLeft'?-1:1))));}});
   host.append(toolbar,track);update();
+  // Optionally play the selected card (initially the first) when the carousel scrolls into focus.
+  if(autoplay)playWhenFocused(track,()=>{if(cards[selected].video.paused)activate(selected,false);});
  }
  const revo3=window.REAL_CASES.filter(c=>c.embodiment==='Flexiv + Revo3');
  const leap=window.REAL_CASES.filter(c=>c.embodiment==='Flexiv + LEAP');
- carousel(document.getElementById('success-revo3-carousel'),revo3,'Revo3 success case');
+ carousel(document.getElementById('success-revo3-carousel'),revo3,'Revo3 success case',false,true);
  carousel(document.getElementById('success-leap-carousel'),leap,'LEAP success case');
  const failures=window.FAILURE_CASES.map(c=>({...c,embodiment:'Flexiv + Revo3',src:'cases/'+c.id+'.mp4?v=20261115-baked3x',poster:'cases/'+c.id+'.png?v=20261110-labeled'}));
  failures.push({id:'flexiv-leap-demo',embodiment:'Flexiv + LEAP',title:'Unsuccessful grasp acquisition',src:'cases/flexiv-leap-demo.mp4?v=20261115-baked3x',poster:'cases/flexiv-leap-demo.png?v=20261110-labeled',observation:'The hand repeatedly contacts the yellow die but does not establish a stable grasp or complete a lift.'});
  failures.push(...[{id:'flexiv-leap-failure-block',title:'White block · failed grasp'},{id:'flexiv-leap-failure-pomegranate',title:'Pomegranate · failed grasp'}].map(c=>({...c,embodiment:'Flexiv + LEAP',src:'cases/'+c.id+'.mp4?v=20261115-baked3x',poster:'cases/'+c.id+'.png?v=20261111-trim'})));
- carousel(document.getElementById('failure-carousel'),failures,'failure case',true);
+ carousel(document.getElementById('failure-carousel'),failures,'failure case',true,true);
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopOthers();});
 })();
