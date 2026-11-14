@@ -125,3 +125,6 @@ main{max-width:1440px;padding-top:55px}.intro{display:block;text-align:center;ma
 
 .new-embodiment-view .legend-panel{min-width:0}.new-embodiment-view .legend-item{white-space:normal}.new-embodiment-view .legend-title{flex-wrap:wrap}
 @media(max-width:760px){.new-embodiment-view .explorer-body{grid-template-columns:minmax(0,1fr)}.new-embodiment-view #legend{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+/* Project resources awaiting release. */
+.project-resource-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:22px 0 8px}.project-resource-buttons button{appearance:none;min-width:132px;padding:11px 23px;border:1px solid #174879;border-radius:999px;background:#174879;color:#fff;line-height:1.25;font-family:inherit;font-size:15px;font-weight:600;opacity:1;cursor:default}
