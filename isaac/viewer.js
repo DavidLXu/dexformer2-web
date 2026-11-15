@@ -65,7 +65,7 @@ function setupGuided(allModels,columns,labels){
   for(const col of columns){
    const m=allModels.find(m=>m.arm===selectedArm&&(m.new_hand||m.hand)===col.id);if(!m)continue;
    const tag=m.new_hand?'zero-shot new environment':(m.split==='Unseen'?'unseen pair':'');
-   $('hand-cards').append(card(col.label,'config-assets/hand-'+col.id+'.png',selectedHand===col.id,tag,()=>{
+   $('hand-cards').append(card(col.label,'config-assets/hand-'+col.id+'.png?v=20261116-grippers2',selectedHand===col.id,tag,()=>{
     if(busy)return;if(selectedHand===col.id)return;stop();$('configured-replay').hidden=true;selectedHand=col.id;selectedObject=-1;renderHands();renderObjects();$('object-step').hidden=false;setStatus('Choose an object to load the replay.');
    }));
   }
