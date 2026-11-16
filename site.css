@@ -244,3 +244,32 @@ main#page{max-width:none;margin:0;padding:0}
 .sub-head h3 span{font:500 12px var(--mono);letter-spacing:.1em;color:var(--navy);border:1px solid rgba(14,67,124,.3);border-radius:999px;padding:2px 9px}
 .sub-head p{flex:1 1 360px;margin:0;color:var(--sub);font-size:15px;max-width:640px}
 #isaac .sub-head#representation{margin-top:9vh;padding-top:5vh;border-top:1px solid var(--line);scroll-margin-top:90px}
+
+/* ---------- Explore: replay and representation side by side, linked both ways */
+#isaac .duo-head h3 span{color:var(--accent);border-color:rgba(232,95,58,.35)}
+.explore-duo{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.duo-map{scroll-margin-top:90px}
+@media(min-width:1180px){
+  .explore-duo{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-items:start}
+  .duo-map{position:sticky;top:78px}
+  .duo-map .explorer-body{grid-template-columns:minmax(0,1fr)!important}
+  /* the map card fills the screen height below the nav; the plot takes whatever the toolbar and legend leave */
+  .duo-map .explorer{height:calc(100vh - 96px);min-height:720px;display:flex;flex-direction:column}
+  .duo-map .explorer-body{flex:1;min-height:0;grid-template-rows:minmax(0,1fr) auto}
+  .duo-map .plot-panel{display:flex;flex-direction:column;min-height:0}
+  .duo-map .plot-wrap{flex:1;height:auto;min-height:380px}
+  /* New-embodiments view: its 47-entry legend scrolls in a short box so the map keeps its room */
+  .duo-map .new-embodiment-view #legend{max-height:190px}
+  .duo-map .layer-toolbar{padding:10px 16px}.duo-map .layer-toolbar p{display:none}
+  .duo-map #embodiment-preview:not(.preview-floating){display:none}
+  .duo-map .legend-panel{padding:14px 18px 18px;border-left:0;border-top:1px solid var(--line)}
+  .duo-map .legend-title{margin-bottom:4px}.duo-map .legend-help{display:none}
+  .duo-map #legend{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 10px;row-gap:6px}
+  .duo-map .legend-item{min-height:22px;padding-top:2px;padding-bottom:2px;font-size:11px}
+  .duo-map .view-toolbar{padding:12px 16px}.duo-map .view-toolbar button{padding:6px 11px;font-size:12px}
+  .duo-map #view-note{display:none}
+  .duo-map .shape-key{padding:8px 16px;font-size:11px}
+}
+
+/* tiles waiting to fly into the matrix sit off-screen; never let them widen the page */
+html,body{overflow-x:clip}

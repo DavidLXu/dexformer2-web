@@ -80,7 +80,7 @@
     button.addEventListener('pointerleave', leave);
     button.addEventListener('focus', () => {anchor(null,button);cancelHover();activate(i);});
     button.addEventListener('blur', leave);
-    button.addEventListener('click', () => {cancelHover();pinned = pinned === i ? null : i;activate(pinned, true);});
+    button.addEventListener('click', () => {cancelHover();pinned = pinned === i ? null : i;activate(pinned, true);pick();});
   });
 
   }
@@ -193,7 +193,7 @@
   }
   canvas.addEventListener('pointermove',event=>{anchor(event,canvas);const index=hit(event);schedule(index);canvas.style.cursor=index===null?'default':'pointer';});
   canvas.addEventListener('pointerleave',leave);
-  canvas.addEventListener('click',event=>{anchor(event,canvas);cancelHover();const index=hit(event);pinned=index===pinned?null:index;activate(pinned,true);});
+  canvas.addEventListener('click',event=>{anchor(event,canvas);cancelHover();const index=hit(event);pinned=index===pinned?null:index;activate(pinned,true);pick();});
   function reset(){
     cancelHover();pinned=null;activate(null,true);previewIndex=null;
     preview.classList.remove('has-selection');
@@ -206,6 +206,14 @@
   document.addEventListener('dexformer:locate',event=>{
     const index=original.groups.findIndex(g=>g.composition===event.detail);
     if(index<0)return;pointerAnchor=null;setView('embodiment');cancelHover();pinned=index;activate(index,true);
+  });
+  // replay ⇄ map: tell the 3D replay which pair was picked here; follow the pair the replay loads (embodiment view only)
+  function pick(){if(view==='embodiment'&&pinned!==null&&groups[pinned]?.composition)document.dispatchEvent(new CustomEvent('dexformer:pick',{detail:groups[pinned].composition}));}
+  document.addEventListener('dexformer:follow',event=>{
+    if(view!=='embodiment')return;
+    const index=event.detail?groups.findIndex(g=>g.composition===event.detail):-1;
+    pointerAnchor=null;cancelHover();pinned=index<0?null:index;activate(pinned,true);
+    preview.classList.remove('is-open');preview.inert=true;preview.setAttribute('aria-hidden','true');   // the replay already shows the robot
   });
   async function setView(next){
     const request=++viewRequest;

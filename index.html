@@ -7,16 +7,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20261116-new-types">
-  <link rel="stylesheet" href="site.css?v=12">
+  <link rel="stylesheet" href="site.css?v=17">
   <link rel="stylesheet" href="spacetime/spacetime.css?v=7">
   <script src="site-data.js?v=1"></script>
   <script src="spacetime/data.js?v=1" defer></script><script src="site.js?v=8" defer></script><script src="spacetime/spacetime.js?v=6" defer></script>
-  <script src="data.js" defer></script><script src="app.js?v=20261116-revo2" defer></script><script src="films.js?v=20261116-revo2" defer></script><script src="cases/data.js?v=20261110-leap-object-names-2" defer></script><script src="cases/failures.js?v=20261115-no-notes" defer></script><script src="cases.js?v=20261115-leap-autoplay" defer></script>
+  <script src="data.js" defer></script><script src="app.js?v=20261117-duo2" defer></script><script src="films.js?v=20261116-revo2" defer></script><script src="cases/data.js?v=20261110-leap-object-names-2" defer></script><script src="cases/failures.js?v=20261115-no-notes" defer></script><script src="cases.js?v=20261115-leap-autoplay" defer></script>
 </head>
 <body>
   <header class="nav" id="top-nav">
     <a class="wordmark" href="#top">DexFormer <span>2.0</span></a>
-    <nav class="nav-links" aria-label="Sections"><a href="#bodies">Embodiments</a><a href="#films">Films</a><a href="#isaac">Explore</a><a href="#spacetime">Space × Time</a><a href="#cases">Real world</a><a href="#results">Experiments</a></nav>
+    <nav class="nav-links" aria-label="Sections"><a href="#bodies">Embodiments</a><a href="#isaac">Explore</a><a href="#spacetime">Space × Time</a><a href="#cases">Real world</a><a href="#results">Experiments</a><a href="#films">Films</a></nav>
     <a class="nav-cta" href="https://github.com/DavidLXu/dexformer2" target="_blank" rel="noopener">Code ↗</a>
   </header>
 
@@ -39,21 +39,12 @@
       </div>
     </section>
 
-    <section class="chapter" id="films">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>02</b> Films</p><h2>Watch one policy drive twenty-four bodies.</h2></div>
-      <div class="film-stage" data-reveal>
-        <div class="film-screen"><video id="film-video" controls autoplay muted playsinline preload="metadata" poster="films/intro.png?v=20261111c" aria-label="DexFormer 2.0 in 60 seconds promotional film"></video></div>
-      </div>
-      <div class="film-caption" data-reveal><div><span id="film-number">01 / 06</span><strong id="film-title">DexFormer 2.0 in 60 seconds</strong></div><span id="film-description">A narrated overview of the method and results.</span></div>
-      <div id="film-picker" class="film-strip" role="group" aria-label="Choose a film" data-reveal></div>
-      <p id="film-status" role="status"></p>
-    </section>
-
     <section class="chapter" id="isaac" aria-labelledby="isaac-h">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>03</b> Explore</p><h2 id="isaac-h">Every grasp, in 3D and in the representation.</h2><p class="chapter-lede">Replay any recorded grasp in your browser, then see where its arm–hand combination sits in what the policy has learned.</p></div>
-      <div class="sub-head" data-reveal><h3><span>A</span> In 3D</h3><p>A recorded rollout plays below. Swap the arm, the hand or the object to load another, including held-out pairs, new hands and grippers.</p></div>
-      <div class="replay-frame" data-reveal><iframe id="mujoco-replay" src="isaac/index.html?v=20261117-redesign4" title="Interactive Isaac state replay" loading="lazy"></iframe></div>
-      <div class="sub-head" id="representation" data-reveal><h3 id="rep-h"><span>B</span> In the representation</h3><p>The temporal features of all 24 combinations, projected with t-SNE. Hover a point to see which robot produced it, or use “Locate in the t-SNE map” in the replay above.</p></div>
+      <div class="chapter-head" data-reveal><p class="kicker"><b>02</b> Explore</p><h2 id="isaac-h">Every grasp, in 3D and in the representation.</h2><p class="chapter-lede">Replay any recorded grasp in your browser, then see where its arm–hand combination sits in what the policy has learned.</p></div>
+      <div class="sub-head duo-head" data-reveal><h3><span>Linked</span> Replay ⇄ representation</h3><p>The two views are linked. Pick an arm, a hand and an object in the replay, and the t-SNE map highlights where that arm–hand pair sits among the policy's temporal features. Click any cluster or legend entry on the map to replay that pair.</p></div>
+      <div class="explore-duo">
+      <div class="duo-replay"><div class="replay-frame" data-reveal><iframe id="mujoco-replay" src="isaac/index.html?v=20261117-chips2" title="Interactive Isaac state replay" loading="lazy"></iframe></div></div>
+      <div class="duo-map" id="representation">
       <section class="explorer" id="explorer" data-reveal aria-label="Interactive t-SNE visualization">
       <div class="view-toolbar"><div role="group" aria-label="Color representation by"><button type="button" data-tsne-view="embodiment" aria-pressed="true">Arm × Hand · 24</button><button type="button" data-tsne-view="arm" aria-pressed="false">Arms · 4</button><button type="button" data-tsne-view="hand" aria-pressed="false">Hands · 6</button><button type="button" data-tsne-view="new" aria-pressed="false">New embodiments · +23</button></div><p id="view-note">Original t-SNE coordinates · color = combination; shape = arm.</p></div>
       <div id="new-embodiment-layers" class="layer-toolbar" hidden>
@@ -71,12 +62,13 @@
       </div>
 
     </section>
+      </div></div>
     
       <div class="reading-note" data-reveal><p>Each point represents a 128-dimensional Transformer-XL output with 16 steps of temporal memory, before concatenation with the task features. We visualize 800 samples per arm–hand combination, collected 1.0 s into each rollout.</p></div>
     </section>
 
     <section class="chapter dark" id="spacetime" aria-labelledby="st-h">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>04</b> Space × Time</p><h2 id="st-h">One policy reasons <span class="grad">across joints</span> and <span class="grad">across time</span>.</h2><p class="chapter-lede">A recorded grasp, played back: Flexiv + Revo3, one of the six held-out pairs, picks up an apple it never saw in training.</p></div>
+      <div class="chapter-head" data-reveal><p class="kicker"><b>03</b> Space × Time</p><h2 id="st-h">One policy reasons <span class="grad">across joints</span> and <span class="grad">across time</span>.</h2><p class="chapter-lede">A recorded grasp, played back: Flexiv + Revo3, one of the six held-out pairs, picks up an apple it never saw in training.</p></div>
       <div class="st-box" id="st-box" data-reveal>
         <div class="st-stage" id="st-stage"><div class="st-layers" id="st-layers"></div><svg class="st-svg" id="st-svg" aria-hidden="true"></svg></div>
         <div class="st-hud" id="st-hud"><span class="st-clock" id="st-clock">t = 0.00 s</span><span class="st-src">Recorded rollout · iteration 5,000</span></div>
@@ -90,7 +82,7 @@
     </section>
 
     <section class="chapter dark cases-section" id="cases" aria-labelledby="cases-heading">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>05</b> Real world</p><h2 id="cases-heading">From simulation to real hands.</h2><p class="chapter-lede">A student policy distilled from successful simulated rollouts runs on a Flexiv arm with a Revo3 or a LEAP hand.</p></div>
+      <div class="chapter-head" data-reveal><p class="kicker"><b>04</b> Real world</p><h2 id="cases-heading">From simulation to real hands.</h2><p class="chapter-lede">A student policy distilled from successful simulated rollouts runs on a Flexiv arm with a Revo3 or a LEAP hand.</p></div>
       <div class="cases-grid" id="deployment-content">
         <article class="case-panel" id="revo3-continuous" aria-labelledby="revo3-continuous-heading"><div class="case-panel-heading"><h3 id="revo3-continuous-heading">Real World Grasping Non-stop</h3><span class="case-status">Flexiv + Revo3</span></div><div class="nonstop-layout"><figure class="nonstop-main"><video id="revo3-continuous-video" controls muted playsinline preload="metadata" poster="cases/flexiv-revo3-continuous.png" src="cases/flexiv-revo3-continuous.mp4?v=20261115-baked3x" aria-label="Flexiv and Revo3 continuous grasping sequence"></video><figcaption>Mixed objects · 3×</figcaption></figure><div class="nonstop-side" aria-label="Fruit grasping clips"><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-pear.jpg?v=20261114" data-src="cases/nonstop-pear.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a pear and placing it in the basket, 4× speed"></video><figcaption>Pear · 4×</figcaption></figure><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-mango.jpg?v=20261114" data-src="cases/nonstop-mango.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a mango and placing it in the basket, 4× speed"></video><figcaption>Mango · 4×</figcaption></figure><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-pomegranate.jpg?v=20261114" data-src="cases/nonstop-pomegranate.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a pomegranate and placing it in the basket, 4× speed"></video><figcaption>Pomegranate · 4×</figcaption></figure></div></div><p class="deployment-note">A single student policy distilled from successful rollouts. After a successful grasp, motion planning handles transfer to and placement in the basket.</p></article>
         <article class="case-panel" id="success-cases" aria-labelledby="success-heading">
@@ -107,7 +99,7 @@
     </section>
 
     <section class="chapter results-section" id="results" aria-labelledby="results-heading">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>06</b> Experiments</p><h2 id="results-heading">The numbers.</h2></div>
+      <div class="chapter-head" data-reveal><p class="kicker"><b>05</b> Experiments</p><h2 id="results-heading">The numbers.</h2></div>
       <div class="result-highlights" data-reveal>
         <div><strong><span data-count="89.01">89.01</span><span>%</span></strong><p>Stable success · 18 trained combinations · seen objects</p></div>
         <div><strong><span data-count="51.18">51.18</span><span>%</span></strong><p>Six held-out pairs · zero-shot · seen objects</p></div>
@@ -118,6 +110,16 @@
       <div id="results-content" aria-live="polite"></div>
       <details class="result-training" open><summary>Training dynamics</summary>
         <div id="training-chart" class="training-chart" aria-label="Training success, mean episode reward and curriculum level over 5,000 iterations"></div>      </details>
+    </section>
+
+    <section class="chapter" id="films">
+      <div class="chapter-head" data-reveal><p class="kicker"><b>06</b> Films</p><h2>Watch one policy drive twenty-four bodies.</h2></div>
+      <div class="film-stage" data-reveal>
+        <div class="film-screen"><video id="film-video" controls autoplay muted playsinline preload="metadata" poster="films/intro.png?v=20261111c" aria-label="DexFormer 2.0 in 60 seconds promotional film"></video></div>
+      </div>
+      <div class="film-caption" data-reveal><div><span id="film-number">01 / 06</span><strong id="film-title">DexFormer 2.0 in 60 seconds</strong></div><span id="film-description">A narrated overview of the method and results.</span></div>
+      <div id="film-picker" class="film-strip" role="group" aria-label="Choose a film" data-reveal></div>
+      <p id="film-status" role="status"></p>
     </section>
 
     <section class="chapter citation-section" id="citation" aria-labelledby="citation-heading">
@@ -133,6 +135,6 @@
   <footer class="site-footer"><span>DexFormer 2.0</span><span>Web by <a href="https://davidlxu.github.io/" target="_blank" rel="noopener noreferrer">Lixin Xu ↗</a></span></footer>
 <script src="results.js?v=20261116-new-types" defer></script>
 <script src="training.js?v=1" defer></script>
-<script src="mujoco-section.js?v=20261117" defer></script>
+<script src="mujoco-section.js?v=20261117b" defer></script>
 </body>
 </html>
