@@ -1,58 +1,99 @@
 'use strict';
+/* Films: a row of small looping previews under the hero buttons. Clicking one grows it into a floating player
+   with ← / → to switch films (also the arrow keys), Esc or the backdrop to close. */
 (() => {
   const films = [
-    {id:'intro',src:'films/intro.mp4?v=20261116-v10-revo2',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00',sound:true},
+    {id:'intro',src:'films/intro.mp4?v=20261116-v10-revo2',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 60 seconds',short:'Film in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00'},
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
     {id:'long-table',src:'films/long-table.mp4?v=20261110-13s',title:'Across the table',description:'A closer look at multiple arm–hand combinations.',duration:'0:13'},
-    {id:'real-world-wall',src:'films/real-world-wall.mp4?v=title-matched',poster:'films/real-world-wall.png?v=centered',title:'Real-world Grasping',description:'Flexiv + Revo3 and LEAP.',duration:'0:11',rate:1}
+    {id:'real-world-wall',src:'films/real-world-wall.mp4?v=title-matched',poster:'films/real-world-wall.png?v=centered',title:'Real-world grasping',description:'Flexiv + Revo3 and LEAP.',duration:'0:11'}
   ];
-  const video=document.getElementById('film-video'), picker=document.getElementById('film-picker');
-  const status=document.getElementById('film-status');
-  let current=-1, request=0, inView=false, resumeOnReturn=true;const buttons=[];
-  video.muted=true;video.loop=false;
-  films.forEach((film,i)=>{
-    const button=document.createElement('button');button.type='button';button.className='film-card';
-    button.setAttribute('aria-label',`Play ${film.title} film`);
-    const img=document.createElement('img');img.src=film.poster||`films/${film.id}.png`;img.alt='';img.width=1280;img.height=720;img.loading='lazy';
-    const info=document.createElement('span');info.className='film-card-info';
-    const title=document.createElement('strong');title.textContent=film.title;
-    const time=document.createElement('span');time.textContent=film.duration;
-    info.append(title,time);button.append(img,info);picker.append(button);buttons.push(button);
-    button.addEventListener('click',()=>select(i,true));
+  const row = document.getElementById('hero-films'), lb = document.getElementById('film-lightbox');
+  if (!row || !lb) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const frame = lb.querySelector('.fl-frame'), video = document.getElementById('fl-video');
+  const tiles = [], previews = [];
+  let current = -1, closing = 0, lastFocus = null;
+
+  // ---------- preview tiles
+  films.forEach((film, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'hero-film'; b.style.setProperty('--i', i);
+    b.setAttribute('aria-label', `Play film: ${film.title} (${film.duration})`);
+    const v = document.createElement('video');
+    v.className = 'nonstop-loop'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
+    v.poster = film.poster || `films/${film.id}.png`; v.src = `films/preview/${film.id}.mp4?v=1`;
+    v.setAttribute('aria-hidden', 'true');
+    const play = document.createElement('span'); play.className = 'hf-play'; play.setAttribute('aria-hidden', 'true');
+    const cap = document.createElement('span'); cap.className = 'hf-cap';
+    cap.innerHTML = `<strong></strong><span>${film.duration}</span>`; cap.querySelector('strong').textContent = film.short || film.title;
+    b.append(v, play, cap); row.append(b); tiles.push(b); previews.push(v);
+    b.addEventListener('click', () => open(i));
   });
-  // auto: started by scrolling, not by a click. Browsers only allow that muted, so a film with sound starts muted.
-  function select(index,play,auto=false){
-    const film=films[index];
-    video.autoplay=Boolean(play)&&inView&&!document.hidden;
-    if(current!==index){
-      request++;video.pause();current=index;status.textContent='';
-      video.muted=!film.sound;video.poster=film.poster||`films/${film.id}.png`;video.defaultPlaybackRate=film.rate||1;video.src=film.src||`films/${film.id}.mp4`;video.load();video.playbackRate=film.rate||1;
-      video.setAttribute('aria-label',`${film.title} promotional film`);
-      document.getElementById('film-number').textContent=`0${index+1} / ${String(films.length).padStart(2,'0')}`;
-      document.getElementById('film-title').textContent=film.title;
-      document.getElementById('film-description').textContent=film.description;
-      buttons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
-    }
-    if(play){video.muted=auto?true:!film.sound;const token=++request;video.play().then(()=>{if(token===request&&auto&&film.sound)status.textContent='Playing without sound. Unmute for the narration.';}).catch(()=>{if(token===request)status.textContent='Press play to watch this film.';});}
+  // previews loop only while the hero is on screen and no film is open
+  let heroOn = false;
+  const syncPreviews = () => previews.forEach(v => { if (heroOn && lb.hidden && !reduce && !document.hidden) v.play().catch(() => {}); else v.pause(); });
+  new IntersectionObserver(es => { heroOn = es[0].isIntersecting; syncPreviews(); }, { threshold: .15 }).observe(row);
+  document.addEventListener('visibilitychange', syncPreviews);
+
+  // ---------- floating player
+  const load = i => {
+    current = (i + films.length) % films.length;
+    const f = films[current];
+    video.poster = f.poster || `films/${f.id}.png`;
+    video.src = f.src || `films/${f.id}.mp4`;
+    video.muted = false;
+    document.getElementById('fl-count').textContent = `${String(current + 1).padStart(2, '0')} / ${String(films.length).padStart(2, '0')}`;
+    document.getElementById('fl-title').textContent = f.title;
+    document.getElementById('fl-desc').textContent = f.description;
+    tiles.forEach((t, k) => t.classList.toggle('current', k === current));
+    video.play().catch(() => {});
+  };
+  // the frame grows out of (and shrinks back into) the tile that was clicked
+  const fromTile = () => {
+    // transform-origin is the frame's top-left corner, which is also the screen's, so the screen lands on the tile
+    const r = tiles[current].getBoundingClientRect(), f = frame.getBoundingClientRect();
+    return `translate(${r.left - f.left}px,${r.top - f.top}px) scale(${r.width / f.width})`;
+  };
+  function open(i) {
+    clearTimeout(closing);
+    lastFocus = document.activeElement;
+    lb.hidden = false; lb.classList.remove('open');
+    document.documentElement.classList.add('film-open');
+    load(i); syncPreviews();
+    if (!reduce) { frame.style.transition = 'none'; frame.style.transform = fromTile(); frame.getBoundingClientRect(); frame.style.transition = ''; }
+    requestAnimationFrame(() => { lb.classList.add('open'); frame.style.transform = ''; });
+    lb.querySelector('.fl-close').focus({ preventScroll: true });
   }
-  video.addEventListener('loadedmetadata',()=>{video.playbackRate=films[current]?.rate||1;});
-  video.addEventListener('volumechange',()=>{if(!video.muted)status.textContent='';});
-  video.addEventListener('playing',()=>{if(!(video.muted&&films[current]?.sound))status.textContent='';});
-  video.addEventListener('ended',()=>select((current+1)%films.length,inView&&!document.hidden,video.muted));
-  video.addEventListener('error',()=>{status.textContent='This film could not be loaded. Select another film or reload the page.';});
-  // Coordinate the film playlist with other page videos.
-  document.addEventListener('play',event=>{
-    if(!(event.target instanceof HTMLVideoElement)||event.target.classList.contains('nonstop-loop'))return;
-    const g=event.target.dataset.group;
-    document.querySelectorAll('video:not(.nonstop-loop)').forEach(v=>{if(v!==event.target&&!(g&&v.dataset.group===g))v.pause();});
-  },true);
-  function suspend(){video.autoplay=false;resumeOnReturn=resumeOnReturn||!video.paused;video.pause();}
-  function resume(){if(inView&&!document.hidden&&resumeOnReturn){resumeOnReturn=false;select(current,true,true);}}
-  // Pause once the film leaves the screen; start it once most of it is in view.
-  new IntersectionObserver(entries=>{if(!entries[0].isIntersecting){inView=false;suspend();}},{threshold:0}).observe(video);
-  new IntersectionObserver(entries=>{if(entries[0].isIntersecting){inView=true;resume();}},{threshold:.6}).observe(video);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)suspend();else resume();});
-  select(0,false);
+  function close() {
+    if (lb.hidden) return;
+    video.pause();
+    lb.classList.remove('open');
+    if (!reduce) frame.style.transform = fromTile();
+    closing = setTimeout(() => {
+      lb.hidden = true; frame.style.transform = ''; video.removeAttribute('src'); video.load();
+      document.documentElement.classList.remove('film-open'); tiles.forEach(t => t.classList.remove('current')); syncPreviews();
+      lastFocus?.focus?.({ preventScroll: true });
+    }, reduce ? 0 : 420);
+  }
+  const step = d => { frame.classList.remove('swap'); frame.getBoundingClientRect(); frame.classList.add('swap'); load(current + d); };
+  lb.querySelector('.fl-prev').addEventListener('click', () => step(-1));
+  lb.querySelector('.fl-next').addEventListener('click', () => step(1));
+  lb.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
+  video.addEventListener('ended', () => step(1));
+  document.addEventListener('keydown', e => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  });
+
+  // only one film or case video plays at a time (looping previews are exempt)
+  document.addEventListener('play', event => {
+    if (!(event.target instanceof HTMLVideoElement) || event.target.classList.contains('nonstop-loop')) return;
+    const g = event.target.dataset.group;
+    document.querySelectorAll('video:not(.nonstop-loop)').forEach(v => { if (v !== event.target && !(g && v.dataset.group === g)) v.pause(); });
+  }, true);
 })();

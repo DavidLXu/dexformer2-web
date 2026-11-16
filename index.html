@@ -7,16 +7,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20261116-new-types">
-  <link rel="stylesheet" href="site.css?v=17">
+  <link rel="stylesheet" href="site.css?v=29">
   <link rel="stylesheet" href="spacetime/spacetime.css?v=7">
   <script src="site-data.js?v=1"></script>
-  <script src="spacetime/data.js?v=1" defer></script><script src="site.js?v=8" defer></script><script src="spacetime/spacetime.js?v=6" defer></script>
-  <script src="data.js" defer></script><script src="app.js?v=20261117-duo2" defer></script><script src="films.js?v=20261116-revo2" defer></script><script src="cases/data.js?v=20261110-leap-object-names-2" defer></script><script src="cases/failures.js?v=20261115-no-notes" defer></script><script src="cases.js?v=20261115-leap-autoplay" defer></script>
+  <script src="spacetime/data.js?v=1" defer></script><script src="site.js?v=8" defer></script><script src="spacetime/spacetime.js?v=6" defer></script><script src="spacetime/design.js?v=5" defer></script>
+  <script src="data.js" defer></script><script src="app.js?v=20261117-duo2" defer></script><script src="films.js?v=20261117-hero3" defer></script><script src="cases/data.js?v=20261110-leap-object-names-2" defer></script><script src="cases/failures.js?v=20261115-no-notes" defer></script><script src="cases.js?v=20261115-leap-autoplay" defer></script>
 </head>
 <body>
   <header class="nav" id="top-nav">
     <a class="wordmark" href="#top">DexFormer <span>2.0</span></a>
-    <nav class="nav-links" aria-label="Sections"><a href="#bodies">Embodiments</a><a href="#isaac">Explore</a><a href="#spacetime">Space × Time</a><a href="#cases">Real world</a><a href="#results">Experiments</a><a href="#films">Films</a></nav>
+    <nav class="nav-links" aria-label="Sections"><a href="#bodies">Embodiments</a><a href="#spacetime">Space × Time</a><a href="#isaac">Explore</a><a href="#cases">Real world</a><a href="#results">Experiments</a></nav>
     <a class="nav-cta" href="https://github.com/DavidLXu/dexformer2" target="_blank" rel="noopener">Code ↗</a>
   </header>
 
@@ -26,12 +26,13 @@
         <h1 class="hero-title">DexFormer <em>2.0</em></h1>
         <p class="hero-lede">Towards a Cross-Embodiment Foundation Policy for Dexterous Grasping</p>
         <div class="project-credits" aria-label="Authors and affiliations"><p class="project-authors"><span>Lixin Xu<sup>1,2,*</sup></span><span>Ke Zhang<sup>1,2,*</sup></span><span>Xinyu Liu<sup>2,*</sup></span><span>Jie Tan<sup>2,3</sup></span><span>Senming Tan<sup>2</sup></span></p><p class="project-authors project-authors-second"><span>Jiaju Yin<sup>1,2</sup></span><span>Yating Feng<sup>1,2</sup></span><span>Xiaoyi Lin<sup>4</sup></span><span>Xiyue Dong<sup>1,2</sup></span><span>Renjing Xu<sup>1,†</sup></span></p><p class="project-affiliations"><span><sup>1</sup> HKUST(GZ)</span><span><sup>2</sup> BrainCo</span><span><sup>3</sup> Chongqing University</span><span><sup>4</sup> Wuhan University</span></p><p class="project-author-notes"><span>* Equal contribution</span><span>† Corresponding author</span></p></div><div class="project-resource-buttons" aria-label="Project resources"><button type="button" disabled title="Paper coming soon">Arxiv soon</button><a href="https://github.com/DavidLXu/dexformer2" target="_blank" rel="noopener" title="Code on GitHub">Code</a></div>
+        <div class="hero-films" id="hero-films" role="group" aria-label="Films: click one to play"></div>
       </div>
       <a class="hero-next" href="#bodies" aria-label="Go to the 24 embodiments">↓</a>
     </section>
 
     <section class="chapter" id="bodies" aria-labelledby="bodies-h">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>01</b> Embodiments</p><h2 id="bodies-h">Twenty-four bodies. One policy.</h2><p class="chapter-lede">Four arms and six hands, with different joints, links and mounts, all controlled by one set of weights.</p></div>
+      <div class="chapter-head" data-reveal><p class="kicker"><b>01</b> Embodiments</p><h2 id="bodies-h"><span class="num-blue">Twenty-four</span> bodies. <span class="num-orange">One</span> policy.</h2><p class="chapter-lede">Four arms and six hands, with different joints, links and mounts, all controlled by one set of weights.</p></div>
       <div class="matrix" id="matrix" aria-label="Stable success rate of DexFormer 2.0 for each arm–hand combination"></div>
       <div class="matrix-notes" aria-live="polite">
         <p class="matrix-note" data-stage="trained"><b>18 pairs trained together.</b> One policy learns all of them at once and reaches <span class="navy">89.01%</span> stable success on them.</p>
@@ -39,11 +40,47 @@
       </div>
     </section>
 
+    <section class="chapter dark" id="spacetime" aria-labelledby="st-h">
+      <div class="chapter-head" data-reveal><p class="kicker"><b>02</b> Space × Time</p><h2 id="st-h">Across <span class="st-joints">joints</span>. Across <span class="st-time">time</span>.</h2></div>
+      <div class="st-box" id="st-box" data-reveal>
+        <div class="st-stage" id="st-stage"><div class="st-layers" id="st-layers"></div><svg class="st-svg" id="st-svg" aria-hidden="true"></svg></div>
+        <div class="st-hud" id="st-hud"><span class="st-clock" id="st-clock">t = 0.00 s</span><span class="st-src">Recorded rollout · iteration 5,000</span></div>
+        <div class="st-cards" aria-live="polite">
+        <article class="st-card" data-step="0"><p class="st-card-k"><b>01</b> Time</p><h2>Every step remembers the last sixteen.</h2><p>A Transformer-XL keeps a memory of recent control steps, so the policy sees how its hand has been moving, not just where it is now. Each line traces one fingertip, or the object, through the recorded rollout.</p></article>
+        <article class="st-card" data-step="1"><p class="st-card-k"><b>02</b> Space</p><h2>Every joint is a token.</h2><p>MorphNode turns each joint and link into a token with its physical descriptors and lets them attend to each other along the kinematic tree. The same network reads a Revo3, a LEAP, an Allegro or a Shadow hand on any of four arms.</p></article>
+        <article class="st-card" data-step="2"><p class="st-card-k"><b>03</b> Space × Time</p><h2>Read the body. Read the motion.</h2><p>Spatial attention tells the policy what body it is driving; temporal memory tells it how that body has been moving. Together they let one network grasp with an arm–hand pair it was never trained on: this Flexiv + Revo3 pair is one of the six held out.</p><a class="st-card-link" href="#cases">See it on real hands ↓</a></article>
+      </div>
+        <div class="st-controls"><nav class="st-steps" id="st-steps" aria-label="Story steps"><button data-go="0"><i></i>Time</button><button data-go="1"><i></i>Space</button><button data-go="2"><i></i>Space × Time</button></nav><button class="st-replay" id="st-replay" type="button">↻ Replay</button></div>
+      </div>
+      <div class="st-design" id="st-design" data-reveal>
+        <figure class="sd-panel">
+          <figcaption><p class="sd-k"><b>A</b> Across joints · MorphNode</p><h3>29 joint tokens. The tree shapes who listens to whom.</h3>
+            <p>Every arm and hand maps onto 7 arm + 22 hand slots; a validity mask switches off slots a body does not have. Two spatial attention layers add a learned bias for tree distance and joint role to every joint pair, while five context tokens attend globally.</p></figcaption>
+          <div class="sd-tools"><div role="group" aria-label="Example hand by degrees of freedom"><button type="button" data-sd-hand="22" aria-pressed="true">22-DoF</button><button type="button" data-sd-hand="21" aria-pressed="false">21-DoF</button><button type="button" data-sd-hand="20" aria-pressed="false">20-DoF</button><button type="button" data-sd-hand="16" aria-pressed="false">16-DoF</button><button type="button" data-sd-hand="12" aria-pressed="false">12-DoF · XHAND1</button></div><span id="sd-slot-count">29 of 29 slots active</span></div>
+          <svg id="sd-joints" class="sd-svg" viewBox="0 0 560 400" role="img" aria-label="Kinematic tree of 29 joint slots with attention arcs from one joint"></svg>
+          <p class="sd-readout" id="sd-joint-readout"></p>
+          <div class="sd-eq">ℓ<sub>ij</sub> = q<sub>i</sub>·k<sub>j</sub>/√d + B<sub>dist</sub>(D<sub>ij</sub>) + B<sub>role</sub>(R<sub>ij</sub>)</div>
+          <div class="sd-legend"><span><i style="background:#e85f3a"></i>same chain</span><span><i style="background:#8fb3e0"></i>different finger</span><span><i style="background:rgba(238,241,248,.55)"></i>arm ↔ hand</span><span class="sd-note">Arc width: tree-distance bias (illustrative). Hover a joint.</span></div>
+        </figure>
+        <figure class="sd-panel">
+          <figcaption><p class="sd-k"><b>B</b> Across time · Transformer-XL</p><h3>Each step reads the last sixteen.</h3>
+            <p>The spatial code s<sub>t</sub> enters a three-layer, eight-head Transformer-XL. Every layer keeps its own 16-step key/value memory, cleared at each episode boundary, so the policy can infer how this body responds.</p></figcaption>
+          <div class="sd-tools"><div role="group" aria-label="Memory controls"><button type="button" id="sd-play">Pause</button><button type="button" id="sd-reset">New episode</button></div><span>memory length 16 · 3 layers</span></div>
+          <svg id="sd-time" class="sd-svg" viewBox="0 0 520 270" role="img" aria-label="Sliding 16-step memory in three Transformer-XL layers"></svg>
+          <div class="sd-flow" aria-label="Context passed to the actor head">
+            <span class="sd-chip">s<sub>t</sub> · 128</span><i>→</i><span class="sd-chip hot">TXL · 3 × 8 heads</span><i>→</i><span class="sd-chip">c<sup>hist</sup> · 128</span>
+            <i>⊕</i><span class="sd-chip">c<sup>task</sup> · 128 <small>bypasses memory</small></span><i>→</i><span class="sd-chip hot">actor head · 256 → masked joint actions</span>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+
     <section class="chapter" id="isaac" aria-labelledby="isaac-h">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>02</b> Explore</p><h2 id="isaac-h">Every grasp, in 3D and in the representation.</h2><p class="chapter-lede">Replay any recorded grasp in your browser, then see where its arm–hand combination sits in what the policy has learned.</p></div>
+      <div class="chapter-head" data-reveal><p class="kicker"><b>03</b> Explore</p><h2 id="isaac-h">Every grasp, in 3D and in the representation.</h2><p class="chapter-lede">Replay any recorded grasp in your browser, then see where its arm–hand combination sits in what the policy has learned.</p></div>
       <div class="sub-head duo-head" data-reveal><h3><span>Linked</span> Replay ⇄ representation</h3><p>The two views are linked. Pick an arm, a hand and an object in the replay, and the t-SNE map highlights where that arm–hand pair sits among the policy's temporal features. Click any cluster or legend entry on the map to replay that pair.</p></div>
       <div class="explore-duo">
-      <div class="duo-replay"><div class="replay-frame" data-reveal><iframe id="mujoco-replay" src="isaac/index.html?v=20261117-chips2" title="Interactive Isaac state replay" loading="lazy"></iframe></div></div>
+      <div class="duo-replay"><div class="replay-frame" data-reveal><iframe id="mujoco-replay" src="isaac/index.html?v=20261117-table2" title="Interactive Isaac state replay" loading="lazy"></iframe></div></div>
       <div class="duo-map" id="representation">
       <section class="explorer" id="explorer" data-reveal aria-label="Interactive t-SNE visualization">
       <div class="view-toolbar"><div role="group" aria-label="Color representation by"><button type="button" data-tsne-view="embodiment" aria-pressed="true">Arm × Hand · 24</button><button type="button" data-tsne-view="arm" aria-pressed="false">Arms · 4</button><button type="button" data-tsne-view="hand" aria-pressed="false">Hands · 6</button><button type="button" data-tsne-view="new" aria-pressed="false">New embodiments · +23</button></div><p id="view-note">Original t-SNE coordinates · color = combination; shape = arm.</p></div>
@@ -63,22 +100,9 @@
 
     </section>
       </div></div>
+      <div id="all-combinations-host" class="all-host" hidden></div>
     
       <div class="reading-note" data-reveal><p>Each point represents a 128-dimensional Transformer-XL output with 16 steps of temporal memory, before concatenation with the task features. We visualize 800 samples per arm–hand combination, collected 1.0 s into each rollout.</p></div>
-    </section>
-
-    <section class="chapter dark" id="spacetime" aria-labelledby="st-h">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>03</b> Space × Time</p><h2 id="st-h">One policy reasons <span class="grad">across joints</span> and <span class="grad">across time</span>.</h2><p class="chapter-lede">A recorded grasp, played back: Flexiv + Revo3, one of the six held-out pairs, picks up an apple it never saw in training.</p></div>
-      <div class="st-box" id="st-box" data-reveal>
-        <div class="st-stage" id="st-stage"><div class="st-layers" id="st-layers"></div><svg class="st-svg" id="st-svg" aria-hidden="true"></svg></div>
-        <div class="st-hud" id="st-hud"><span class="st-clock" id="st-clock">t = 0.00 s</span><span class="st-src">Recorded rollout · iteration 5,000</span></div>
-        <div class="st-cards" aria-live="polite">
-        <article class="st-card" data-step="0"><p class="st-card-k"><b>01</b> Time</p><h2>Every step remembers the last sixteen.</h2><p>A Transformer-XL keeps a memory of recent control steps, so the policy sees how its hand has been moving, not just where it is now. Each line traces one fingertip, or the object, through the recorded rollout.</p></article>
-        <article class="st-card" data-step="1"><p class="st-card-k"><b>02</b> Space</p><h2>Every joint is a token.</h2><p>MorphNode turns each joint and link into a token with its physical descriptors and lets them attend to each other along the kinematic tree. The same network reads a Revo3, a LEAP, an Allegro or a Shadow hand on any of four arms.</p></article>
-        <article class="st-card" data-step="2"><p class="st-card-k"><b>03</b> Space × Time</p><h2>Read the body. Read the motion.</h2><p>Spatial attention tells the policy what body it is driving; temporal memory tells it how that body has been moving. Together they let one network grasp with an arm–hand pair it was never trained on: this Flexiv + Revo3 pair is one of the six held out.</p><a class="st-card-link" href="#cases">See it on real hands ↓</a></article>
-      </div>
-        <div class="st-controls"><nav class="st-steps" id="st-steps" aria-label="Story steps"><button data-go="0"><i></i>Time</button><button data-go="1"><i></i>Space</button><button data-go="2"><i></i>Space × Time</button></nav><button class="st-replay" id="st-replay" type="button">↻ Replay</button></div>
-      </div>
     </section>
 
     <section class="chapter dark cases-section" id="cases" aria-labelledby="cases-heading">
@@ -104,7 +128,6 @@
         <div><strong><span data-count="89.01">89.01</span><span>%</span></strong><p>Stable success · 18 trained combinations · seen objects</p></div>
         <div><strong><span data-count="51.18">51.18</span><span>%</span></strong><p>Six held-out pairs · zero-shot · seen objects</p></div>
         <div><strong><span data-count="48.85">48.85</span><span>%</span></strong><p>Held-out pairs · unseen YCB objects</p></div>
-        <div><strong>+<span data-count="15.67">15.67</span><span>pp</span></strong><p>Over the GRU baseline on held-out pairs with unseen objects</p></div>
       </div>
       <div class="result-tabs" data-reveal role="group" aria-label="Experiment view"><button data-result-tab="overview" aria-pressed="true">Generalization</button><button data-result-tab="matrix" aria-pressed="false">24 embodiments</button><button data-result-tab="transfer" aria-pressed="false">New hands &amp; grippers</button><button data-result-tab="ablation" aria-pressed="false">Ablations</button><button data-result-tab="robustness" aria-pressed="false">Fault robustness</button><button data-result-tab="quality" aria-pressed="false">Success stability</button></div>
       <div id="results-content" aria-live="polite"></div>
@@ -112,18 +135,8 @@
         <div id="training-chart" class="training-chart" aria-label="Training success, mean episode reward and curriculum level over 5,000 iterations"></div>      </details>
     </section>
 
-    <section class="chapter" id="films">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>06</b> Films</p><h2>Watch one policy drive twenty-four bodies.</h2></div>
-      <div class="film-stage" data-reveal>
-        <div class="film-screen"><video id="film-video" controls autoplay muted playsinline preload="metadata" poster="films/intro.png?v=20261111c" aria-label="DexFormer 2.0 in 60 seconds promotional film"></video></div>
-      </div>
-      <div class="film-caption" data-reveal><div><span id="film-number">01 / 06</span><strong id="film-title">DexFormer 2.0 in 60 seconds</strong></div><span id="film-description">A narrated overview of the method and results.</span></div>
-      <div id="film-picker" class="film-strip" role="group" aria-label="Choose a film" data-reveal></div>
-      <p id="film-status" role="status"></p>
-    </section>
-
     <section class="chapter citation-section" id="citation" aria-labelledby="citation-heading">
-      <div class="chapter-head" data-reveal><p class="kicker"><b>07</b> Cite</p><h2 id="citation-heading">BibTeX</h2></div>
+      <div class="chapter-head" data-reveal><p class="kicker"><b>06</b> Cite</p><h2 id="citation-heading">BibTeX</h2></div>
       <div class="bib" data-reveal><button type="button" class="copy" id="copy-bib">Copy</button><pre><code>@misc{xu2026dexformer2,
   title = {DexFormer 2.0: Towards a Cross-Embodiment Foundation Policy for Dexterous Grasping},
   author = {Xu, Lixin and Zhang, Ke and Liu, Xinyu and Tan, Jie and Tan, Senming and Yin, Jiaju and Feng, Yating and Lin, Xiaoyi and Dong, Xiyue and Xu, Renjing},
@@ -132,9 +145,17 @@
 }</code></pre></div>
     </section>
   </main>
+  <div class="film-lightbox" id="film-lightbox" role="dialog" aria-modal="true" aria-label="Film player" hidden>
+    <div class="fl-backdrop" data-close></div>
+    <button type="button" class="fl-close" data-close aria-label="Close film">✕</button>
+    <button type="button" class="fl-nav fl-prev" aria-label="Previous film">←</button>
+    <figure class="fl-frame"><div class="fl-screen"><video id="fl-video" controls playsinline preload="auto"></video></div>
+      <figcaption><span class="fl-count" id="fl-count"></span><strong id="fl-title"></strong><span class="fl-desc" id="fl-desc"></span></figcaption></figure>
+    <button type="button" class="fl-nav fl-next" aria-label="Next film">→</button>
+  </div>
   <footer class="site-footer"><span>DexFormer 2.0</span><span>Web by <a href="https://davidlxu.github.io/" target="_blank" rel="noopener noreferrer">Lixin Xu ↗</a></span></footer>
 <script src="results.js?v=20261116-new-types" defer></script>
-<script src="training.js?v=1" defer></script>
+<script src="training.js?v=3" defer></script>
 <script src="mujoco-section.js?v=20261117b" defer></script>
 </body>
 </html>
