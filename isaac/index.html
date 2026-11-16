@@ -114,6 +114,23 @@ h2{font:650 26px/1.1 var(--font);letter-spacing:-.03em;margin:0 0 6px}
 @media(prefers-reduced-motion:reduce){.spinner{animation:none}}
 /* every chip visible: rows wrap, and the "New hands" / "New grippers" groups each start on their own line */
 .config-cards .group-label{flex-basis:100%;border-left:0;margin:6px 0 0;padding:0 2px}
+
+/* phones: less text in the info panel; slider gets its own row */
+@media(max-width:560px){
+  .side{grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:14px 16px 12px;align-items:center}
+  .kind{font-size:9.5px;letter-spacing:.06em;white-space:nowrap;padding:2px 8px;margin-bottom:6px}
+  .side h2{font-size:21px;line-height:1.15}
+  #model-info{font-size:12px}
+  .sr strong{font-size:30px}.sr span{display:none}.sr::after{content:"stable success";display:block;font-size:11px;color:var(--sub);margin-top:2px}
+  .metrics{grid-column:1/-1;grid-template-columns:1fr;padding-top:8px}
+  .metric:nth-child(2){display:none}
+  .metric strong{font-size:15px;display:inline}.metric span{font-size:11.5px;margin-left:8px}
+  #replay-to-map,#replay-to-map:not([hidden]){display:none}
+  .controls{flex-wrap:wrap;gap:8px 10px;padding:10px 14px}
+  .controls input{order:5;flex:1 1 100%}
+  .controls output{margin-left:auto;font-size:11.5px}
+  .controls button{padding:7px 14px;font-size:13.5px}
+}
 </style></head><body>
 <div id="configured-replay">
   <div class="layout">

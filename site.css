@@ -460,3 +460,11 @@ html.film-open{overflow:hidden}
 .films-grid.in .hero-film{animation:hf-in .7s var(--ease) both;animation-delay:calc(.15s + var(--i) * .07s)}
 @media (max-width:900px){#films .films-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 @media (max-width:560px){#films .films-grid{grid-template-columns:1fr}#films .hero-film .hf-cap span{display:inline}}
+/* seven films: four per row, the last row centred */
+#films .films-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+#films .films-grid .hero-film{flex:0 0 calc((100% - 54px) / 4)}
+@media (max-width:900px){#films .films-grid .hero-film{flex-basis:calc((100% - 18px) / 2)}}
+@media (max-width:560px){#films .films-grid .hero-film{flex-basis:100%}}
+/* phones: the attention formula shrinks to fit its box */
+@media (max-width:560px){.st-design .sd-legend+.sd-eq{font-size:13px;padding:10px 8px}.sd-legend .sd-note{margin-left:0}}
+@media (max-width:380px){.st-design .sd-legend+.sd-eq{font-size:12px}}

@@ -7,6 +7,7 @@
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
+    {id:'order-packing',title:'Order packing',description:'Arms on conveyor belts fill one packing tray; recorded actions replayed at changing speed.',duration:'0:30'},
     {id:'long-table',src:'films/long-table.mp4?v=20261110-13s',title:'Across the table',description:'A closer look at multiple arm–hand combinations.',duration:'0:13'},
     {id:'real-world-wall',src:'films/real-world-wall.mp4?v=title-matched',poster:'films/real-world-wall.png?v=centered',title:'Real-world grasping',description:'Flexiv + Revo3 and LEAP.',duration:'0:11'}
   ];
