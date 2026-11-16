@@ -1,112 +1,15 @@
 [
   {
-    "id": "wuji1",
-    "label": "Wuji 1",
+    "id": "revo2",
+    "label": "Revo2",
     "kind": "hand",
     "clips": []
   },
   {
-    "id": "wuji2",
-    "label": "Wuji 2.2",
+    "id": "wuji1",
+    "label": "Wuji 1",
     "kind": "hand",
-    "clips": [
-      {
-        "arm": "franka",
-        "file": "unseen/wuji2-franka.mp4",
-        "poster": "unseen/wuji2-franka.jpg",
-        "control": "Direct policy control",
-        "evidence": {
-          "seed": 1043,
-          "environment": 110,
-          "scored_run": true,
-          "replay_success": true,
-          "replay_lift_over_3cm": true,
-          "replay_final_error_m": 0.03624158352613449,
-          "replay_initial_state_delta": {
-            "robot_root": 0.0,
-            "q": 0.0,
-            "qd": 0.0,
-            "object_root": 0.0,
-            "goal": 0.0
-          },
-          "status": "Stable success"
-        },
-        "source": "/Users/xulixin/Downloads/DexFormer2.0/data/wuji2_20261106/videos/franka.mp4",
-        "sha256": "39c4bf3e8e19218ed3f5619b200f5d8eb0e8616e42cd47bce9b0bbbb5bc64e73"
-      },
-      {
-        "arm": "kuka",
-        "file": "unseen/wuji2-kuka.mp4",
-        "poster": "unseen/wuji2-kuka.jpg",
-        "control": "Direct policy control",
-        "evidence": {
-          "seed": 1043,
-          "environment": 110,
-          "scored_run": true,
-          "replay_success": true,
-          "replay_lift_over_3cm": true,
-          "replay_final_error_m": 0.022079240530729294,
-          "replay_initial_state_delta": {
-            "robot_root": 0.0,
-            "q": 0.0,
-            "qd": 0.0,
-            "object_root": 0.0,
-            "goal": 0.0
-          },
-          "status": "Stable success"
-        },
-        "source": "/Users/xulixin/Downloads/DexFormer2.0/data/wuji2_20261106/videos/kuka.mp4",
-        "sha256": "89f2d9c869ef4cb121fe04db89f85be02e334d29bd6c83c9194d33208e18626b"
-      },
-      {
-        "arm": "xarm",
-        "file": "unseen/wuji2-xarm.mp4",
-        "poster": "unseen/wuji2-xarm.jpg",
-        "control": "Direct policy control",
-        "evidence": {
-          "seed": 1043,
-          "environment": 110,
-          "scored_run": true,
-          "replay_success": true,
-          "replay_lift_over_3cm": true,
-          "replay_final_error_m": 0.026541274040937424,
-          "replay_initial_state_delta": {
-            "robot_root": 0.0,
-            "q": 0.0,
-            "qd": 0.0,
-            "object_root": 0.0,
-            "goal": 0.0
-          },
-          "status": "Stable success"
-        },
-        "source": "/Users/xulixin/Downloads/DexFormer2.0/data/wuji2_20261106/videos/xarm.mp4",
-        "sha256": "eb0a766020977b5aaa76578fad8590410186688854aefe33b4108a6c10f31576"
-      },
-      {
-        "arm": "flexiv",
-        "file": "unseen/wuji2-flexiv.mp4",
-        "poster": "unseen/wuji2-flexiv.jpg",
-        "control": "Direct policy control",
-        "evidence": {
-          "seed": 1043,
-          "environment": 110,
-          "scored_run": true,
-          "replay_success": true,
-          "replay_lift_over_3cm": true,
-          "replay_final_error_m": 0.005614451132714748,
-          "replay_initial_state_delta": {
-            "robot_root": 0.0,
-            "q": 0.0,
-            "qd": 0.0,
-            "object_root": 0.0,
-            "goal": 0.0
-          },
-          "status": "Stable success"
-        },
-        "source": "/Users/xulixin/Downloads/DexFormer2.0/data/wuji2_20261106/videos/flexiv.mp4",
-        "sha256": "773235768cc8b6d15fe09fcb54b2787d5abba5370effdce6b69a8c31ca63ab4b"
-      }
-    ]
+    "clips": []
   },
   {
     "id": "tesollo",

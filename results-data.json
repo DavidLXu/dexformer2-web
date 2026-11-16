@@ -229,7 +229,8 @@
       "franka_hand": 14.7,
       "robotiq": 7.0,
       "xarm_g1": 5.9,
-      "umi": 3.7
+      "umi": 3.7,
+      "revo2": 26.6
     },
     "franka": {
       "wuji1": 10.0,
@@ -239,7 +240,8 @@
       "franka_hand": 18.7,
       "robotiq": 16.4,
       "xarm_g1": 20.2,
-      "umi": 15.1
+      "umi": 15.1,
+      "revo2": 4.6
     },
     "kuka": {
       "wuji1": 24.1,
@@ -249,7 +251,8 @@
       "franka_hand": 14.3,
       "robotiq": 8.1,
       "xarm_g1": 6.1,
-      "umi": 3.6
+      "umi": 3.6,
+      "revo2": 14.4
     },
     "xarm": {
       "wuji1": 33.4,
@@ -259,8 +262,209 @@
       "franka_hand": 18.8,
       "robotiq": 15.0,
       "xarm_g1": 13.1,
-      "umi": 7.8
+      "umi": 7.8,
+      "revo2": 10.7
     }
   },
-  "unseen-transfer-source": "Paper table: Transfer to unseen hand and gripper types; five-seed means, 1,000 episodes per pair; grippers are driven by the policy's own actions through a fixed virtual-hand retargeting map (data/gripper_policy_20261111/formal_m0x_summary.json)."
+  "unseen-transfer-source": "Paper table: Transfer to unseen hand and gripper types; five-seed means, 1,000 episodes per pair; grippers are driven by the policy's own actions through a fixed virtual-hand retargeting map (data/gripper_policy_20261111/formal_m0x_summary.json).",
+  "new-types": {
+    "columns": [
+      "Revo2",
+      "Wuji 1",
+      "Tesollo DG-5F-M",
+      "XHAND1",
+      "Franka Hand",
+      "Robotiq 2F-85",
+      "xArm G1",
+      "UMI WSG-50"
+    ],
+    "groups": [
+      [
+        "Unseen hand types (direct policy control)",
+        4
+      ],
+      [
+        "Unseen gripper types (virtual-hand retargeting)",
+        4
+      ]
+    ],
+    "rows": [
+      [
+        "Flexiv",
+        [
+          26.6,
+          2.22
+        ],
+        [
+          41.2,
+          2.8
+        ],
+        [
+          12.7,
+          3.88
+        ],
+        [
+          26.5,
+          4.47
+        ],
+        [
+          14.7,
+          0.91
+        ],
+        [
+          7.0,
+          0.61
+        ],
+        [
+          5.9,
+          0.82
+        ],
+        [
+          3.7,
+          1.35
+        ]
+      ],
+      [
+        "Franka",
+        [
+          4.6,
+          1.08
+        ],
+        [
+          10.0,
+          2.03
+        ],
+        [
+          7.0,
+          1.27
+        ],
+        [
+          6.1,
+          1.29
+        ],
+        [
+          18.7,
+          1.3
+        ],
+        [
+          16.4,
+          3.23
+        ],
+        [
+          20.2,
+          2.05
+        ],
+        [
+          15.1,
+          1.78
+        ]
+      ],
+      [
+        "KUKA",
+        [
+          14.4,
+          2.22
+        ],
+        [
+          24.1,
+          1.24
+        ],
+        [
+          6.7,
+          1.35
+        ],
+        [
+          6.8,
+          1.44
+        ],
+        [
+          14.3,
+          1.72
+        ],
+        [
+          8.1,
+          1.19
+        ],
+        [
+          6.1,
+          0.74
+        ],
+        [
+          3.6,
+          1.56
+        ]
+      ],
+      [
+        "xArm7",
+        [
+          10.7,
+          1.04
+        ],
+        [
+          33.4,
+          2.48
+        ],
+        [
+          20.7,
+          2.08
+        ],
+        [
+          27.7,
+          2.84
+        ],
+        [
+          18.8,
+          3.21
+        ],
+        [
+          15.0,
+          1.41
+        ],
+        [
+          13.1,
+          1.85
+        ],
+        [
+          7.8,
+          2.11
+        ]
+      ],
+      [
+        "Mean",
+        [
+          14.07,
+          0.91
+        ],
+        [
+          27.18,
+          1.32
+        ],
+        [
+          11.78,
+          1.44
+        ],
+        [
+          16.78,
+          1.87
+        ],
+        [
+          16.62,
+          0.83
+        ],
+        [
+          11.62,
+          1.0
+        ],
+        [
+          11.32,
+          0.58
+        ],
+        [
+          7.55,
+          0.9
+        ]
+      ]
+    ],
+    "source": "Paper Table: Transfer to unseen hand and gripper types (2026-11-16 revision: Revo2 coupled joints + 20x finger inertia replaces Wuji 2.2). Mean ± sample SD over five evaluation seeds, 1,000 episodes per pair."
+  }
 }

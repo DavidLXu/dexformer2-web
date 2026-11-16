@@ -1,0 +1,44 @@
+/* Space × Time player: a dark 2:1 panel (same frame as the renders) with cards, clock and step controls. */
+.st-box{position:relative;border-radius:26px;overflow:hidden;background:#06080d;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 120px rgba(0,0,0,.5)}
+.st-stage{position:relative;aspect-ratio:2/1;width:100%}
+.st-layers,.st-svg{position:absolute;inset:0;width:100%;height:100%}
+.st-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.st-svg{overflow:visible}
+.st-tick{font:500 22px var(--mono);fill:#c5cad8}
+.st-axis-label{font:600 36px var(--font);fill:#e85f3a}
+
+.st-hud{position:absolute;right:26px;top:22px;display:flex;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none}
+.st-clock{font:500 clamp(18px,2.2vw,32px) var(--mono);color:#fff;font-variant-numeric:tabular-nums}
+.st-src{font:400 11px var(--mono);color:#6b7390}
+
+.st-cards{position:absolute;left:26px;top:24px;width:min(380px,36%)}
+.st-card{position:absolute;inset:0 auto auto 0;width:100%;padding:20px 22px 22px;border-radius:18px;background:rgba(14,18,30,.66);border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;transform:translateY(12px);transition:opacity .45s,transform .5s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.st-card.on{opacity:1;transform:none;pointer-events:auto}
+.st-card-k{font:500 11.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#a3abc2;margin:0 0 10px}
+.st-card-k b{font-weight:500;color:#8fb3e0;margin-right:8px}
+.st-card h2{font:650 clamp(20px,1.9vw,27px)/1.12 var(--font);letter-spacing:-.03em;margin:0 0 10px;color:#fff}
+.st-card p{font-size:14.5px;line-height:1.55;color:#c3c9da;margin:0}
+.st-card-link{display:inline-block;margin-top:14px;color:#fff;font-weight:600;font-size:14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
+
+.st-controls{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:8px;align-items:center}
+.st-steps{display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(14,18,30,.7);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.st-steps button,.st-replay{display:flex;align-items:center;gap:9px;border:0;background:transparent;color:#8a92ab;font:500 13px var(--font);padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:color .2s,background .2s}
+.st-steps button.on{background:rgba(255,255,255,.1);color:#fff}
+.st-steps button:hover,.st-replay:hover{color:#fff}
+.st-steps i{width:22px;height:3px;border-radius:2px;background:rgba(255,255,255,.18);position:relative;overflow:hidden}
+.st-steps i::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(var(--fill,0))}
+.st-replay{background:rgba(14,18,30,.7);border:1px solid rgba(255,255,255,.1);padding:12px 16px}
+
+/* narrow screens: cards and controls move below the picture */
+@media (max-width:860px){
+  .st-box{display:flex;flex-direction:column;border-radius:18px}
+  .st-hud{right:12px;top:10px}.st-src{display:none}
+  .st-cards{position:relative;left:auto;top:auto;width:auto;min-height:250px;margin:12px}
+  .st-card{position:absolute;inset:0;padding:16px 16px 18px}
+  .st-card p{font-size:14px}
+  .st-controls{position:relative;left:auto;bottom:auto;transform:none;justify-content:center;flex-wrap:wrap;margin:0 10px 14px}
+  .st-steps button{padding:7px 10px;font-size:12px;gap:6px}.st-steps i{width:12px}
+  .st-tick,.st-axis-label{display:none}
+}
+@media (prefers-reduced-motion:reduce){.st-card{transition:none}}

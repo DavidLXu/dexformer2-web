@@ -18,7 +18,7 @@
     return data;
   }
   function loadNewData(){
-    if(!newDataRequest)newDataRequest=fetch('new-embodiments.json?v=20261112-xhand1').then(r=>{if(!r.ok)throw new Error('Data unavailable');return r.json();}).then(validateNewData).catch(error=>{newDataRequest=null;throw error;});
+    if(!newDataRequest)newDataRequest=fetch('new-embodiments.json?v=20261116-revo2').then(r=>{if(!r.ok)throw new Error('Data unavailable');return r.json();}).then(validateNewData).catch(error=>{newDataRequest=null;throw error;});
     return newDataRequest;
   }
   const palette = ['#4277b5','#d98637','#359b89','#9b65ac','#cc647e','#8b9141'];

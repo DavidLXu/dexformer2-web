@@ -23,6 +23,26 @@
       "max_world_position_error_m": 6.192055285472146e-08
     },
     {
+      "model": "flexiv_revo2",
+      "file": "unseen/states/flexiv_revo2_1042_0076.bin",
+      "seed": 1042,
+      "env": 76,
+      "source_sha256": "16844220047e10088a68ab20e708a1f864cdc1bffb7bc836da897d5309345675",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
+      "stable_success": true,
+      "max_world_position_error_m": 5.973297765833721e-08
+    },
+    {
+      "model": "flexiv_revo2",
+      "file": "unseen/states/flexiv_revo2_1042_0077.bin",
+      "seed": 1042,
+      "env": 77,
+      "source_sha256": "27d2d1f5678596dd0eaf7376bb287613f0079321a3cc2b5e9282459151c190a5",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
+      "stable_success": true,
+      "max_world_position_error_m": 5.971269820762039e-08
+    },
+    {
       "model": "flexiv_robotiq",
       "file": "unseen/states/flexiv_robotiq_1401_0170.bin",
       "seed": 1401,
@@ -103,26 +123,6 @@
       "max_world_position_error_m": 5.984604883885243e-08
     },
     {
-      "model": "flexiv_wuji2",
-      "file": "unseen/states/flexiv_wuji2_1042_0005.bin",
-      "seed": 1042,
-      "env": 5,
-      "source_sha256": "db7a8f13c0eabdfb85126dfb75fef8562ec0538a6e2b97dfe8c943b6d4e625fb",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 5.98536385940833e-08
-    },
-    {
-      "model": "flexiv_wuji2",
-      "file": "unseen/states/flexiv_wuji2_1042_0140.bin",
-      "seed": 1042,
-      "env": 140,
-      "source_sha256": "a8537d2b444477f6a7ed678c1e827f2458ac645af6528cb62d5dc8429b949c86",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 5.976169835298389e-08
-    },
-    {
       "model": "flexiv_xarm_g1",
       "file": "unseen/states/flexiv_xarm_g1_1401_0070.bin",
       "seed": 1401,
@@ -181,6 +181,26 @@
       "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 7.083138189052372e-09
+    },
+    {
+      "model": "franka_revo2",
+      "file": "unseen/states/franka_revo2_1042_0039.bin",
+      "seed": 1042,
+      "env": 39,
+      "source_sha256": "9cf297b681e190845d5efaa9c922fdc325802e757406bb31ee9f8045cc55bf01",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
+      "stable_success": true,
+      "max_world_position_error_m": 6.54919747976484e-09
+    },
+    {
+      "model": "franka_revo2",
+      "file": "unseen/states/franka_revo2_1042_0131.bin",
+      "seed": 1042,
+      "env": 131,
+      "source_sha256": "6624747f5a7e57dc550a134c6b0c5e57c62dca3e45627d31c42b4f04d704251a",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
+      "stable_success": true,
+      "max_world_position_error_m": 6.548458888157667e-09
     },
     {
       "model": "franka_robotiq",
@@ -263,26 +283,6 @@
       "max_world_position_error_m": 7.1976766429710514e-09
     },
     {
-      "model": "franka_wuji2",
-      "file": "unseen/states/franka_wuji2_1042_0020.bin",
-      "seed": 1042,
-      "env": 20,
-      "source_sha256": "bc475add537d3101be7b41a9deba130a6dfd664cda7384205889374ecc294121",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 7.197814388371889e-09
-    },
-    {
-      "model": "franka_wuji2",
-      "file": "unseen/states/franka_wuji2_1042_0105.bin",
-      "seed": 1042,
-      "env": 105,
-      "source_sha256": "406208d9af5da09d69e1cb6b376fd81f7748852bea094fff08a518a3956f6567",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 3.5590239719112135e-08
-    },
-    {
       "model": "franka_xarm_g1",
       "file": "unseen/states/franka_xarm_g1_1401_0164.bin",
       "seed": 1401,
@@ -339,6 +339,26 @@
       "env": 181,
       "source_sha256": "5251f7f3d1ff1dad6bb6a32c32bf667df456703cad8b205022452fa94d8ef870",
       "control": "Policy actions via virtual-hand retargeting",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_revo2",
+      "file": "unseen/states/kuka_revo2_1042_0036.bin",
+      "seed": 1042,
+      "env": 36,
+      "source_sha256": "8b5e3faa5401a7875b259c3ee7f82c7e65fa06008f08ca4a1481c031ce7f989b",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
+      "stable_success": true,
+      "max_world_position_error_m": 0.0
+    },
+    {
+      "model": "kuka_revo2",
+      "file": "unseen/states/kuka_revo2_1042_0087.bin",
+      "seed": 1042,
+      "env": 87,
+      "source_sha256": "806ab32623c49f837a15d8044f075bdf756538d157670fc36e08e4aac795110a",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
       "stable_success": true,
       "max_world_position_error_m": 0.0
     },
@@ -423,26 +443,6 @@
       "max_world_position_error_m": 0.0
     },
     {
-      "model": "kuka_wuji2",
-      "file": "unseen/states/kuka_wuji2_1042_0031.bin",
-      "seed": 1042,
-      "env": 31,
-      "source_sha256": "c3a284c079ab84adb59c8dcbdb6e54a95c22cebcb124f11097fcb2400e8825fd",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 0.0
-    },
-    {
-      "model": "kuka_wuji2",
-      "file": "unseen/states/kuka_wuji2_1042_0054.bin",
-      "seed": 1042,
-      "env": 54,
-      "source_sha256": "f8b249076118cefe6f99a185e273689b2a4832de2d963b654633bc1c999f4338",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 0.0
-    },
-    {
       "model": "kuka_xarm_g1",
       "file": "unseen/states/kuka_xarm_g1_1401_0005.bin",
       "seed": 1401,
@@ -501,6 +501,26 @@
       "control": "Policy actions via virtual-hand retargeting",
       "stable_success": true,
       "max_world_position_error_m": 2.2652800020075263e-09
+    },
+    {
+      "model": "xarm_revo2",
+      "file": "unseen/states/xarm_revo2_1042_0010.bin",
+      "seed": 1042,
+      "env": 10,
+      "source_sha256": "15971f3d6ee06892f9117e7f29ec612fad00ab6ed0c6bfa25477ded1d733ee5f",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
+      "stable_success": true,
+      "max_world_position_error_m": 6.8093798820852725e-09
+    },
+    {
+      "model": "xarm_revo2",
+      "file": "unseen/states/xarm_revo2_1042_0089.bin",
+      "seed": 1042,
+      "env": 89,
+      "source_sha256": "6d9016f64b9dc23ef8b19e95d92072e7a161073fd7d2a38ba5e8df6de24a2a56",
+      "control": "Direct policy control (hardware distal coupling, 20x finger inertia)",
+      "stable_success": true,
+      "max_world_position_error_m": 5.81676375593947e-09
     },
     {
       "model": "xarm_robotiq",
@@ -581,26 +601,6 @@
       "control": "Direct policy control",
       "stable_success": true,
       "max_world_position_error_m": 2.12634525042996e-09
-    },
-    {
-      "model": "xarm_wuji2",
-      "file": "unseen/states/xarm_wuji2_1042_0053.bin",
-      "seed": 1042,
-      "env": 53,
-      "source_sha256": "888f1f668dc4205966ad3455e02a4b2e03d03924bea2562555c437bf8262e67a",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 2.0837241578276312e-09
-    },
-    {
-      "model": "xarm_wuji2",
-      "file": "unseen/states/xarm_wuji2_1042_0192.bin",
-      "seed": 1042,
-      "env": 192,
-      "source_sha256": "75247a6d3bd9d89037470bb767c477985ba6f3f33d54a9e45fc386762268e8c5",
-      "control": "Direct policy control",
-      "stable_success": true,
-      "max_world_position_error_m": 2.0161188615524006e-09
     },
     {
       "model": "xarm_xarm_g1",
