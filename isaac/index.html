@@ -44,7 +44,7 @@ h2{font:650 26px/1.1 var(--font);letter-spacing:-.03em;margin:0 0 6px}
 .metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:1px solid var(--line);padding-top:16px}
 .metric strong{display:block;font:600 19px var(--font);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .trials-wrap{display:none}
-.detail:empty{display:none}
+.detail:empty,.side .sub:empty{display:none}
 #replay-to-map{margin-top:auto;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none}
 #replay-to-map:hover{text-decoration:underline}
 
@@ -99,7 +99,15 @@ h2{font:650 26px/1.1 var(--font);letter-spacing:-.03em;margin:0 0 6px}
 @media(max-width:820px){
   .layout{grid-template-columns:1fr}.stage{height:clamp(300px,74vw,620px)}
   .side{border-left:0;border-top:1px solid var(--line);padding:18px;display:grid;grid-template-columns:1fr auto;gap:10px 16px}
-  .side>div:first-child{grid-column:1/-1}.metrics{grid-column:1/-1}.sr strong{font-size:34px}
+  /* compact info panel: name | success rate on top, then one strip with object · height · t-SNE link */
+  .side{grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:end;padding:18px 22px 16px}
+  .side>div:first-child{grid-column:1}.side h2{margin:0}.kind{margin-bottom:8px}
+  .sr{grid-column:2;text-align:right}.sr strong{font-size:38px}.sr span{display:block;max-width:260px;margin-left:auto;line-height:1.35}
+  .metrics,#replay-to-map{border-top:1px solid var(--line);padding-top:12px;margin:0}
+  .metrics{grid-column:1;grid-template-columns:auto auto;justify-content:start;column-gap:40px}
+  .metric strong{font-size:17px}
+  #replay-to-map{grid-column:2;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;white-space:nowrap}
+  #replay-to-map[hidden]{display:none}
   .config-step{grid-template-columns:1fr;gap:6px}.configurator{padding:8px 12px}
   .all{padding:16px 12px}
 }
@@ -140,5 +148,5 @@ h2{font:650 26px/1.1 var(--font);letter-spacing:-.03em;margin:0 0 6px}
   <div class="matrix-scroll" role="region" aria-label="Arm and hand combinations"><div id="combinations"></div></div>
   <p class="note">Training hands: seen objects, normal execution, 1,000 evaluation episodes per combination. New hands and grippers were never used in training; grippers are driven by the policy's own actions through a fixed virtual-hand retargeting map.</p>
 </section>
-<script type="module" src="viewer.js?v=20261117-table2"></script>
+<script type="module" src="viewer.js?v=20261117-revo2note"></script>
 </body></html>

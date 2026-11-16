@@ -92,22 +92,23 @@
 
   /* ---------------- B · time */
   const svgB = document.getElementById('sd-time');
-  const MEM = 16, X0 = 46, DX = 27.5, ROWS = [70, 118, 166], YIN = 232, cx = k => X0 + (k + MEM) * DX; // k = -16..0
+  const MEM = 16, X0 = 46, DX = 27.5, ROWS = [84, 152, 220], YIN = 300, cx = k => X0 + (k + MEM) * DX; // k = -16..0
   const gTArcs = el('g', {}, svgB), gCols = el('g', {}, svgB), gT = el('g', {}, svgB);
   ROWS.forEach((y, l) => el('text', { x: 6, y: y + 4, class: 'sd-small' }, gT).textContent = 'L' + (l + 1));
   el('text', { x: 6, y: YIN + 4, class: 'sd-small' }, gT).textContent = 'sₜ';
-  el('text', { x: cx(-MEM) - 8, y: 28, class: 'sd-small' }, gT).textContent = '← key/value memory · 16 steps';
-  const nowLbl = el('text', { x: cx(0), y: 28, class: 'sd-now', 'text-anchor': 'middle' }, gT); nowLbl.textContent = 'now';
+  el('text', { x: cx(-MEM) - 8, y: 30, class: 'sd-small' }, gT).textContent = '← key/value memory · 16 steps';
+  const nowLbl = el('text', { x: cx(0), y: 30, class: 'sd-now', 'text-anchor': 'middle' }, gT); nowLbl.textContent = 'now';
   const tLbl = el('text', { x: cx(0), y: YIN + 34, class: 'sd-small', 'text-anchor': 'middle' }, gT);
-  const resetLbl = el('text', { x: cx(-8), y: 214, class: 'sd-reset', 'text-anchor': 'middle', opacity: 0 }, gT); resetLbl.textContent = 'episode boundary · memory cleared';
+  const resetLbl = el('text', { x: cx(-8), y: 270, class: 'sd-reset', 'text-anchor': 'middle', opacity: 0 }, gT); resetLbl.textContent = 'episode boundary · memory cleared';
   // attention from the current step to every memory slot of the same layer (relative position, illustrative fade with age)
-  const arcs = ROWS.map(y => { const row = []; for (let k = -MEM; k < 0; k++) row.push(el('path', { d: `M${cx(0)} ${y - 12} Q${(cx(0) + cx(k)) / 2} ${y - 16 - (-k) * 1.1} ${cx(k)} ${y - 12}`, class: 'sd-tarc', opacity: 0 }, gTArcs)); return row; });
+  const arcs = ROWS.map(y => { const row = []; for (let k = -MEM; k < 0; k++) row.push(el('path', { d: `M${cx(0)} ${y - 17} Q${(cx(0) + cx(k)) / 2} ${y - 22 - (-k) * 1.5} ${cx(k)} ${y - 17}`, class: 'sd-tarc', opacity: 0 }, gTArcs)); return row; });
   let t = 0, filled = 0, cols = new Map(), playing = true, timer = 0;
+  const timeReadout = document.getElementById('sd-time-readout');
   const makeCol = id => {
     const g = el('g', { class: 'sd-col' }, gCols);
-    ROWS.forEach(y => el('rect', { x: -9, y: y - 12, width: 18, height: 24, rx: 5, class: 'sd-cell' }, g));
+    ROWS.forEach(y => el('rect', { x: -9.5, y: y - 17, width: 19, height: 34, rx: 6, class: 'sd-cell' }, g));
     el('circle', { cx: 0, cy: YIN, r: 6, class: 'sd-in' }, g);
-    el('line', { x1: 0, y1: YIN - 7, x2: 0, y2: ROWS[2] + 13, class: 'sd-up' }, g);
+    el('line', { x1: 0, y1: YIN - 7, x2: 0, y2: ROWS[2] + 18, class: 'sd-up' }, g);
     g.dataset.id = id; return g;
   };
   const place = (g, k, instant) => { g.style.transition = instant || reduce ? 'none' : ''; g.style.transform = `translate(${cx(k)}px,0)`; g.classList.toggle('now', k === 0); };
@@ -124,6 +125,7 @@
     });
     arcs.forEach(row => row.forEach((p, i) => { const k = i - MEM, on = -k <= filled; p.setAttribute('opacity', on ? (.12 + .5 * (1 - (-k - 1) / MEM)).toFixed(2) : 0); }));
     tLbl.textContent = 't = ' + t;
+    timeReadout.innerHTML = filled < MEM ? `<b>Step ${t}</b> reads ${filled} remembered step${filled === 1 ? '' : 's'} · the memory is refilling after the reset` : `<b>Step ${t}</b> reads steps ${t - MEM}–${t - 1} in every layer · step ${t - MEM - 1} just dropped out`;
   }
   for (let i = 0; i < MEM; i++) tick(false);
   const play = document.getElementById('sd-play');

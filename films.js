@@ -3,7 +3,7 @@
    with ← / → to switch films (also the arrow keys), Esc or the backdrop to close. */
 (() => {
   const films = [
-    {id:'intro',src:'films/intro.mp4?v=20261116-v10-revo2',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 60 seconds',short:'Film in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00'},
+    {id:'intro',src:'films/intro.mp4?v=20261116-v10-revo2',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00'},
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},

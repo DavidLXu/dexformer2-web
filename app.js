@@ -99,7 +99,8 @@
     if (hoverTimer && pending === 'leave') return;
     cancelHover();pending = 'leave';
     // Bridge small gaps in the cloud and between legend rows without a reset flash.
-    hoverTimer = setTimeout(() => {cancelHover();activate(pinned);}, 180);
+    // the pinned pair stays highlighted, but the floating card closes once the pointer has left
+    hoverTimer = setTimeout(() => {cancelHover();activate(pinned);hidePreview();}, 180);
   }
   function activate(index, force = false) {
     if (active === index && !force) return;
@@ -114,6 +115,8 @@
     // Retain original colors at 48% of base opacity; emphasize the selected group.
     transitionTo([index === null ? 1 : .48, ...groups.map((_, i) => index === i ? .78 : 0)]);
   }
+  let overMap=false;explorer.addEventListener('pointerenter',()=>{overMap=true;});explorer.addEventListener('pointerleave',()=>{overMap=false;});
+  function hidePreview(){preview.classList.remove('is-open');preview.inert=true;preview.setAttribute('aria-hidden','true');}
   function showPreview(index) {
     if(index===null){preview.classList.remove('is-open');preview.inert=true;preview.setAttribute('aria-hidden','true');return;}
     const g=groups[index],key=isCombinationView()?g.composition:view+'-'+g[view];
@@ -213,7 +216,7 @@
     if(view!=='embodiment')return;
     const index=event.detail?groups.findIndex(g=>g.composition===event.detail):-1;
     pointerAnchor=null;cancelHover();pinned=index<0?null:index;activate(pinned,true);
-    preview.classList.remove('is-open');preview.inert=true;preview.setAttribute('aria-hidden','true');   // the replay already shows the robot
+    if(!overMap)hidePreview();   // the replay already shows the robot; keep the card only while the pointer is on the map
   });
   async function setView(next){
     const request=++viewRequest;
