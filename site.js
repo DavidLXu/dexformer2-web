@@ -60,7 +60,7 @@
     H.arms.forEach((a, i) => cell('mx-label arm', a, i + 2, 1, 1, i + 2));
     H.hands.forEach((h, j) => cell('mx-label hand', h, 1, j + 2, j + 2, 1));
     H.cells.forEach(c => {
-      const t = cell('tile' + (c.held ? ' held' : ''), `<img src="assets/emb/${c.id}.webp" alt="${H.arms[c.a]} + ${H.hands[c.h]}" loading="lazy" decoding="async"><span class="tile-sr"><b>${c.sr.toFixed(1)}<small>%</small></b>${c.held ? '<i>held-out</i>' : '<i class="train">training</i>'}</span>`, c.a + 2, c.h + 2, c.h + 2, c.a + 2);
+      const t = cell('tile' + (c.held ? ' held' : ''), `<img src="assets/emb/${c.id}.webp" alt="${H.arms[c.a]} + ${H.hands[c.h]}" loading="lazy" decoding="async"><span class="tile-sr"><b>${c.sr.toFixed(1)}<small>%</small></b></span>`, c.a + 2, c.h + 2, c.h + 2, c.a + 2);
       t.title = `${H.arms[c.a]} + ${H.hands[c.h]}: ${c.sr.toFixed(1)}% stable success${c.held ? ' (held-out pair)' : ''}`;
       t.style.setProperty('--dx', ((rnd() - .5) * 120).toFixed(1) + 'vw');
       t.style.setProperty('--dy', ((rnd() - .5) * 70).toFixed(1) + 'vh');

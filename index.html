@@ -10,14 +10,14 @@
   <link rel="stylesheet" href="site.css?v=38">
   <link rel="stylesheet" href="spacetime/spacetime.css?v=7">
   <script src="site-data.js?v=1"></script>
-  <script src="spacetime/data.js?v=1" defer></script><script src="site.js?v=8" defer></script><script src="spacetime/spacetime.js?v=6" defer></script><script src="spacetime/design.js?v=6" defer></script>
+  <script src="spacetime/data.js?v=1" defer></script><script src="site.js?v=9" defer></script><script src="spacetime/spacetime.js?v=6" defer></script><script src="spacetime/design.js?v=6" defer></script>
   <script src="data.js" defer></script><script src="app.js?v=20261117-leave2" defer></script><script src="films.js?v=20261117-packing1" defer></script><script src="cases/data.js?v=20261110-leap-object-names-2" defer></script><script src="cases/failures.js?v=20261115-no-notes" defer></script><script src="cases.js?v=20261115-leap-autoplay" defer></script>
 </head>
 <body>
   <header class="nav" id="top-nav">
     <a class="wordmark" href="#top">DexFormer <span>2.0</span></a>
     <nav class="nav-links" aria-label="Sections"><a href="#bodies">Embodiments</a><a href="#spacetime">Space × Time</a><a href="#isaac">Explore</a><a href="#cases">Real world</a><a href="#results">Experiments</a><a href="#films">Films</a></nav>
-    <a class="nav-cta" href="https://github.com/DavidLXu/dexformer2" target="_blank" rel="noopener">Code ↗</a>
+    <a class="nav-cta" href="https://github.com/DavidLXu/dexformer2" target="_blank" rel="noopener">Code (soon) ↗</a>
   </header>
 
   <main id="page">
@@ -25,7 +25,7 @@
       <div class="hero-copy" data-reveal>
         <h1 class="hero-title">DexFormer <em>2.0</em></h1>
         <p class="hero-lede">Towards a Cross-Embodiment Foundation Policy for Dexterous Grasping</p>
-        <div class="project-credits" aria-label="Authors and affiliations"><p class="project-authors"><span>Lixin Xu<sup>1,2,*</sup></span><span>Ke Zhang<sup>1,2,*</sup></span><span>Xinyu Liu<sup>2,*</sup></span><span>Jie Tan<sup>2,3</sup></span><span>Senming Tan<sup>2</sup></span></p><p class="project-authors project-authors-second"><span>Jiaju Yin<sup>1,2</sup></span><span>Yating Feng<sup>1,2</sup></span><span>Xiaoyi Lin<sup>4</sup></span><span>Xiyue Dong<sup>1,2</sup></span><span>Renjing Xu<sup>1,†</sup></span></p><p class="project-affiliations"><span><sup>1</sup> HKUST(GZ)</span><span><sup>2</sup> BrainCo</span><span><sup>3</sup> Chongqing University</span><span><sup>4</sup> Wuhan University</span></p><p class="project-author-notes"><span>* Equal contribution</span><span>† Corresponding author</span></p></div><div class="project-resource-buttons" aria-label="Project resources"><button type="button" disabled title="Paper coming soon">Arxiv soon</button><a href="https://github.com/DavidLXu/dexformer2" target="_blank" rel="noopener" title="Code on GitHub">Code</a></div>
+        <div class="project-credits" aria-label="Authors and affiliations"><p class="project-authors"><span>Lixin Xu<sup>1,2,*</sup></span><span>Ke Zhang<sup>1,2,*</sup></span><span>Xinyu Liu<sup>2,*</sup></span><span>Jie Tan<sup>2,3</sup></span><span>Senming Tan<sup>2</sup></span></p><p class="project-authors project-authors-second"><span>Jiaju Yin<sup>1,2</sup></span><span>Yating Feng<sup>1,2</sup></span><span>Xiaoyi Lin<sup>4</sup></span><span>Xiyue Dong<sup>1,2</sup></span><span>Renjing Xu<sup>1,†</sup></span></p><p class="project-affiliations"><span><sup>1</sup> HKUST(GZ)</span><span><sup>2</sup> BrainCo</span><span><sup>3</sup> Chongqing University</span><span><sup>4</sup> Wuhan University</span></p><p class="project-author-notes"><span>* Equal contribution</span><span>† Corresponding author</span></p></div><div class="project-resource-buttons" aria-label="Project resources"><button type="button" disabled title="Paper coming soon">Arxiv soon</button><a href="https://github.com/DavidLXu/dexformer2" target="_blank" rel="noopener" title="Code on GitHub (release coming soon)">Code (soon)</a></div>
       </div>
       <a class="hero-next" href="#bodies" aria-label="Go to the 24 embodiments">↓</a>
     </section>
@@ -55,7 +55,7 @@
         <figure class="sd-panel">
           <figcaption><p class="sd-k"><b>A</b> Across joints · MorphNode</p><h3>29 joint tokens. The tree shapes who listens to whom.</h3>
             <p>Every arm and hand maps onto 7 arm + 22 hand slots; a validity mask switches off slots a body does not have. Two spatial attention layers add a learned bias for tree distance and joint role to every joint pair, while five context tokens attend globally.</p></figcaption>
-          <div class="sd-tools"><div role="group" aria-label="Example hand by degrees of freedom"><button type="button" data-sd-hand="22" aria-pressed="true">22-DoF</button><button type="button" data-sd-hand="21" aria-pressed="false">21-DoF</button><button type="button" data-sd-hand="20" aria-pressed="false">20-DoF</button><button type="button" data-sd-hand="16" aria-pressed="false">16-DoF</button><button type="button" data-sd-hand="12" aria-pressed="false">12-DoF · XHAND1</button></div><span id="sd-slot-count">29 of 29 slots active</span></div>
+          <div class="sd-tools"><div role="group" aria-label="Example hand by degrees of freedom"><button type="button" data-sd-hand="22" aria-pressed="true">22-DoF</button><button type="button" data-sd-hand="21" aria-pressed="false">21-DoF</button><button type="button" data-sd-hand="20" aria-pressed="false">20-DoF</button><button type="button" data-sd-hand="16" aria-pressed="false">16-DoF</button><button type="button" data-sd-hand="12" aria-pressed="false">12-DoF</button></div><span id="sd-slot-count">29 of 29 slots active</span></div>
           <svg id="sd-joints" class="sd-svg" viewBox="0 0 560 400" role="img" aria-label="Kinematic tree of 29 joint slots with attention arcs from one joint"></svg>
           <p class="sd-readout" id="sd-joint-readout"></p>
           <div class="sd-legend"><span><i style="background:#e85f3a"></i>same chain</span><span><i style="background:#8fb3e0"></i>different finger</span><span><i style="background:rgba(238,241,248,.55)"></i>arm ↔ hand</span><span class="sd-note">Arc width: tree-distance bias (illustrative).</span></div>
@@ -80,7 +80,7 @@
     <section class="chapter" id="isaac" aria-labelledby="isaac-h">
       <div class="chapter-head" data-reveal><p class="kicker"><b>03</b> Explore</p><h2 id="isaac-h">Watch it. <span class="num-orange">Map it.</span></h2><p class="chapter-lede">Replay any recorded grasp in your browser. The t-SNE map of the policy's temporal features follows along, highlighting where that arm–hand combination sits; click a cluster on the map to replay it.</p></div>
       <div class="explore-duo">
-      <div class="duo-replay"><div class="replay-frame" data-reveal><iframe id="mujoco-replay" src="isaac/index.html?v=20261117-phone1" title="Interactive Isaac state replay" loading="lazy"></iframe></div></div>
+      <div class="duo-replay"><div class="replay-frame" data-reveal><iframe id="mujoco-replay" src="isaac/index.html?v=20261117-nonote" title="Interactive Isaac state replay" loading="lazy"></iframe></div></div>
       <div class="duo-map" id="representation">
       <section class="explorer" id="explorer" data-reveal aria-label="Interactive t-SNE visualization">
       <div class="view-toolbar"><div role="group" aria-label="Color representation by"><button type="button" data-tsne-view="embodiment" aria-pressed="true">Arm × Hand · 24</button><button type="button" data-tsne-view="arm" aria-pressed="false">Arms · 4</button><button type="button" data-tsne-view="hand" aria-pressed="false">Hands · 6</button><button type="button" data-tsne-view="new" aria-pressed="false">New embodiments · +23</button></div><p id="view-note">Original t-SNE coordinates · color = combination; shape = arm.</p></div>
@@ -102,13 +102,12 @@
       </div></div>
       <div id="all-combinations-host" class="all-host" hidden></div>
     
-      <div class="reading-note" data-reveal><p>Each point represents a 128-dimensional Transformer-XL output with 16 steps of temporal memory, before concatenation with the task features. We visualize 800 samples per arm–hand combination, collected 1.0 s into each rollout.</p></div>
     </section>
 
     <section class="chapter dark cases-section" id="cases" aria-labelledby="cases-heading">
       <div class="chapter-head" data-reveal><p class="kicker"><b>04</b> Real world</p><h2 id="cases-heading"><span class="st-joints">Sim</span>2<span class="st-time">Real</span>.</h2><p class="chapter-lede">A student policy distilled from successful simulated rollouts runs on a Flexiv arm with a Revo3 or a LEAP hand.</p></div>
       <div class="cases-grid" id="deployment-content">
-        <article class="case-panel" id="revo3-continuous" aria-labelledby="revo3-continuous-heading"><div class="case-panel-heading"><h3 id="revo3-continuous-heading">Real World Grasping Non-stop</h3><span class="case-status">Flexiv + Revo3</span></div><div class="nonstop-layout"><figure class="nonstop-main"><video id="revo3-continuous-video" controls muted playsinline preload="metadata" poster="cases/flexiv-revo3-continuous.png" src="cases/flexiv-revo3-continuous.mp4?v=20261115-baked3x" aria-label="Flexiv and Revo3 continuous grasping sequence"></video><figcaption>Mixed objects · 3×</figcaption></figure><div class="nonstop-side" aria-label="Fruit grasping clips"><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-pear.jpg?v=20261114" data-src="cases/nonstop-pear.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a pear and placing it in the basket, 4× speed"></video><figcaption>Pear · 4×</figcaption></figure><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-mango.jpg?v=20261114" data-src="cases/nonstop-mango.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a mango and placing it in the basket, 4× speed"></video><figcaption>Mango · 4×</figcaption></figure><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-pomegranate.jpg?v=20261114" data-src="cases/nonstop-pomegranate.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a pomegranate and placing it in the basket, 4× speed"></video><figcaption>Pomegranate · 4×</figcaption></figure></div></div><p class="deployment-note">A single student policy distilled from successful rollouts. After a successful grasp, motion planning handles transfer to and placement in the basket.</p></article>
+        <article class="case-panel" id="revo3-continuous" aria-labelledby="revo3-continuous-heading"><div class="case-panel-heading"><h3 id="revo3-continuous-heading">Real World Grasping Non-stop</h3><span class="case-status">Flexiv + Revo3</span></div><div class="nonstop-layout"><figure class="nonstop-main"><video id="revo3-continuous-video" controls muted playsinline preload="metadata" poster="cases/flexiv-revo3-continuous.png" src="cases/flexiv-revo3-continuous.mp4?v=20261115-baked3x" aria-label="Flexiv and Revo3 continuous grasping sequence"></video><figcaption>Mixed objects · 3×</figcaption></figure><div class="nonstop-side" aria-label="Fruit grasping clips"><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-pear.jpg?v=20261114" data-src="cases/nonstop-pear.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a pear and placing it in the basket, 4× speed"></video><figcaption>Pear · 4×</figcaption></figure><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-mango.jpg?v=20261114" data-src="cases/nonstop-mango.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a mango and placing it in the basket, 4× speed"></video><figcaption>Mango · 4×</figcaption></figure><figure class="nonstop-tile"><video class="nonstop-loop" muted loop playsinline preload="none" poster="cases/nonstop-pomegranate.jpg?v=20261114" data-src="cases/nonstop-pomegranate.mp4?v=20261115" aria-label="Flexiv and Revo3 grasping a pomegranate and placing it in the basket, 4× speed"></video><figcaption>Pomegranate · 4×</figcaption></figure></div></div></article>
         <article class="case-panel" id="success-cases" aria-labelledby="success-heading">
           <div class="case-panel-heading"><h3 id="success-heading">Success Cases</h3></div>
           <section class="case-embodiment-row" aria-labelledby="success-revo3-heading"><h4 id="success-revo3-heading">Flexiv + Revo3</h4><div id="success-revo3-carousel"></div></section>
@@ -159,7 +158,7 @@
     <button type="button" class="fl-nav fl-next" aria-label="Next film">→</button>
   </div>
   <footer class="site-footer"><span>DexFormer 2.0</span><span>Web by <a href="https://davidlxu.github.io/" target="_blank" rel="noopener noreferrer">Lixin Xu ↗</a></span></footer>
-<script src="results.js?v=20261116-new-types" defer></script>
+<script src="results.js?v=20261117-seenpairs" defer></script>
 <script src="training.js?v=3" defer></script>
 <script src="mujoco-section.js?v=20261117b" defer></script>
 </body>
