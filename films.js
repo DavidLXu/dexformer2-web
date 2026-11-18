@@ -3,7 +3,7 @@
    with ← / → to switch films (also the arrow keys), Esc or the backdrop to close. */
 (() => {
   const films = [
-    {id:'intro',src:'films/intro.mp4?v=20261116-v10-revo2',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 60 seconds',description:'A narrated overview of the method and results.',duration:'1:00'},
+    {id:'intro',src:'films/intro.mp4?v=20261119-v12',poster:'films/intro.png?v=20261111c',title:'DexFormer 2.0 in 75 seconds',description:'A narrated overview of the method and results.',duration:'1:15'},
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
@@ -25,7 +25,7 @@
     b.setAttribute('aria-label', `Play film: ${film.title} (${film.duration})`);
     const v = document.createElement('video');
     v.className = 'nonstop-loop'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
-    v.poster = film.poster || `films/${film.id}.png`; v.src = `films/preview/${film.id}.mp4?v=4`;
+    v.poster = film.poster || `films/${film.id}.png`; v.src = `films/preview/${film.id}.mp4?v=5`;
     v.setAttribute('aria-hidden', 'true');
     const play = document.createElement('span'); play.className = 'hf-play'; play.setAttribute('aria-hidden', 'true');
     const cap = document.createElement('span'); cap.className = 'hf-cap';
