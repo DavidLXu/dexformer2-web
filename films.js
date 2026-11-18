@@ -7,7 +7,7 @@
     {id:'newton',title:'Grasp in focus',description:'The hand–object interaction, up close.',duration:'0:15'},
     {id:'ring',title:'Four objects',description:'Four objects in a shared manipulation scene.',duration:'0:15'},
     {id:'conveyor',title:'Along the conveyor',description:'Continuous views of the conveyor scene.',duration:'0:14'},
-    {id:'order-packing',title:'Order packing',description:'Arms on conveyor belts fill one packing tray; recorded actions replayed at changing speed.',duration:'0:30'},
+    {id:'order-packing',src:'films/order-packing.mp4?v=v2',poster:'films/order-packing.png?v=v2',title:'Order packing',description:'Arms on conveyor belts fill one packing tray, replaying recorded grasps.',duration:'0:30'},
     {id:'long-table',src:'films/long-table.mp4?v=20261110-13s',title:'Across the table',description:'A closer look at multiple arm–hand combinations.',duration:'0:13'},
     {id:'real-world-wall',src:'films/real-world-wall.mp4?v=title-matched',poster:'films/real-world-wall.png?v=centered',title:'Real-world grasping',description:'Flexiv + Revo3 and LEAP.',duration:'0:11'}
   ];
@@ -25,7 +25,7 @@
     b.setAttribute('aria-label', `Play film: ${film.title} (${film.duration})`);
     const v = document.createElement('video');
     v.className = 'nonstop-loop'; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
-    v.poster = film.poster || `films/${film.id}.png`; v.src = `films/preview/${film.id}.mp4?v=1`;
+    v.poster = film.poster || `films/${film.id}.png`; v.src = `films/preview/${film.id}.mp4?v=4`;
     v.setAttribute('aria-hidden', 'true');
     const play = document.createElement('span'); play.className = 'hf-play'; play.setAttribute('aria-hidden', 'true');
     const cap = document.createElement('span'); cap.className = 'hf-cap';
