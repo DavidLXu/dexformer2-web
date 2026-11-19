@@ -468,3 +468,4 @@ html.film-open{overflow:hidden}
 /* phones: the attention formula shrinks to fit its box */
 @media (max-width:560px){.st-design .sd-legend+.sd-eq{font-size:13px;padding:10px 8px}.sd-legend .sd-note{margin-left:0}}
 @media (max-width:380px){.st-design .sd-legend+.sd-eq{font-size:12px}}
+.pv-count{color:var(--dim);font-variant-numeric:tabular-nums}
